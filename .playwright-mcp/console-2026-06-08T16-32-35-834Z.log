@@ -1,0 +1,10 @@
+[     512ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=28d50e1f:20100
+[     648ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/favicon.ico:0
+[    1004ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://opengraph.githubassets.com/fallback-portfolio-2026-06-08T00%3A00%3A00Z/sinanmertsenerr/focus-first-portfolio:0
+[    1005ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://opengraph.githubassets.com/fallback-api-2026-05-18T00%3A00%3A00Z/sinanmertsenerr/announcement-watcher:0
+[    1005ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://opengraph.githubassets.com/fallback-dashboard-2026-04-02T00%3A00%3A00Z/sinanmertsenerr/realtime-panel:0
+[    4620ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://opengraph.githubassets.com/1093686497-2026-06-06T00%3A13%3A05Z/sinanmertsenerr/AIcelerate:0
+[   39959ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=28d50e1f:20100
+[   39983ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/favicon.ico:0
+[   40131ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://opengraph.githubassets.com/fallback-dashboard-2026-04-02T00%3A00%3A00Z/sinanmertsenerr/realtime-panel:0
+[   40157ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://opengraph.githubassets.com/1093686497-2026-06-06T00%3A13%3A05Z/sinanmertsenerr/AIcelerate:0
