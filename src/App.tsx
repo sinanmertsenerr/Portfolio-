@@ -195,8 +195,6 @@ type GithubRepo = {
   stargazers_count: number;
   pushed_at: string;
   updated_at: string;
-  archived: boolean;
-  fork: boolean;
 };
 
 type PortfolioRepo = {
@@ -220,17 +218,20 @@ const languageColors: Record<string, string> = {
   "C#": "#9b7bff",
 };
 
-const REPO_CACHE_KEY = "portfolio-repos-v3";
+const REPO_CACHE_KEY = "portfolio-repos-v4";
 const REPO_CACHE_TTL = 60 * 60 * 1000;
-const REPO_LIMIT = 6;
 
-// Seritte gorunmesini istemedigin repo adlari (tire/alt cizgi/boslukar ve
-// buyuk-kucuk harf onemsiz): yenisini eklemek icin adini buraya yaz.
-const hiddenRepos = ["se355project", "se355", "sinanmertsenerr"];
-
-function isHiddenRepo(name: string) {
-  return hiddenRepos.includes(name.replace(/[-_\s]+/g, "").toLowerCase());
-}
+// Seritte SADECE bu repolar, bu sirayla gosterilir ("sahip/repo" formati).
+// Private olan repo, public yapilana kadar sessizce atlanir.
+const showcaseRepos = [
+  "sinanmertsenerr/Performanz-Web-SistemTakipPlatformu",
+  "sucreistaken/AIcelerate",
+  "sinanmertsenerr/NikiApp",
+  "moeanes/mobilegamedev",
+  "sucreistaken/pdf-watermark-remover",
+  "Fanakartal/se354-fall2526-project",
+  "sinanmertsenerr/nodebb-plugin-recent-cards",
+];
 
 const container: Variants = {
   hidden: {},
@@ -278,18 +279,8 @@ function App() {
 
     async function loadRepos() {
       try {
-        const data = await fetchAllRepos(controller.signal);
-        const normalized = data
-          .filter(
-            (repo) => !repo.fork && !repo.archived && !isHiddenRepo(repo.name),
-          )
-          .sort(
-            (a, b) =>
-              new Date(b.pushed_at || b.updated_at).getTime() -
-              new Date(a.pushed_at || a.updated_at).getTime(),
-          )
-          .slice(0, REPO_LIMIT)
-          .map(normalizeRepo);
+        const data = await fetchShowcaseRepos(controller.signal);
+        const normalized = data.map(normalizeRepo);
 
         if (!isMounted) {
           return;
@@ -702,32 +693,27 @@ function useActiveSection() {
   return activeSection;
 }
 
-async function fetchAllRepos(signal: AbortSignal) {
-  const repos: GithubRepo[] = [];
-  let page = 1;
+async function fetchShowcaseRepos(signal: AbortSignal) {
+  const results = await Promise.all(
+    showcaseRepos.map(async (slug) => {
+      try {
+        const response = await fetch(`https://api.github.com/repos/${slug}`, {
+          headers: { Accept: "application/vnd.github+json" },
+          signal,
+        });
 
-  while (true) {
-    const response = await fetch(
-      `https://api.github.com/users/${profile.githubUser}/repos?type=all&sort=pushed&per_page=100&page=${page}`,
-      {
-        headers: { Accept: "application/vnd.github+json" },
-        signal,
-      },
-    );
+        if (!response.ok) {
+          return null;
+        }
 
-    if (!response.ok) {
-      throw new Error(`GitHub response ${response.status}`);
-    }
+        return (await response.json()) as GithubRepo;
+      } catch {
+        return null;
+      }
+    }),
+  );
 
-    const data = (await response.json()) as GithubRepo[];
-    repos.push(...data);
-
-    if (data.length < 100) {
-      return repos;
-    }
-
-    page += 1;
-  }
+  return results.filter((repo): repo is GithubRepo => repo !== null);
 }
 
 function normalizeRepo(repo: GithubRepo): PortfolioRepo {
