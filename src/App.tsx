@@ -1,13 +1,10 @@
 import {
+  ArrowUpRight,
   CalendarDays,
-  Code2,
-  ExternalLink,
-  GitFork,
+  Download,
   Github,
   Mail,
-  RefreshCw,
   Rocket,
-  Search,
   Star,
 } from "lucide-react";
 import {
@@ -17,33 +14,112 @@ import {
   useSpring,
   type Variants,
 } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const profile = {
   name: "Sinan Mert Şener",
   email: "sinanmertsenerr@gmail.com",
   githubUser: "sinanmertsenerr",
   github: "https://github.com/sinanmertsenerr",
-  linkedin: "https://linkedin.com/in/sinanmertsenerr",
+  cvUrl: "/sinan-mert-sener-cv.pdf",
 };
 
 const stageSections = [
   { id: "about", number: "1", label: "Hakkımda" },
   { id: "work", number: "2", label: "Projeler" },
-  { id: "stack", number: "3", label: "Tech Stacks" },
-  { id: "contact", number: "4", label: "İletişim" },
+  { id: "experience", number: "3", label: "Deneyim" },
+  { id: "stack", number: "4", label: "Tech Stack" },
+  { id: "contact", number: "5", label: "İletişim" },
 ] as const;
 
 const stageSectionIds = stageSections.map((section) => section.id);
 
 const aboutHighlights = [
+  { label: "Şu an", value: "Performanz · Part-time Developer" },
+  { label: "Odak", value: "Fullstack Development · Mobil" },
+  { label: "Sahada", value: "3 ürün gerçek kullanıcıda" },
+  { label: "Eğitim", value: "Bilgisayar Müh. · 2026" },
+];
+
+type FeaturedProject = {
+  name: string;
+  year: string;
+  status: "Sahada" | "Geliştiriliyor";
+  tagline: string;
+  points: string[];
+  stack: string[];
+};
+
+const featuredProjects: FeaturedProject[] = [
   {
-    label: "Rol",
-    value: "Full Stack Developer",
+    name: "NikiApp",
+    year: "2025",
+    status: "Sahada",
+    tagline: "Kampüs kahvecisinin cebe giren hâli.",
+    points: [
+      "QR ile ödeme, kampanya katılımı ve haftalık ödül çarkı: sipariş ve sadakat akışını uçtan uca geliştirdim.",
+      "İşletmeye özel dashboard: menü, kampanya ve kredi yönetimi tek panelden.",
+    ],
+    stack: ["React Native", "Nest.js", "PostgreSQL"],
   },
   {
-    label: "Şu an",
-    value: "Performanz'da Stajyer",
+    name: "Sistem Takip Platformu",
+    year: "2025",
+    status: "Sahada",
+    tagline: "Üretimde “bu malzeme nerede?” sorusunu bitiren panel.",
+    points: [
+      "Stok, depo ve malzeme konumlandırmayı tek ekranda toplayan şirket içi web platformu.",
+      "Satışa hazır ürün durumu artık anlık olarak izlenebiliyor.",
+    ],
+    stack: ["Nest.js", "React", "PostgreSQL"],
+  },
+  {
+    name: "Spor Okulları Yönetim Modülü",
+    year: "2025",
+    status: "Sahada",
+    tagline: "Yoklamadan aidata, spor okulunun tüm operasyonu tek modülde.",
+    points: [
+      "Antrenör yoklama alıyor, sporcunun katılımı izleniyor, muhasebe aidatı takip ediyor.",
+      "Şirket bünyesinde tamamlandı, sahada kullanımda.",
+    ],
+    stack: ["React", "Nest.js", "PostgreSQL"],
+  },
+];
+
+const experience = [
+  {
+    period: "May 2026 – Devam",
+    role: "Software Engineer (Part-time)",
+    org: "Performanz Arge ve Yazılım",
+    summary:
+      "Staj bitti, takımda kaldım: web ve mobilde uçtan uca ürün geliştirmeye devam ediyorum.",
+  },
+  {
+    period: "Ağu 2025 – May 2026",
+    role: "Software Engineer Intern",
+    org: "Performanz Arge ve Yazılım",
+    summary:
+      "Web ve mobilde uçtan uca ürün geliştirme; Claude ile AI destekli geliştirme süreçleri.",
+  },
+  {
+    period: "2024 – 2025",
+    role: "Tanıtım Görevlisi (Part-time)",
+    org: "İzmir Ekonomi Üniversitesi",
+    summary:
+      "Her gün farklı bir kitleye kampüs sunumu yaptım; iletişim kasım buradan geliyor.",
+  },
+  {
+    period: "2021 – 2026",
+    role: "Activity Committee Leader · Yönetim Kurulu",
+    org: "ESTIEM",
+    summary:
+      "25+ ülkeden öğrencinin katıldığı uluslararası etkinlikler organize ettim.",
+  },
+  {
+    period: "2019 – 2026",
+    role: "Bilgisayar Mühendisliği Lisans",
+    org: "İzmir Ekonomi Üniversitesi",
+    summary: "2026'da mezun oluyorum.",
   },
 ];
 
@@ -115,11 +191,8 @@ type GithubRepo = {
   name: string;
   description: string | null;
   html_url: string;
-  homepage: string | null;
   language: string | null;
-  topics?: string[];
   stargazers_count: number;
-  forks_count: number;
   pushed_at: string;
   updated_at: string;
   archived: boolean;
@@ -128,85 +201,36 @@ type GithubRepo = {
 
 type PortfolioRepo = {
   id: string;
-  name: string;
   displayName: string;
   description: string;
   htmlUrl: string;
-  homepageUrl: string;
   language: string;
-  topics: string[];
   stars: number;
-  forks: number;
   updatedAt: string;
-  isArchived: boolean;
-  isFork: boolean;
-  source: "github" | "fallback";
 };
-
-const fallbackRepos: PortfolioRepo[] = [
-  {
-    id: "fallback-spor-okullari",
-    name: "spor-okullari-yonetim",
-    displayName: "Spor Okulları Yönetim Modülü",
-    description:
-      "Antrenör yoklaması, sporcu takibi ve aidat yönetimini tek modülde toplayan yönetim paneli.",
-    htmlUrl: profile.github,
-    homepageUrl: "",
-    language: "TypeScript",
-    topics: ["nestjs", "react", "postgresql"],
-    stars: 0,
-    forks: 0,
-    updatedAt: "2026-05-01T00:00:00Z",
-    isArchived: false,
-    isFork: false,
-    source: "fallback",
-  },
-  {
-    id: "fallback-sistem-takip",
-    name: "sistem-takip-platformu",
-    displayName: "Sistem Takip Platformu",
-    description:
-      "Stok, depo ve üretim süreçlerini tek panelden izleyen şirket içi takip platformu.",
-    htmlUrl: profile.github,
-    homepageUrl: "",
-    language: "TypeScript",
-    topics: ["nestjs", "react", "postgresql"],
-    stars: 0,
-    forks: 0,
-    updatedAt: "2026-01-15T00:00:00Z",
-    isArchived: false,
-    isFork: false,
-    source: "fallback",
-  },
-  {
-    id: "fallback-nikiapp",
-    name: "nikiapp",
-    displayName: "NikiApp",
-    description:
-      "Bir kahve işletmesi için QR ile ödeme, kampanya ve sadakat sistemi sunan mobil uygulama.",
-    htmlUrl: profile.github,
-    homepageUrl: "",
-    language: "TypeScript",
-    topics: ["react-native", "nestjs", "postgresql"],
-    stars: 0,
-    forks: 0,
-    updatedAt: "2025-09-20T00:00:00Z",
-    isArchived: false,
-    isFork: false,
-    source: "fallback",
-  },
-];
 
 const languageColors: Record<string, string> = {
   TypeScript: "#4fb3ff",
   JavaScript: "#f5d04b",
-  React: "#12c7a5",
   Python: "#7aa8ff",
   Java: "#d95d39",
   CSS: "#c084fc",
   HTML: "#f06a3d",
-  "Node.js": "#7ad66d",
+  Dart: "#12c7a5",
+  "C#": "#9b7bff",
 };
+
+const REPO_CACHE_KEY = "portfolio-repos-v3";
+const REPO_CACHE_TTL = 60 * 60 * 1000;
+const REPO_LIMIT = 6;
+
+// Seritte gorunmesini istemedigin repo adlari (tire/alt cizgi/boslukar ve
+// buyuk-kucuk harf onemsiz): yenisini eklemek icin adini buraya yaz.
+const hiddenRepos = ["se355project", "se355", "sinanmertsenerr"];
+
+function isHiddenRepo(name: string) {
+  return hiddenRepos.includes(name.replace(/[-_\s]+/g, "").toLowerCase());
+}
 
 const container: Variants = {
   hidden: {},
@@ -235,55 +259,51 @@ function App() {
     damping: 30,
     restDelta: 0.001,
   });
-  const [repos, setRepos] = useState<PortfolioRepo[]>(fallbackRepos);
-  const [status, setStatus] = useState<"loading" | "ready" | "error">(
+  const [repos, setRepos] = useState<PortfolioRepo[]>([]);
+  const [repoStatus, setRepoStatus] = useState<"loading" | "ready" | "error">(
     "loading",
   );
-  const [lastSync, setLastSync] = useState("");
-  const [query, setQuery] = useState("");
-  const [language, setLanguage] = useState("Tümü");
-  const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
+    const cached = readRepoCache();
+
+    if (cached) {
+      setRepos(cached);
+      setRepoStatus("ready");
+      return;
+    }
+
     const controller = new AbortController();
     let isMounted = true;
 
     async function loadRepos() {
-      setStatus("loading");
-
       try {
         const data = await fetchAllRepos(controller.signal);
         const normalized = data
-          .map(normalizeRepo)
-          .sort((a, b) => {
-            if (a.isArchived !== b.isArchived) {
-              return a.isArchived ? 1 : -1;
-            }
-
-            return (
-              new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-            );
-          });
+          .filter(
+            (repo) => !repo.fork && !repo.archived && !isHiddenRepo(repo.name),
+          )
+          .sort(
+            (a, b) =>
+              new Date(b.pushed_at || b.updated_at).getTime() -
+              new Date(a.pushed_at || a.updated_at).getTime(),
+          )
+          .slice(0, REPO_LIMIT)
+          .map(normalizeRepo);
 
         if (!isMounted) {
           return;
         }
 
-        setRepos(normalized.length > 0 ? normalized : fallbackRepos);
-        setStatus(normalized.length > 0 ? "ready" : "error");
-        setLastSync(
-          new Intl.DateTimeFormat("tr-TR", {
-            hour: "2-digit",
-            minute: "2-digit",
-          }).format(new Date()),
-        );
+        setRepos(normalized);
+        setRepoStatus(normalized.length > 0 ? "ready" : "error");
+        writeRepoCache(normalized);
       } catch (error) {
         if (!isMounted || controller.signal.aborted) {
           return;
         }
 
-        setRepos(fallbackRepos);
-        setStatus("error");
+        setRepoStatus("error");
       }
     }
 
@@ -293,7 +313,7 @@ function App() {
       isMounted = false;
       controller.abort();
     };
-  }, [reloadToken]);
+  }, []);
 
   const revealProps = prefersReducedMotion
     ? {}
@@ -302,30 +322,6 @@ function App() {
         whileInView: "visible" as const,
         viewport: { once: true, margin: "-120px" },
       };
-
-  const languages = useMemo(() => {
-    const unique = new Set(
-      repos.map((repo) => repo.language).filter((value) => value.length > 0),
-    );
-
-    return ["Tümü", ...Array.from(unique).sort()];
-  }, [repos]);
-
-  const filteredRepos = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-
-    return repos.filter((repo) => {
-      const matchesLanguage = language === "Tümü" || repo.language === language;
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        [repo.displayName, repo.description, repo.language, ...repo.topics]
-          .join(" ")
-          .toLowerCase()
-          .includes(normalizedQuery);
-
-      return matchesLanguage && matchesQuery;
-    });
-  }, [language, query, repos]);
 
   return (
     <div className="app-shell">
@@ -344,18 +340,17 @@ function App() {
           >
             <motion.div className="about-copy" variants={container}>
               <motion.p className="eyebrow" variants={item}>
-                Kendimi tanıtayım
+                Full Stack Developer · İzmir
               </motion.p>
               <motion.h1 id="about-title" variants={item}>
                 <span className="hero-greeting">Merhaba, ben</span>
                 {profile.name}
               </motion.h1>
               <motion.p className="about-lead" variants={item}>
-                Full Stack Developer'ım. .NET, React, React Native ve Nest.js
-                ile web ve mobil ürünler geliştiriyorum. Şu an Performanz Arge
-                ve Yazılım'da Software Engineer Intern olarak Claude ile proje
-                geliştirme üzerine çalışıyorum. Temiz kod ve kullanıcı odaklı
-                ürünlere önem veriyorum.
+                Daha okul bitmeden çalışmaya başladım: Performanz'a stajyer
+                olarak girdim, şimdi part-time developer olarak devam
+                ediyorum. En keyif aldığım kısım, bir fikrin gerçek insanların
+                her gün kullandığı bir ürüne dönüşmesini görmek.
               </motion.p>
 
               <motion.div className="hero-actions" variants={item}>
@@ -363,9 +358,30 @@ function App() {
                   <Rocket size={18} aria-hidden="true" />
                   Projelere bak
                 </a>
-                <a className="button button-secondary" href={`mailto:${profile.email}`}>
+                <a className="button button-secondary" href={profile.cvUrl} download>
+                  <Download size={18} aria-hidden="true" />
+                  CV'yi indir
+                </a>
+              </motion.div>
+
+              <motion.div className="hero-socials" variants={item}>
+                <a
+                  className="icon-link"
+                  href={profile.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub profilim"
+                >
+                  <Github size={18} aria-hidden="true" />
+                  <span>GitHub</span>
+                </a>
+                <a
+                  className="icon-link"
+                  href={`mailto:${profile.email}`}
+                  aria-label="E-posta gönder"
+                >
                   <Mail size={18} aria-hidden="true" />
-                  İletişime geç
+                  <span>E-posta</span>
                 </a>
               </motion.div>
 
@@ -393,148 +409,162 @@ function App() {
             id="work"
             aria-labelledby="work-title"
           >
-            <div className="section-heading project-heading">
-              <div>
-                <p className="eyebrow">GitHub'dan canlı</p>
-                <h2 id="work-title">Projeler</h2>
-              </div>
-              <div className={`sync-pill sync-${status}`}>
-                <span aria-hidden="true" />
-                {status === "loading" && "GitHub'dan okunuyor"}
-                {status === "ready" &&
-                  `${repos.length} repo${lastSync ? ` · ${lastSync}` : ""}`}
-                {status === "error" && "Yedek veri"}
-              </div>
+            <div className="section-heading">
+              <p className="eyebrow">Sahada çalışan işler</p>
+              <h2 id="work-title">Projeler</h2>
             </div>
 
-            <div className="project-tools" aria-label="Proje filtreleri">
-              <label className="search-box">
-                <Search size={18} aria-hidden="true" />
-                <input
-                  type="search"
-                  value={query}
-                  placeholder="Repo ara"
-                  aria-label="Repo ara"
-                  onChange={(event) => setQuery(event.target.value)}
-                />
-              </label>
-
-              <label className="select-box">
-                <span>Dil</span>
-                <select
-                  value={language}
-                  aria-label="Programlama dili filtresi"
-                  onChange={(event) => setLanguage(event.target.value)}
+            <motion.div className="featured-grid" variants={container} {...revealProps}>
+              {featuredProjects.map((project) => (
+                <motion.article
+                  className="featured-card"
+                  key={project.name}
+                  variants={item}
                 >
-                  {languages.map((languageOption) => (
-                    <option key={languageOption} value={languageOption}>
-                      {languageOption}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <button
-                className="icon-button"
-                type="button"
-                aria-label="GitHub projelerini yenile"
-                onClick={() => setReloadToken((token) => token + 1)}
-              >
-                <RefreshCw size={18} aria-hidden="true" />
-                <span role="tooltip">Yenile</span>
-              </button>
-            </div>
-
-            <motion.div className="project-grid" variants={container} {...revealProps}>
-              {filteredRepos.map((repo) => (
-                <motion.article className="project-card" key={repo.id} variants={item}>
-                  <ProjectPreview repo={repo} />
-
-                  <div className="project-topline">
-                    <span>{repo.source === "github" ? "GitHub" : "Yedek"}</span>
-                    {repo.isFork && <span>Fork</span>}
-                    {repo.isArchived && <span>Arşiv</span>}
-                  </div>
-
-                  <h3>{repo.displayName}</h3>
-                  <p>{repo.description}</p>
-
-                  <div className="repo-meta">
-                    {repo.language && (
-                      <span>
-                        <i
-                          style={{
-                            backgroundColor:
-                              languageColors[repo.language] ?? "var(--teal)",
-                          }}
-                        />
-                        {repo.language}
-                      </span>
-                    )}
-                    <span>
-                      <Star size={15} aria-hidden="true" />
-                      {repo.stars}
+                  <div className="featured-top">
+                    <span
+                      className={`status-chip ${
+                        project.status === "Sahada" ? "status-live" : "status-wip"
+                      }`}
+                    >
+                      {project.status}
                     </span>
-                    <span>
-                      <GitFork size={15} aria-hidden="true" />
-                      {repo.forks}
-                    </span>
-                    <span>
-                      <CalendarDays size={15} aria-hidden="true" />
-                      {formatDate(repo.updatedAt)}
+                    <span className="featured-year">
+                      <CalendarDays size={14} aria-hidden="true" />
+                      {project.year}
                     </span>
                   </div>
 
-                  {repo.topics.length > 0 && (
-                    <div className="tech-list">
-                      {repo.topics.slice(0, 4).map((topic) => (
-                        <span key={topic}>{topic}</span>
-                      ))}
-                    </div>
-                  )}
+                  <h3>{project.name}</h3>
+                  <p className="featured-tagline">{project.tagline}</p>
 
-                  <div className="project-actions">
-                    <a className="text-link" href={repo.htmlUrl} target="_blank" rel="noreferrer">
-                      Repo
-                      <Github size={16} aria-hidden="true" />
-                    </a>
-                    {repo.homepageUrl && (
-                      <a
-                        className="text-link"
-                        href={repo.homepageUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Canlı
-                        <ExternalLink size={16} aria-hidden="true" />
-                      </a>
-                    )}
+                  <ul className="featured-points">
+                    {project.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+
+                  <div className="tech-list">
+                    {project.stack.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
                   </div>
                 </motion.article>
               ))}
             </motion.div>
 
-            {filteredRepos.length === 0 && (
-              <div className="empty-state">
-                <Code2 size={22} aria-hidden="true" />
-                <p>Bu filtreyle repo bulunamadı.</p>
+            <div className="repo-strip">
+              <div className="repo-strip-head">
+                <h3>GitHub'da daha fazlası</h3>
+                <a
+                  className="text-link"
+                  href={profile.github}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Tümünü gör
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
               </div>
-            )}
 
-            {filteredRepos.length > 0 && (
-              <p className="repo-count">
-                {filteredRepos.length} repo gösteriliyor. GitHub'a herkese açık
-                eklediğin yeni projeler burada otomatik listelenir.
-              </p>
-            )}
+              {repoStatus === "loading" && (
+                <p className="repo-note">GitHub'dan yükleniyor…</p>
+              )}
+
+              {repoStatus === "error" && (
+                <p className="repo-note">
+                  Şu an GitHub'a ulaşılamıyor — projelerime{" "}
+                  <a href={profile.github} target="_blank" rel="noreferrer">
+                    github.com/{profile.githubUser}
+                  </a>{" "}
+                  üzerinden bakabilirsin.
+                </p>
+              )}
+
+              {repoStatus === "ready" && (
+                <motion.div className="repo-grid" variants={container} {...revealProps}>
+                  {repos.map((repo) => (
+                    <motion.a
+                      className="repo-card"
+                      key={repo.id}
+                      href={repo.htmlUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      variants={item}
+                    >
+                      <div className="repo-card-head">
+                        <h4>{repo.displayName}</h4>
+                        <ArrowUpRight size={16} aria-hidden="true" />
+                      </div>
+                      <p>{repo.description}</p>
+                      <div className="repo-meta">
+                        <span>
+                          <i
+                            style={{
+                              backgroundColor:
+                                languageColors[repo.language] ?? "var(--teal)",
+                            }}
+                          />
+                          {repo.language}
+                        </span>
+                        {repo.stars > 0 && (
+                          <span>
+                            <Star size={15} aria-hidden="true" />
+                            {repo.stars}
+                          </span>
+                        )}
+                        <span>
+                          <CalendarDays size={15} aria-hidden="true" />
+                          {formatDate(repo.updatedAt)}
+                        </span>
+                      </div>
+                    </motion.a>
+                  ))}
+                </motion.div>
+              )}
+            </div>
+          </section>
+
+          <section
+            className="stage-section experience-section"
+            id="experience"
+            aria-labelledby="experience-title"
+          >
+            <div className="section-heading">
+              <p className="eyebrow">Yol haritası</p>
+              <h2 id="experience-title">Deneyim</h2>
+            </div>
+
+            <motion.div className="timeline" variants={container} {...revealProps}>
+              {experience.map((entry) => (
+                <motion.div
+                  className="timeline-item"
+                  key={`${entry.org}-${entry.period}`}
+                  variants={item}
+                >
+                  <span className="timeline-period">{entry.period}</span>
+                  <div>
+                    <h3>{entry.role}</h3>
+                    <p className="timeline-org">{entry.org}</p>
+                    <p className="timeline-summary">{entry.summary}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </section>
 
           <motion.section
             className="stage-section stack-section"
             id="stack"
+            aria-labelledby="stack-title"
             variants={container}
             {...revealProps}
           >
+            <div className="section-heading">
+              <p className="eyebrow">Her gün kullandıklarım</p>
+              <h2 id="stack-title">Tech Stack</h2>
+            </div>
+
             <motion.div className="stack-logo-grid" variants={container}>
               {stackItems.map((stackItem) => (
                 <motion.article
@@ -556,7 +586,8 @@ function App() {
           >
             <div>
               <p className="eyebrow">İletişim</p>
-              <h2 id="contact-title">İş teklifleri ve proje fikirleri için.</h2>
+              <h2 id="contact-title">Aklında bir proje mi var? Konuşalım.</h2>
+              <p className="contact-note">E-postana genelde 24 saat içinde dönerim.</p>
             </div>
             <div className="contact-actions">
               <a className="button button-primary" href={`mailto:${profile.email}`}>
@@ -574,6 +605,18 @@ function App() {
               </a>
             </div>
           </section>
+
+          <footer className="site-footer">
+            <span>
+              © {new Date().getFullYear()} {profile.name} · İzmir
+            </span>
+            <div className="footer-links">
+              <a href={profile.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a href={`mailto:${profile.email}`}>E-posta</a>
+            </div>
+          </footer>
         </main>
       </div>
     </div>
@@ -688,69 +731,50 @@ async function fetchAllRepos(signal: AbortSignal) {
 }
 
 function normalizeRepo(repo: GithubRepo): PortfolioRepo {
-  const homepageUrl =
-    repo.homepage && /^https?:\/\//i.test(repo.homepage) ? repo.homepage : "";
-
   return {
     id: String(repo.id),
-    name: repo.name,
     displayName: toTitle(repo.name),
     description:
-      repo.description?.trim() ||
-      "Bu proje için henüz bir açıklama eklenmemiş.",
+      repo.description?.trim() || "Bu proje için henüz bir açıklama eklenmemiş.",
     htmlUrl: repo.html_url,
-    homepageUrl,
     language: repo.language || "Diğer",
-    topics: repo.topics ?? [],
     stars: repo.stargazers_count,
-    forks: repo.forks_count,
     updatedAt: repo.pushed_at || repo.updated_at,
-    isArchived: repo.archived,
-    isFork: repo.fork,
-    source: "github",
   };
 }
 
-function ProjectPreview({ repo }: { repo: PortfolioRepo }) {
-  const fallbackImage = getRepoOpenGraphImage(repo);
-  const previewImage = repo.homepageUrl
-    ? getWebsiteScreenshotImage(repo.homepageUrl)
-    : fallbackImage;
+function readRepoCache(): PortfolioRepo[] | null {
+  try {
+    const raw = sessionStorage.getItem(REPO_CACHE_KEY);
 
-  return (
-    <a
-      className="project-preview"
-      href={repo.homepageUrl || repo.htmlUrl}
-      target="_blank"
-      rel="noreferrer"
-      aria-label={`${repo.displayName} önizlemesini aç`}
-    >
-      <img
-        src={previewImage}
-        data-fallback={fallbackImage}
-        alt={`${repo.displayName} önizleme görseli`}
-        loading="lazy"
-        onError={(event) => {
-          const fallback = event.currentTarget.dataset.fallback;
+    if (!raw) {
+      return null;
+    }
 
-          if (fallback && event.currentTarget.src !== fallback) {
-            event.currentTarget.src = fallback;
-          }
-        }}
-      />
-      <span>{repo.homepageUrl ? "Canlı önizleme" : "Repo önizleme"}</span>
-    </a>
-  );
+    const parsed = JSON.parse(raw) as {
+      savedAt: number;
+      repos: PortfolioRepo[];
+    };
+
+    if (Date.now() - parsed.savedAt > REPO_CACHE_TTL) {
+      return null;
+    }
+
+    return parsed.repos;
+  } catch {
+    return null;
+  }
 }
 
-function getWebsiteScreenshotImage(url: string) {
-  return `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1200`;
-}
-
-function getRepoOpenGraphImage(repo: PortfolioRepo) {
-  const cacheKey = encodeURIComponent(`${repo.id}-${repo.updatedAt}`);
-
-  return `https://opengraph.githubassets.com/${cacheKey}/${profile.githubUser}/${repo.name}`;
+function writeRepoCache(repos: PortfolioRepo[]) {
+  try {
+    sessionStorage.setItem(
+      REPO_CACHE_KEY,
+      JSON.stringify({ savedAt: Date.now(), repos }),
+    );
+  } catch {
+    // sessionStorage kapali (gizli mod vb.) — cache olmadan devam
+  }
 }
 
 function toTitle(value: string) {
