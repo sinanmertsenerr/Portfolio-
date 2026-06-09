@@ -1,9 +1,9 @@
 # Computer Engineering Portfolio
 
 Vite, React, Framer Motion ve lucide-react ile hazırlanmış modern, animasyonlu
-ve deploy edilmeye hazır portfolio sitesi.
+ve yayına hazır portföy sitesi.
 
-Public proje kartları GitHub'dan sayfalama ile canlı yüklenir. GitHub API'ye
+Herkese açık proje kartları GitHub'dan sayfalama ile canlı yüklenir. GitHub API'ye
 ulaşılamazsa yerel yedek veriler gösterilir. Proje görselleri repo içindeki
 website bağlantısından canlı ekran görüntüsü üretir; canlı URL yoksa GitHub Open
 Graph önizlemesine düşer.
@@ -24,7 +24,7 @@ npm run dev
 npm run build
 ```
 
-Deploy edilebilir çıktı `dist/` klasöründe oluşur.
+Yayınlanabilir çıktı `dist/` klasöründe oluşur.
 
 ## Özelleştirme
 

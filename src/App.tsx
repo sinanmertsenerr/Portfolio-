@@ -38,16 +38,12 @@ const stageSectionIds = stageSections.map((section) => section.id);
 
 const aboutHighlights = [
   {
-    label: "Alan",
-    value: "Bilgisayar mühendisliği",
+    label: "Rol",
+    value: "Full Stack Developer",
   },
   {
-    label: "Odak",
-    value: "Web, API ve ürün akışı",
-  },
-  {
-    label: "Kanıt",
-    value: "Canlı GitHub projeleri",
+    label: "Şu an",
+    value: "Performanz'da Stajyer",
   },
 ];
 
@@ -65,48 +61,52 @@ const stackItems = [
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
   },
   {
-    name: "Vite",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
+    name: "HTML5",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
+  },
+  {
+    name: "CSS3",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+  },
+  {
+    name: "React Native",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+  },
+  {
+    name: "Flutter",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
+  },
+  {
+    name: ".NET",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg",
   },
   {
     name: "Node.js",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
   },
   {
-    name: "Express",
-    icon: "https://cdn.simpleicons.org/express/f5f0e8",
-  },
-  {
-    name: "Python",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-  },
-  {
-    name: "Java",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+    name: "Nest.js",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg",
   },
   {
     name: "PostgreSQL",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
   },
   {
-    name: "Firebase",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-  },
-  {
-    name: "Docker",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
-  },
-  {
     name: "Git",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
   },
   {
-    name: "Linux",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    name: "Claude",
+    icon: "https://cdn.simpleicons.org/claude/D97757",
   },
   {
-    name: "Vercel",
-    icon: "https://cdn.simpleicons.org/vercel/f5f0e8",
+    name: "Codex",
+    icon: "https://api.iconify.design/simple-icons/openai.svg?color=%23f5f0e8",
   },
 ];
 
@@ -145,52 +145,52 @@ type PortfolioRepo = {
 
 const fallbackRepos: PortfolioRepo[] = [
   {
-    id: "fallback-portfolio",
-    name: "focus-first-portfolio",
-    displayName: "Focus First Portfolio",
+    id: "fallback-spor-okullari",
+    name: "spor-okullari-yonetim",
+    displayName: "Spor Okulları Yönetim Modülü",
     description:
-      "Kısa dikkat süresine göre tasarlanmış, animasyonlu ve deploy-ready portfolio arayüzü.",
+      "Antrenör yoklaması, sporcu takibi ve aidat yönetimini tek modülde toplayan yönetim paneli.",
     htmlUrl: profile.github,
     homepageUrl: "",
     language: "TypeScript",
-    topics: ["react", "vite", "portfolio"],
+    topics: ["nestjs", "react", "postgresql"],
     stars: 0,
     forks: 0,
-    updatedAt: "2026-06-08T00:00:00Z",
+    updatedAt: "2026-05-01T00:00:00Z",
     isArchived: false,
     isFork: false,
     source: "fallback",
   },
   {
-    id: "fallback-api",
-    name: "announcement-watcher",
-    displayName: "Announcement Watcher",
+    id: "fallback-sistem-takip",
+    name: "sistem-takip-platformu",
+    displayName: "Sistem Takip Platformu",
     description:
-      "Kaynakları izleyip değişiklikleri yakalayan otomasyon ve bildirim servisi.",
+      "Stok, depo ve üretim süreçlerini tek panelden izleyen şirket içi takip platformu.",
     htmlUrl: profile.github,
     homepageUrl: "",
-    language: "Node.js",
-    topics: ["automation", "api", "node"],
+    language: "TypeScript",
+    topics: ["nestjs", "react", "postgresql"],
     stars: 0,
     forks: 0,
-    updatedAt: "2026-05-18T00:00:00Z",
+    updatedAt: "2026-01-15T00:00:00Z",
     isArchived: false,
     isFork: false,
     source: "fallback",
   },
   {
-    id: "fallback-dashboard",
-    name: "realtime-panel",
-    displayName: "Realtime Panel",
+    id: "fallback-nikiapp",
+    name: "nikiapp",
+    displayName: "NikiApp",
     description:
-      "Canlı veriyi okunur kartlara bölen, kritik metrikleri öne çıkaran dashboard.",
+      "Bir kahve işletmesi için QR ile ödeme, kampanya ve sadakat sistemi sunan mobil uygulama.",
     htmlUrl: profile.github,
     homepageUrl: "",
-    language: "React",
-    topics: ["dashboard", "ui", "realtime"],
+    language: "TypeScript",
+    topics: ["react-native", "nestjs", "postgresql"],
     stars: 0,
     forks: 0,
-    updatedAt: "2026-04-02T00:00:00Z",
+    updatedAt: "2025-09-20T00:00:00Z",
     isArchived: false,
     isFork: false,
     source: "fallback",
@@ -347,12 +347,15 @@ function App() {
                 Kendimi tanıtayım
               </motion.p>
               <motion.h1 id="about-title" variants={item}>
+                <span className="hero-greeting">Merhaba, ben</span>
                 {profile.name}
               </motion.h1>
               <motion.p className="about-lead" variants={item}>
-                Bilgisayar mühendisliği odağında web arayüzleri, API akışları
-                ve ürün düşüncesini bir araya getiriyorum. Amacım, ilk bakışta
-                anlaşılan ve projeleriyle kendini kanıtlayan işler üretmek.
+                Full Stack Developer'ım. .NET, React, React Native ve Nest.js
+                ile web ve mobil ürünler geliştiriyorum. Şu an Performanz Arge
+                ve Yazılım'da Software Engineer Intern olarak Claude ile proje
+                geliştirme üzerine çalışıyorum. Temiz kod ve kullanıcı odaklı
+                ürünlere önem veriyorum.
               </motion.p>
 
               <motion.div className="hero-actions" variants={item}>
@@ -382,10 +385,6 @@ function App() {
 
             <motion.figure className="portrait-card" variants={item}>
               <img src="/sinan-portrait.jpg" alt="Sinan Mert Şener portresi" />
-              <figcaption>
-                <span>Computer Engineering</span>
-                <strong>Web ürünleri ve canlı projeler</strong>
-              </figcaption>
             </motion.figure>
           </motion.section>
 
@@ -396,14 +395,14 @@ function App() {
           >
             <div className="section-heading project-heading">
               <div>
-                <p className="eyebrow">GitHub canlı</p>
+                <p className="eyebrow">GitHub'dan canlı</p>
                 <h2 id="work-title">Projeler</h2>
               </div>
               <div className={`sync-pill sync-${status}`}>
                 <span aria-hidden="true" />
-                {status === "loading" && "GitHub okunuyor"}
+                {status === "loading" && "GitHub'dan okunuyor"}
                 {status === "ready" &&
-                  `${repos.length} repo${lastSync ? ` - ${lastSync}` : ""}`}
+                  `${repos.length} repo${lastSync ? ` · ${lastSync}` : ""}`}
                 {status === "error" && "Yedek veri"}
               </div>
             </div>
@@ -524,8 +523,8 @@ function App() {
 
             {filteredRepos.length > 0 && (
               <p className="repo-count">
-                {filteredRepos.length} repo gösteriliyor. GitHub'a public
-                olarak eklediklerin burada otomatik büyür.
+                {filteredRepos.length} repo gösteriliyor. GitHub'a herkese açık
+                eklediğin yeni projeler burada otomatik listelenir.
               </p>
             )}
           </section>
@@ -557,12 +556,12 @@ function App() {
           >
             <div>
               <p className="eyebrow">İletişim</p>
-              <h2 id="contact-title">İş teklifi ve iş fikri için.</h2>
+              <h2 id="contact-title">İş teklifleri ve proje fikirleri için.</h2>
             </div>
             <div className="contact-actions">
               <a className="button button-primary" href={`mailto:${profile.email}`}>
                 <Mail size={18} aria-hidden="true" />
-                Mail gönder
+                E-posta gönder
               </a>
               <a
                 className="button button-secondary"
@@ -698,7 +697,7 @@ function normalizeRepo(repo: GithubRepo): PortfolioRepo {
     displayName: toTitle(repo.name),
     description:
       repo.description?.trim() ||
-      "Açıklama eklenince bu proje kartı problem, çözüm ve kullanım bilgisini otomatik taşır.",
+      "Bu proje için henüz bir açıklama eklenmemiş.",
     htmlUrl: repo.html_url,
     homepageUrl,
     language: repo.language || "Diğer",
