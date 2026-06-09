@@ -575,11 +575,9 @@ function App() {
             id="contact"
             aria-labelledby="contact-title"
           >
-            <div>
-              <p className="eyebrow">İletişim</p>
-              <h2 id="contact-title">Aklında bir proje mi var? Konuşalım.</h2>
-              <p className="contact-note">E-postana genelde 24 saat içinde dönerim.</p>
-            </div>
+            <p className="eyebrow">İletişim</p>
+            <h2 id="contact-title">Aklında bir proje mi var? Konuşalım.</h2>
+            <p className="contact-note">E-postana genelde 24 saat içinde dönerim.</p>
             <div className="contact-actions">
               <a className="button button-primary" href={`mailto:${profile.email}`}>
                 <Mail size={18} aria-hidden="true" />
@@ -595,6 +593,9 @@ function App() {
                 GitHub
               </a>
             </div>
+            <a className="contact-email" href={`mailto:${profile.email}`}>
+              {profile.email}
+            </a>
           </section>
 
           <footer className="site-footer">
@@ -650,6 +651,17 @@ function useActiveSection() {
     let frame = 0;
 
     function updateActiveSection() {
+      // Sayfa dibine inildiyse son bolum kisa olsa bile aktif sayilmali;
+      // %38 ankraj noktasi oraya hic ulasamayabiliyor.
+      const scrolledToBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 8;
+
+      if (scrolledToBottom) {
+        setActiveSection(stageSectionIds[stageSectionIds.length - 1]);
+        return;
+      }
+
       const anchorY = window.innerHeight * 0.38;
       let closestSection = stageSectionIds[0];
       let closestDistance = Number.POSITIVE_INFINITY;

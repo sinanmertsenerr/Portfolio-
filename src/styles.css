@@ -726,30 +726,49 @@ figure {
 }
 
 .contact-section {
-  min-height: 72svh;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 42px;
-  align-items: center;
-  padding: 34px;
+  min-height: auto;
+  justify-items: center;
+  padding: 80px 34px;
+  text-align: center;
   border: 1px solid var(--line-strong);
   border-radius: 8px;
   background:
-    linear-gradient(90deg, rgba(88, 215, 191, 0.13), rgba(242, 189, 90, 0.08)),
+    linear-gradient(135deg, rgba(88, 215, 191, 0.13), rgba(242, 189, 90, 0.08)),
     #121816;
 }
 
 .contact-section .eyebrow {
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.contact-section h2 {
+  max-width: 560px;
+  text-wrap: balance;
 }
 
 .contact-note {
-  margin-top: 12px;
+  margin-top: 14px;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 1.02rem;
 }
 
 .contact-actions {
-  justify-content: flex-end;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.contact-email {
+  display: inline-flex;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 720;
+  letter-spacing: 0.01em;
+  transition: color 180ms ease;
+}
+
+.contact-email:hover {
+  color: var(--teal);
 }
 
 .site-footer {
@@ -872,12 +891,7 @@ figure {
   }
 
   .contact-section {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .contact-actions {
-    justify-content: flex-start;
+    padding: 56px 24px;
   }
 }
 
@@ -923,7 +937,11 @@ figure {
   }
 
   .contact-section {
-    padding: 24px;
+    padding: 44px 20px;
+  }
+
+  .contact-email {
+    overflow-wrap: anywhere;
   }
 }
 
