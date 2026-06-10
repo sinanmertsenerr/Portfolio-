@@ -84,11 +84,35 @@ export const copy: Record<Lang, Copy> = {
     highlights: [
       { label: "Şu an", value: "Performanz · Part-time Developer" },
       { label: "Odak", value: "Fullstack Development · Mobil" },
-      { label: "Sahada", value: "3 ürün gerçek kullanıcıda" },
+      { label: "Sahada", value: "4 ürün gerçek kullanıcıda" },
       { label: "Eğitim", value: "Bilgisayar Müh. · 2026" },
     ],
     work: { eyebrow: "Sahada çalışan işler", title: "Projeler" },
     featuredProjects: [
+      {
+        name: "Fenerbahçe Basketbol Altyapı Platformu",
+        year: "2026",
+        live: true,
+        status: "Sahada",
+        tagline: "Sporcu başvurusundan saha ölçümlerine, altyapı seçmelerinin dijital hâli.",
+        points: [
+          "Web, mobil ve backend dahil sistemin tamamını tek başıma geliştirdim; Fenerbahçe Basketbol altyapısı tarafından aktif olarak kullanılıyor.",
+          "QR ile sporcu tanıma, ölçüm istasyonları, çevrimdışı senkronize çalışan mobil uygulama ve KVKK uyumlu veri akışları içeriyor.",
+        ],
+        stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
+      },
+      {
+        name: "VAP · Veri Analiz Portalı",
+        year: "2025 – 2026",
+        live: true,
+        status: "Sahada",
+        tagline: "Spor kurumları için sporcu gelişimini ölçen, izleyen ve raporlayan platform.",
+        points: [
+          "Spor Okulları modülünü (antrenman programı, yoklama, aidat) uçtan uca geliştirdim; Veli Portalı'nı ve anlık bildirim altyapısını ekledim.",
+          "Yetenek karşılaştırma ekranları ve çok sayfalı PDF rapor üretimi üzerinde çalıştım.",
+        ],
+        stack: ["Next.js", ".NET 8", "PostgreSQL"],
+      },
       {
         name: "NikiApp",
         year: "2025",
@@ -112,18 +136,6 @@ export const copy: Record<Lang, Copy> = {
           "Satışa hazır ürün durumu artık anlık olarak izlenebiliyor.",
         ],
         stack: ["Nest.js", "React", "PostgreSQL"],
-      },
-      {
-        name: "Spor Okulları Yönetim Modülü",
-        year: "2025",
-        live: true,
-        status: "Sahada",
-        tagline: "Yoklamadan aidata, spor okulunun tüm operasyonu tek modülde.",
-        points: [
-          "Antrenör yoklama alıyor, sporcunun katılımı izleniyor, muhasebe aidatı takip ediyor.",
-          "Şirket bünyesinde tamamlandı ve aktif olarak kullanılıyor.",
-        ],
-        stack: ["React", "Nest.js", "PostgreSQL"],
       },
     ],
     repos: {
@@ -207,11 +219,35 @@ export const copy: Record<Lang, Copy> = {
     highlights: [
       { label: "Currently", value: "Performanz · Part-time Developer" },
       { label: "Focus", value: "Fullstack Development · Mobile" },
-      { label: "Shipped", value: "3 products with real users" },
+      { label: "Shipped", value: "4 products with real users" },
       { label: "Education", value: "Computer Eng. · 2026" },
     ],
     work: { eyebrow: "Running in production", title: "Projects" },
     featuredProjects: [
+      {
+        name: "Fenerbahçe Basketball Academy Platform",
+        year: "2026",
+        live: true,
+        status: "Live",
+        tagline: "From athlete applications to courtside measurements: academy tryouts, digitized.",
+        points: [
+          "I built the entire system solo, including web, mobile and backend; it is actively used by the Fenerbahçe Basketball youth academy.",
+          "Features QR-based athlete identification, measurement stations, an offline-syncing mobile app and KVKK-compliant data flows.",
+        ],
+        stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
+      },
+      {
+        name: "VAP · Data Analysis Portal",
+        year: "2025 – 2026",
+        live: true,
+        status: "Live",
+        tagline: "A platform that measures, tracks and reports athlete development for sports organizations.",
+        points: [
+          "I built the Sports Schools module (training schedules, attendance, fees) end to end, and added the Parent Portal and the push notification infrastructure.",
+          "I also worked on talent comparison screens and multi-page PDF report generation.",
+        ],
+        stack: ["Next.js", ".NET 8", "PostgreSQL"],
+      },
       {
         name: "NikiApp",
         year: "2025",
@@ -235,18 +271,6 @@ export const copy: Record<Lang, Copy> = {
           "Sales-ready product status is now tracked in real time.",
         ],
         stack: ["Nest.js", "React", "PostgreSQL"],
-      },
-      {
-        name: "Sports School Management Module",
-        year: "2025",
-        live: true,
-        status: "Live",
-        tagline: "From attendance to fees, a sports school's whole operation in one module.",
-        points: [
-          "Coaches take attendance, athlete participation is tracked, accounting handles the fees.",
-          "Completed in-house and now in daily use.",
-        ],
-        stack: ["React", "Nest.js", "PostgreSQL"],
       },
     ],
     repos: {
