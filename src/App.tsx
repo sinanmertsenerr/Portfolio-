@@ -334,10 +334,10 @@ function App() {
               </motion.div>
 
               <motion.div className="about-highlights" variants={container}>
-                {t.highlights.map((highlight) => (
+                {t.highlights.map((highlight, index) => (
                   <motion.div
                     className="about-highlight"
-                    key={highlight.label}
+                    key={index}
                     variants={item}
                   >
                     <span>{highlight.label}</span>
@@ -363,10 +363,10 @@ function App() {
             </div>
 
             <motion.div className="featured-grid" variants={container} {...revealProps}>
-              {t.featuredProjects.map((project) => (
+              {t.featuredProjects.map((project, index) => (
                 <motion.article
                   className="featured-card"
-                  key={project.name}
+                  key={index}
                   variants={item}
                 >
                   <div className="featured-top">
@@ -387,8 +387,8 @@ function App() {
                   <p className="featured-tagline">{project.tagline}</p>
 
                   <ul className="featured-points">
-                    {project.points.map((point) => (
-                      <li key={point}>{point}</li>
+                    {project.points.map((point, pointIndex) => (
+                      <li key={pointIndex}>{point}</li>
                     ))}
                   </ul>
 
@@ -484,10 +484,10 @@ function App() {
             </div>
 
             <motion.div className="timeline" variants={container} {...revealProps}>
-              {t.experience.entries.map((entry) => (
+              {t.experience.entries.map((entry, index) => (
                 <motion.div
                   className="timeline-item"
-                  key={`${entry.org}-${entry.period}`}
+                  key={index}
                   variants={item}
                 >
                   <span className="timeline-period">{entry.period}</span>
