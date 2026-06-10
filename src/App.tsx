@@ -15,6 +15,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { useEffect, useState } from "react";
+import { copy, type Copy, type Lang } from "./content";
 
 const profile = {
   name: "Sinan Mert Şener",
@@ -25,103 +26,14 @@ const profile = {
 };
 
 const stageSections = [
-  { id: "about", number: "1", label: "Hakkımda" },
-  { id: "work", number: "2", label: "Projeler" },
-  { id: "experience", number: "3", label: "Deneyim" },
-  { id: "stack", number: "4", label: "Tech Stack" },
-  { id: "contact", number: "5", label: "İletişim" },
+  { id: "about", number: "1" },
+  { id: "work", number: "2" },
+  { id: "experience", number: "3" },
+  { id: "stack", number: "4" },
+  { id: "contact", number: "5" },
 ] as const;
 
 const stageSectionIds = stageSections.map((section) => section.id);
-
-const aboutHighlights = [
-  { label: "Şu an", value: "Performanz · Part-time Developer" },
-  { label: "Odak", value: "Fullstack Development · Mobil" },
-  { label: "Sahada", value: "3 ürün gerçek kullanıcıda" },
-  { label: "Eğitim", value: "Bilgisayar Müh. · 2026" },
-];
-
-type FeaturedProject = {
-  name: string;
-  year: string;
-  status: "Sahada" | "Geliştiriliyor";
-  tagline: string;
-  points: string[];
-  stack: string[];
-};
-
-const featuredProjects: FeaturedProject[] = [
-  {
-    name: "NikiApp",
-    year: "2025",
-    status: "Sahada",
-    tagline: "Kampüs kahvecisinin cebe giren hâli.",
-    points: [
-      "QR ile ödeme, kampanya katılımı ve haftalık ödül çarkı: sipariş ve sadakat akışını uçtan uca geliştirdim.",
-      "İşletmeye özel dashboard: menü, kampanya ve kredi yönetimi tek panelden.",
-    ],
-    stack: ["React Native", "Nest.js", "PostgreSQL"],
-  },
-  {
-    name: "Sistem Takip Platformu",
-    year: "2025",
-    status: "Sahada",
-    tagline: "Üretimde “bu malzeme nerede?” sorusunu bitiren panel.",
-    points: [
-      "Stok, depo ve malzeme konumlandırmayı tek ekranda toplayan şirket içi web platformu.",
-      "Satışa hazır ürün durumu artık anlık olarak izlenebiliyor.",
-    ],
-    stack: ["Nest.js", "React", "PostgreSQL"],
-  },
-  {
-    name: "Spor Okulları Yönetim Modülü",
-    year: "2025",
-    status: "Sahada",
-    tagline: "Yoklamadan aidata, spor okulunun tüm operasyonu tek modülde.",
-    points: [
-      "Antrenör yoklama alıyor, sporcunun katılımı izleniyor, muhasebe aidatı takip ediyor.",
-      "Şirket bünyesinde tamamlandı, sahada kullanımda.",
-    ],
-    stack: ["React", "Nest.js", "PostgreSQL"],
-  },
-];
-
-const experience = [
-  {
-    period: "May 2026 – Devam",
-    role: "Software Engineer (Part-time)",
-    org: "Performanz Arge ve Yazılım",
-    summary:
-      "Staj bitti, takımda kaldım: web ve mobilde uçtan uca ürün geliştirmeye devam ediyorum.",
-  },
-  {
-    period: "Ağu 2025 – May 2026",
-    role: "Software Engineer Intern",
-    org: "Performanz Arge ve Yazılım",
-    summary:
-      "Web ve mobilde uçtan uca ürün geliştirme; Claude ile AI destekli geliştirme süreçleri.",
-  },
-  {
-    period: "2024 – 2025",
-    role: "Tanıtım Görevlisi (Part-time)",
-    org: "İzmir Ekonomi Üniversitesi",
-    summary:
-      "Her gün farklı bir kitleye kampüs sunumu yaptım; iletişim kasım buradan geliyor.",
-  },
-  {
-    period: "2021 – 2026",
-    role: "Activity Committee Leader · Yönetim Kurulu",
-    org: "ESTIEM",
-    summary:
-      "25+ ülkeden öğrencinin katıldığı uluslararası etkinlikler organize ettim.",
-  },
-  {
-    period: "2019 – 2026",
-    role: "Bilgisayar Mühendisliği Lisans",
-    org: "İzmir Ekonomi Üniversitesi",
-    summary: "2026'da mezun oluyorum.",
-  },
-];
 
 const stackItems = [
   {
@@ -218,8 +130,9 @@ const languageColors: Record<string, string> = {
   "C#": "#9b7bff",
 };
 
-const REPO_CACHE_KEY = "portfolio-repos-v4";
+const REPO_CACHE_KEY = "portfolio-repos-v5";
 const REPO_CACHE_TTL = 60 * 60 * 1000;
+const LANG_STORAGE_KEY = "portfolio-lang";
 
 // Seritte SADECE bu repolar, bu sirayla gosterilir ("sahip/repo" formati).
 // Private olan repo, public yapilana kadar sessizce atlanir.
@@ -251,6 +164,20 @@ const item: Variants = {
   },
 };
 
+function getInitialLang(): Lang {
+  try {
+    const saved = localStorage.getItem(LANG_STORAGE_KEY);
+
+    if (saved === "tr" || saved === "en") {
+      return saved;
+    }
+  } catch {
+    // localStorage kapali (gizli mod vb.) — tarayici diline gore devam
+  }
+
+  return navigator.language?.toLowerCase().startsWith("tr") ? "tr" : "en";
+}
+
 function App() {
   const prefersReducedMotion = useReducedMotion();
   const activeSection = useActiveSection();
@@ -260,10 +187,23 @@ function App() {
     damping: 30,
     restDelta: 0.001,
   });
+  const [lang, setLang] = useState<Lang>(getInitialLang);
   const [repos, setRepos] = useState<PortfolioRepo[]>([]);
   const [repoStatus, setRepoStatus] = useState<"loading" | "ready" | "error">(
     "loading",
   );
+
+  const t = copy[lang];
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+
+    try {
+      localStorage.setItem(LANG_STORAGE_KEY, lang);
+    } catch {
+      // localStorage kapali — secim sadece bu oturumda gecerli kalir
+    }
+  }, [lang]);
 
   useEffect(() => {
     const cached = readRepoCache();
@@ -317,8 +257,28 @@ function App() {
   return (
     <div className="app-shell">
       <motion.div className="scroll-progress" style={{ scaleX }} />
+
+      <div className="lang-toggle" role="group" aria-label={t.langAria}>
+        <button
+          type="button"
+          className={lang === "tr" ? "is-active" : ""}
+          aria-pressed={lang === "tr"}
+          onClick={() => setLang("tr")}
+        >
+          TR
+        </button>
+        <button
+          type="button"
+          className={lang === "en" ? "is-active" : ""}
+          aria-pressed={lang === "en"}
+          onClick={() => setLang("en")}
+        >
+          EN
+        </button>
+      </div>
+
       <div className="stage-layout">
-        <StageNav activeSection={activeSection} />
+        <StageNav activeSection={activeSection} t={t} />
 
         <main className="stage-content">
           <motion.section
@@ -331,27 +291,24 @@ function App() {
           >
             <motion.div className="about-copy" variants={container}>
               <motion.p className="eyebrow" variants={item}>
-                Full Stack Developer · İzmir
+                {t.hero.eyebrow}
               </motion.p>
               <motion.h1 id="about-title" variants={item}>
-                <span className="hero-greeting">Merhaba, ben</span>
+                <span className="hero-greeting">{t.hero.greeting}</span>
                 {profile.name}
               </motion.h1>
               <motion.p className="about-lead" variants={item}>
-                Daha okul bitmeden çalışmaya başladım: Performanz'a stajyer
-                olarak girdim, şimdi part-time developer olarak devam
-                ediyorum. En keyif aldığım kısım, bir fikrin gerçek insanların
-                her gün kullandığı bir ürüne dönüşmesini görmek.
+                {t.hero.lead}
               </motion.p>
 
               <motion.div className="hero-actions" variants={item}>
                 <a className="button button-primary" href="#work">
                   <Rocket size={18} aria-hidden="true" />
-                  Projelere bak
+                  {t.hero.ctaProjects}
                 </a>
                 <a className="button button-secondary" href={profile.cvUrl} download>
                   <Download size={18} aria-hidden="true" />
-                  CV'yi indir
+                  {t.hero.ctaCv}
                 </a>
               </motion.div>
 
@@ -361,23 +318,23 @@ function App() {
                   href={profile.github}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="GitHub profilim"
+                  aria-label={t.hero.tooltipGithub}
                 >
                   <Github size={18} aria-hidden="true" />
-                  <span>GitHub</span>
+                  <span>{t.hero.tooltipGithub}</span>
                 </a>
                 <a
                   className="icon-link"
                   href={`mailto:${profile.email}`}
-                  aria-label="E-posta gönder"
+                  aria-label={t.hero.tooltipEmail}
                 >
                   <Mail size={18} aria-hidden="true" />
-                  <span>E-posta</span>
+                  <span>{t.hero.tooltipEmail}</span>
                 </a>
               </motion.div>
 
               <motion.div className="about-highlights" variants={container}>
-                {aboutHighlights.map((highlight) => (
+                {t.highlights.map((highlight) => (
                   <motion.div
                     className="about-highlight"
                     key={highlight.label}
@@ -391,7 +348,7 @@ function App() {
             </motion.div>
 
             <motion.figure className="portrait-card" variants={item}>
-              <img src="/sinan-portrait.jpg" alt="Sinan Mert Şener portresi" />
+              <img src="/sinan-portrait.jpg" alt={t.hero.portraitAlt} />
             </motion.figure>
           </motion.section>
 
@@ -401,12 +358,12 @@ function App() {
             aria-labelledby="work-title"
           >
             <div className="section-heading">
-              <p className="eyebrow">Sahada çalışan işler</p>
-              <h2 id="work-title">Projeler</h2>
+              <p className="eyebrow">{t.work.eyebrow}</p>
+              <h2 id="work-title">{t.work.title}</h2>
             </div>
 
             <motion.div className="featured-grid" variants={container} {...revealProps}>
-              {featuredProjects.map((project) => (
+              {t.featuredProjects.map((project) => (
                 <motion.article
                   className="featured-card"
                   key={project.name}
@@ -415,7 +372,7 @@ function App() {
                   <div className="featured-top">
                     <span
                       className={`status-chip ${
-                        project.status === "Sahada" ? "status-live" : "status-wip"
+                        project.live ? "status-live" : "status-wip"
                       }`}
                     >
                       {project.status}
@@ -446,29 +403,29 @@ function App() {
 
             <div className="repo-strip">
               <div className="repo-strip-head">
-                <h3>GitHub'da daha fazlası</h3>
+                <h3>{t.repos.heading}</h3>
                 <a
                   className="text-link"
                   href={profile.github}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Tümünü gör
+                  {t.repos.viewAll}
                   <ArrowUpRight size={16} aria-hidden="true" />
                 </a>
               </div>
 
               {repoStatus === "loading" && (
-                <p className="repo-note">GitHub'dan yükleniyor…</p>
+                <p className="repo-note">{t.repos.loading}</p>
               )}
 
               {repoStatus === "error" && (
                 <p className="repo-note">
-                  Şu an GitHub'a ulaşılamıyor — projelerime{" "}
+                  {t.repos.errorPrefix}
                   <a href={profile.github} target="_blank" rel="noreferrer">
                     github.com/{profile.githubUser}
-                  </a>{" "}
-                  üzerinden bakabilirsin.
+                  </a>
+                  {t.repos.errorSuffix}
                 </p>
               )}
 
@@ -487,7 +444,7 @@ function App() {
                         <h4>{repo.displayName}</h4>
                         <ArrowUpRight size={16} aria-hidden="true" />
                       </div>
-                      <p>{repo.description}</p>
+                      <p>{repo.description || t.repos.noDescription}</p>
                       <div className="repo-meta">
                         <span>
                           <i
@@ -496,7 +453,7 @@ function App() {
                                 languageColors[repo.language] ?? "var(--teal)",
                             }}
                           />
-                          {repo.language}
+                          {repo.language || t.repos.otherLanguage}
                         </span>
                         {repo.stars > 0 && (
                           <span>
@@ -506,7 +463,7 @@ function App() {
                         )}
                         <span>
                           <CalendarDays size={15} aria-hidden="true" />
-                          {formatDate(repo.updatedAt)}
+                          {formatDate(repo.updatedAt, lang)}
                         </span>
                       </div>
                     </motion.a>
@@ -522,12 +479,12 @@ function App() {
             aria-labelledby="experience-title"
           >
             <div className="section-heading">
-              <p className="eyebrow">Yol haritası</p>
-              <h2 id="experience-title">Deneyim</h2>
+              <p className="eyebrow">{t.experience.eyebrow}</p>
+              <h2 id="experience-title">{t.experience.title}</h2>
             </div>
 
             <motion.div className="timeline" variants={container} {...revealProps}>
-              {experience.map((entry) => (
+              {t.experience.entries.map((entry) => (
                 <motion.div
                   className="timeline-item"
                   key={`${entry.org}-${entry.period}`}
@@ -552,8 +509,8 @@ function App() {
             {...revealProps}
           >
             <div className="section-heading">
-              <p className="eyebrow">Her gün kullandıklarım</p>
-              <h2 id="stack-title">Tech Stack</h2>
+              <p className="eyebrow">{t.stack.eyebrow}</p>
+              <h2 id="stack-title">{t.stack.title}</h2>
             </div>
 
             <motion.div className="stack-logo-grid" variants={container}>
@@ -575,13 +532,13 @@ function App() {
             id="contact"
             aria-labelledby="contact-title"
           >
-            <p className="eyebrow">İletişim</p>
-            <h2 id="contact-title">Aklında bir proje mi var? Konuşalım.</h2>
-            <p className="contact-note">E-postana genelde 24 saat içinde dönerim.</p>
+            <p className="eyebrow">{t.contact.eyebrow}</p>
+            <h2 id="contact-title">{t.contact.title}</h2>
+            <p className="contact-note">{t.contact.note}</p>
             <div className="contact-actions">
               <a className="button button-primary" href={`mailto:${profile.email}`}>
                 <Mail size={18} aria-hidden="true" />
-                E-posta gönder
+                {t.contact.ctaEmail}
               </a>
               <a
                 className="button button-secondary"
@@ -606,7 +563,7 @@ function App() {
               <a href={profile.github} target="_blank" rel="noreferrer">
                 GitHub
               </a>
-              <a href={`mailto:${profile.email}`}>E-posta</a>
+              <a href={`mailto:${profile.email}`}>{t.footer.email}</a>
             </div>
           </footer>
         </main>
@@ -615,13 +572,13 @@ function App() {
   );
 }
 
-function StageNav({ activeSection }: { activeSection: string }) {
+function StageNav({ activeSection, t }: { activeSection: string; t: Copy }) {
   const activeIndex = stageSections.findIndex(
     (section) => section.id === activeSection,
   );
 
   return (
-    <aside className="stage-nav" aria-label="Sayfa bölümleri">
+    <aside className="stage-nav" aria-label={t.navAria}>
       <div className="stage-list">
         {stageSections.map((section, index) => {
           const state =
@@ -635,7 +592,7 @@ function StageNav({ activeSection }: { activeSection: string }) {
             <a className={`stage-link ${state}`} href={`#${section.id}`} key={section.id}>
               <span className="stage-number">{section.number}</span>
               <span className="stage-dash">-</span>
-              <span>{section.label}</span>
+              <span>{t.nav[section.id]}</span>
             </a>
           );
         })}
@@ -732,10 +689,9 @@ function normalizeRepo(repo: GithubRepo): PortfolioRepo {
   return {
     id: String(repo.id),
     displayName: toTitle(repo.name),
-    description:
-      repo.description?.trim() || "Bu proje için henüz bir açıklama eklenmemiş.",
+    description: repo.description?.trim() ?? "",
     htmlUrl: repo.html_url,
-    language: repo.language || "Diğer",
+    language: repo.language ?? "",
     stars: repo.stargazers_count,
     updatedAt: repo.pushed_at || repo.updated_at,
   };
@@ -783,8 +739,8 @@ function toTitle(value: string) {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("tr-TR", {
+function formatDate(value: string, lang: Lang) {
+  return new Intl.DateTimeFormat(lang === "tr" ? "tr-TR" : "en-US", {
     month: "short",
     year: "numeric",
   }).format(new Date(value));

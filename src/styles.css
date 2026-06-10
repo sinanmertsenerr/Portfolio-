@@ -98,6 +98,46 @@ figure {
   background: linear-gradient(90deg, var(--teal), var(--amber), var(--rust));
 }
 
+.lang-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 75;
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid rgba(245, 240, 232, 0.16);
+  border-radius: 8px;
+  background: rgba(11, 14, 13, 0.72);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.lang-toggle button {
+  min-width: 42px;
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.lang-toggle button:not(.is-active):hover {
+  color: var(--text);
+}
+
+.lang-toggle button.is-active {
+  background: rgba(88, 215, 191, 0.14);
+  color: var(--teal);
+}
+
 .icon-link {
   position: relative;
   display: inline-grid;
@@ -835,7 +875,8 @@ figure {
   .stage-layout {
     display: block;
     width: min(100% - 28px, 1120px);
-    padding-top: 24px;
+    /* Sabit TR/EN secici ust bantta durur; nav onun altindan baslar */
+    padding-top: 64px;
   }
 
   .stage-nav {
