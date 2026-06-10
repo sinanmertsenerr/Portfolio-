@@ -74,7 +74,7 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       eyebrow: "Full Stack Developer · İzmir",
       greeting: "Merhaba, ben",
-      lead: "Henüz okul bitmeden çalışmaya başladım: Performanz'a stajyer olarak girdim, şimdi part-time developer olarak devam ediyorum. En keyif aldığım kısım, bir fikrin gerçek insanların her gün kullandığı bir ürüne dönüşmesini görmek.",
+      lead: "Performanz'da part-time developer olarak web ve mobil uygulamalar geliştiriyorum. Backend'den arayüze uçtan uca sorumluluk alıyor; temiz, sürdürülebilir kod yazmaya ve kullanıcı odaklı ürünler geliştirmeye önem veriyorum.",
       ctaProjects: "Projelere bak",
       ctaCv: "CV'yi indir",
       tooltipGithub: "GitHub",
@@ -197,7 +197,7 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       eyebrow: "Full Stack Developer · İzmir, Türkiye",
       greeting: "Hi, I'm",
-      lead: "I started working before I finished school: I joined Performanz as an intern and stayed on as a part-time developer. The part I enjoy most is watching an idea turn into a product people actually use every day.",
+      lead: "I'm a part-time developer at Performanz, where I build web and mobile applications. I take end-to-end ownership from backend to interface, with a focus on clean, maintainable code and user-centered products.",
       ctaProjects: "See my projects",
       ctaCv: "Download CV (TR)",
       tooltipGithub: "GitHub",
