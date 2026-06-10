@@ -445,7 +445,8 @@ figure {
 
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  /* 4 kart icin 2x2: dar kolonlarda metin kiriliyor, genis kart rahat okunuyor */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -957,6 +958,10 @@ figure {
   .section-heading h2,
   .contact-section h2 {
     font-size: 2rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
   }
 
   .featured-card {
