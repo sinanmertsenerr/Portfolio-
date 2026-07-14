@@ -146,7 +146,6 @@ const showcaseRepos = [
   "sucreistaken/AIcelerate",
   "sinanmertsenerr/NikiApp",
   "sinanmertsenerr/SE380PTAssistant",
-  "moeanes/mobilegamedev",
   "sucreistaken/pdf-watermark-remover",
   "Fanakartal/se354-fall2526-project",
   "sinanmertsenerr/nodebb-plugin-recent-cards",
