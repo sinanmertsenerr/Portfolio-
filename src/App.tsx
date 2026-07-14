@@ -71,6 +71,14 @@ const stackItems = [
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
   },
   {
+    name: "Next.js",
+    icon: "https://cdn.simpleicons.org/nextdotjs/f5f0e8",
+  },
+  {
+    name: "Swift",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg",
+  },
+  {
     name: ".NET",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg",
   },
@@ -83,12 +91,48 @@ const stackItems = [
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg",
   },
   {
+    name: "Python",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+  },
+  {
+    name: "FastAPI",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+  },
+  {
+    name: "Prisma",
+    icon: "https://cdn.simpleicons.org/prisma/f5f0e8",
+  },
+  {
     name: "PostgreSQL",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
   },
   {
+    name: "MySQL",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
+  },
+  {
+    name: "Redis",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
+  },
+  {
+    name: "Firebase",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
+  },
+  {
+    name: "Docker",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+  },
+  {
     name: "Git",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+  },
+  {
+    name: "GitHub Actions",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
+  },
+  {
+    name: "Cloudflare",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg",
   },
   {
     name: "Claude",
@@ -132,7 +176,7 @@ const languageColors: Record<string, string> = {
   "C#": "#9b7bff",
 };
 
-const REPO_CACHE_KEY = "portfolio-repos-v6";
+const REPO_CACHE_KEY = "portfolio-repos-v7";
 const REPO_CACHE_TTL = 60 * 60 * 1000;
 const LANG_STORAGE_KEY = "portfolio-lang";
 
