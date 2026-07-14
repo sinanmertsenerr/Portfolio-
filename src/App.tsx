@@ -173,6 +173,7 @@ const languageColors: Record<string, string> = {
   CSS: "#c084fc",
   HTML: "#f06a3d",
   Dart: "#12c7a5",
+  Swift: "#f05138",
   "C#": "#9b7bff",
 };
 
@@ -181,7 +182,8 @@ const REPO_CACHE_TTL = 60 * 60 * 1000;
 const LANG_STORAGE_KEY = "portfolio-lang";
 
 // Seritte SADECE bu repolar, bu sirayla gosterilir ("sahip/repo" formati).
-// Private olan repo, public yapilana kadar sessizce atlanir.
+// Private olan repo, public yapilana kadar sessizce atlanir —
+// privateShowcase'te statik karti olanlar haric (onlar API'siz gosterilir).
 const showcaseRepos = [
   "sinanmertsenerr/Performanz-Web-SistemTakipPlatformu",
   "sinanmertsenerr/DynamicIsland",
@@ -194,6 +196,51 @@ const showcaseRepos = [
   "Fanakartal/se354-fall2526-project",
   "sinanmertsenerr/nodebb-plugin-recent-cards",
 ];
+
+// Repo private oldugu icin GitHub API'den cekilemeyen projeler burada
+// statik kart olarak tanimlanir; kart GitHub profiline linklenir.
+type PrivateShowcaseEntry = {
+  slug: string;
+  displayName: string;
+  language: string;
+  updatedAt: string;
+  description: Record<Lang, string>;
+};
+
+const privateShowcase: PrivateShowcaseEntry[] = [
+  {
+    slug: "sinanmertsenerr/DynamicIsland",
+    displayName: "Dynamic Island",
+    language: "Swift",
+    updatedAt: "2026-07-14",
+    description: {
+      tr: "MacBook çentiğini canlı bir Dynamic Island'a çeviren native macOS uygulaması — müzik, HUD'lar, dosya rafı.",
+      en: "Native macOS app that turns the MacBook notch into a live Dynamic Island — now playing, HUDs, a file shelf.",
+    },
+  },
+  {
+    slug: "sinanmertsenerr/Duesday",
+    displayName: "Duesday",
+    language: "Dart",
+    updatedAt: "2026-07-14",
+    description: {
+      tr: "Gizlilik odaklı abonelik takip uygulaması — Fiyat Radarı ile, sunucusuz ve cihaz üstü.",
+      en: "Privacy-first subscription tracker with a Price Radar — serverless and on-device.",
+    },
+  },
+];
+
+function privateShowcaseToRepo(entry: PrivateShowcaseEntry, lang: Lang): PortfolioRepo {
+  return {
+    id: entry.slug,
+    displayName: entry.displayName,
+    description: entry.description[lang],
+    htmlUrl: profile.github,
+    language: entry.language,
+    stars: 0,
+    updatedAt: entry.updatedAt,
+  };
+}
 
 const container: Variants = {
   hidden: {},
@@ -302,6 +349,23 @@ function App() {
         whileInView: "visible" as const,
         viewport: { once: true, margin: "-120px" },
       };
+
+  // GitHub'dan cekilen repolarla statik (private) kartlari,
+  // showcaseRepos'taki sirayi koruyarak tek listede birlestirir.
+  const displayRepos = showcaseRepos.flatMap((slug) => {
+    const staticEntry = privateShowcase.find((entry) => entry.slug === slug);
+
+    if (staticEntry) {
+      return [privateShowcaseToRepo(staticEntry, lang)];
+    }
+
+    const repoName = slug.split("/")[1].toLowerCase();
+    const match = repos.find((repo) =>
+      repo.htmlUrl.toLowerCase().endsWith(`/${repoName}`),
+    );
+
+    return match ? [match] : [];
+  });
 
   return (
     <div className="app-shell">
@@ -488,9 +552,9 @@ function App() {
                 </p>
               )}
 
-              {repoStatus === "ready" && (
+              {repoStatus !== "loading" && displayRepos.length > 0 && (
                 <motion.div className="repo-grid" variants={container} {...revealProps}>
-                  {repos.map((repo) => (
+                  {displayRepos.map((repo) => (
                     <motion.a
                       className="repo-card"
                       key={repo.id}
@@ -734,8 +798,11 @@ function useActiveSection() {
 }
 
 async function fetchShowcaseRepos(signal: AbortSignal) {
+  const fetchableRepos = showcaseRepos.filter(
+    (slug) => !privateShowcase.some((entry) => entry.slug === slug),
+  );
   const results = await Promise.all(
-    showcaseRepos.map(async (slug) => {
+    fetchableRepos.map(async (slug) => {
       try {
         const response = await fetch(`https://api.github.com/repos/${slug}`, {
           headers: { Accept: "application/vnd.github+json" },
