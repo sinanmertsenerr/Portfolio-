@@ -3,6 +3,7 @@ import {
   CalendarDays,
   Download,
   Github,
+  Linkedin,
   Mail,
   Rocket,
   Star,
@@ -22,6 +23,7 @@ const profile = {
   email: "sinanmertsenerr@gmail.com",
   githubUser: "sinanmertsenerr",
   github: "https://github.com/sinanmertsenerr",
+  linkedin: "https://www.linkedin.com/in/sinanmertsener/",
   cvUrl: "/sinan-mert-sener-cv.pdf",
 };
 
@@ -130,7 +132,7 @@ const languageColors: Record<string, string> = {
   "C#": "#9b7bff",
 };
 
-const REPO_CACHE_KEY = "portfolio-repos-v5";
+const REPO_CACHE_KEY = "portfolio-repos-v6";
 const REPO_CACHE_TTL = 60 * 60 * 1000;
 const LANG_STORAGE_KEY = "portfolio-lang";
 
@@ -138,8 +140,12 @@ const LANG_STORAGE_KEY = "portfolio-lang";
 // Private olan repo, public yapilana kadar sessizce atlanir.
 const showcaseRepos = [
   "sinanmertsenerr/Performanz-Web-SistemTakipPlatformu",
+  "sinanmertsenerr/DynamicIsland",
+  "sinanmertsenerr/Duesday",
+  "sinanmertsenerr/duesday-data",
   "sucreistaken/AIcelerate",
   "sinanmertsenerr/NikiApp",
+  "sinanmertsenerr/SE380PTAssistant",
   "moeanes/mobilegamedev",
   "sucreistaken/pdf-watermark-remover",
   "Fanakartal/se354-fall2526-project",
@@ -322,6 +328,16 @@ function App() {
                 >
                   <Github size={18} aria-hidden="true" />
                   <span>{t.hero.tooltipGithub}</span>
+                </a>
+                <a
+                  className="icon-link"
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={t.hero.tooltipLinkedin}
+                >
+                  <Linkedin size={18} aria-hidden="true" />
+                  <span>{t.hero.tooltipLinkedin}</span>
                 </a>
                 <a
                   className="icon-link"
@@ -549,6 +565,15 @@ function App() {
                 <Github size={18} aria-hidden="true" />
                 GitHub
               </a>
+              <a
+                className="button button-secondary"
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Linkedin size={18} aria-hidden="true" />
+                LinkedIn
+              </a>
             </div>
             <a className="contact-email" href={`mailto:${profile.email}`}>
               {profile.email}
@@ -562,6 +587,9 @@ function App() {
             <div className="footer-links">
               <a href={profile.github} target="_blank" rel="noreferrer">
                 GitHub
+              </a>
+              <a href={profile.linkedin} target="_blank" rel="noreferrer">
+                LinkedIn
               </a>
               <a href={`mailto:${profile.email}`}>{t.footer.email}</a>
             </div>

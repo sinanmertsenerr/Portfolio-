@@ -39,6 +39,7 @@ export type Copy = {
     ctaProjects: string;
     ctaCv: string;
     tooltipGithub: string;
+    tooltipLinkedin: string;
     tooltipEmail: string;
     portraitAlt: string;
   };
@@ -78,6 +79,7 @@ export const copy: Record<Lang, Copy> = {
       ctaProjects: "Projelere bak",
       ctaCv: "CV'yi indir",
       tooltipGithub: "GitHub",
+      tooltipLinkedin: "LinkedIn",
       tooltipEmail: "E-posta",
       portraitAlt: "Sinan Mert Şener portresi",
     },
@@ -213,6 +215,7 @@ export const copy: Record<Lang, Copy> = {
       ctaProjects: "See my projects",
       ctaCv: "Download CV (TR)",
       tooltipGithub: "GitHub",
+      tooltipLinkedin: "LinkedIn",
       tooltipEmail: "Email",
       portraitAlt: "Portrait of Sinan Mert Şener",
     },
