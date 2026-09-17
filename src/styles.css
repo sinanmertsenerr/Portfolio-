@@ -274,6 +274,11 @@ figure {
   display: none;
 }
 
+.stage-label-mobile,
+.mobile-evidence {
+  display: none;
+}
+
 @media (hover: hover) {
   .stage-link:hover {
     color: var(--text);
@@ -2147,6 +2152,11 @@ figure {
     border-radius: 12px;
   }
 
+  .lang-toggle button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
   .stage-layout {
     width: min(calc(100% - 24px), 560px);
     padding-top: 58px;
@@ -2184,7 +2194,7 @@ figure {
     padding: 7px 3px;
     border-radius: 13px;
     gap: 4px;
-    font-size: 0.61rem;
+    font-size: 0.7rem;
     font-weight: 760;
     line-height: 1.05;
     white-space: normal;
@@ -2193,6 +2203,14 @@ figure {
   .stage-icon {
     display: block;
     flex-shrink: 0;
+  }
+
+  .stage-label-desktop {
+    display: none;
+  }
+
+  .stage-label-mobile {
+    display: block;
   }
 
   .stage-link.is-active {
@@ -2346,6 +2364,48 @@ figure {
     display: none;
   }
 
+  .mobile-evidence {
+    display: block;
+    padding-top: 2px;
+    border-top: 1px solid rgba(245, 240, 232, 0.09);
+  }
+
+  .mobile-evidence summary {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--teal);
+    font-size: 0.86rem;
+    font-weight: 800;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .mobile-evidence summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-evidence summary::after {
+    color: var(--muted);
+    font-size: 1.2rem;
+    font-weight: 500;
+    content: "+";
+  }
+
+  .mobile-evidence[open] summary::after {
+    content: "−";
+  }
+
+  .mobile-evidence .featured-points {
+    display: grid;
+    gap: 7px;
+    margin-top: 8px;
+    padding-bottom: 8px;
+    font-size: 0.9rem;
+  }
+
   .project-bento,
   .stack-bento,
   .github-rail {
@@ -2397,6 +2457,10 @@ figure {
 
   .project-card .featured-points {
     display: none;
+  }
+
+  .project-card .mobile-evidence .featured-points {
+    display: grid;
   }
 
   .project-impact {
@@ -2486,7 +2550,7 @@ figure {
   .stage-link.is-active,
   .stage-link.is-passed {
     padding-inline: 1px;
-    font-size: 0.5rem;
+    font-size: 0.68rem;
   }
 }
 

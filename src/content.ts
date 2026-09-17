@@ -33,6 +33,14 @@ export type Copy = {
     github: string;
     contact: string;
   };
+  mobileNav: {
+    about: string;
+    work: string;
+    experience: string;
+    stack: string;
+    github: string;
+    contact: string;
+  };
   navAria: string;
   langAria: string;
   hero: {
@@ -95,6 +103,14 @@ export const copy: Record<Lang, Copy> = {
       work: "Projeler",
       experience: "Deneyim",
       stack: "Tech Stack",
+      github: "GitHub",
+      contact: "İletişim",
+    },
+    mobileNav: {
+      about: "Profil",
+      work: "Projeler",
+      experience: "Deneyim",
+      stack: "Stack",
       github: "GitHub",
       contact: "İletişim",
     },
@@ -264,6 +280,14 @@ export const copy: Record<Lang, Copy> = {
       work: "Projects",
       experience: "Experience",
       stack: "Tech Stack",
+      github: "GitHub",
+      contact: "Contact",
+    },
+    mobileNav: {
+      about: "Profile",
+      work: "Projects",
+      experience: "Career",
+      stack: "Stack",
       github: "GitHub",
       contact: "Contact",
     },

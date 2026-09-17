@@ -192,11 +192,12 @@ function App() {
   const prefersReducedMotion = useReducedMotion();
   const activeSection = useActiveSection();
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
+  const springScaleX = useSpring(scrollYProgress, {
     stiffness: 120,
     damping: 30,
     restDelta: 0.001,
   });
+  const progressScaleX = prefersReducedMotion ? scrollYProgress : springScaleX;
   const [lang, setLang] = useState<Lang>(getInitialLang);
 
   const t = copy[lang];
@@ -227,7 +228,7 @@ function App() {
       <a className="skip-link" href="#main-content">
         {lang === "tr" ? "İçeriğe geç" : "Skip to content"}
       </a>
-      <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />
+      <motion.div className="scroll-progress" style={{ scaleX: progressScaleX }} aria-hidden="true" />
 
       <div className="lang-toggle" role="group" aria-label={t.langAria}>
         <button
@@ -416,6 +417,17 @@ function App() {
                     <span key={tech}>{tech}</span>
                   ))}
                 </div>
+
+                <details className="mobile-evidence">
+                  <summary>
+                    {lang === "tr" ? "Teknik detayları göster" : "Show technical details"}
+                  </summary>
+                  <ul className="featured-points">
+                    {flagshipProject.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </details>
               </div>
 
               <div className="flagship-visual" aria-hidden="true">
@@ -469,7 +481,14 @@ function App() {
               </div>
             </motion.article>
 
-            <motion.div className="featured-grid project-bento" variants={container} {...revealProps}>
+            <motion.div
+              className="featured-grid project-bento"
+              variants={container}
+              role="region"
+              aria-label={lang === "tr" ? "Diğer projeler, yatay kaydırılabilir liste" : "Other projects, horizontally scrollable list"}
+              tabIndex={0}
+              {...revealProps}
+            >
               {supportingProjects.map((project, index) => (
                 <motion.article
                   className={`featured-card project-card spotlight-card project-card-${index + 1}`}
@@ -508,6 +527,16 @@ function App() {
                       <span key={tech}>{tech}</span>
                     ))}
                   </div>
+
+                  <details className="mobile-evidence project-mobile-evidence">
+                    <summary>{lang === "tr" ? "Detaylar" : "Details"}</summary>
+                    <ul className="featured-points">
+                      <li>{project.role}</li>
+                      {project.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </details>
                 </motion.article>
               ))}
             </motion.div>
@@ -564,7 +593,13 @@ function App() {
               <p className="section-note">{t.stack.note}</p>
             </div>
 
-            <motion.div className="stack-group-grid stack-bento" variants={container}>
+            <motion.div
+              className="stack-group-grid stack-bento"
+              variants={container}
+              role="region"
+              aria-label={lang === "tr" ? "Teknoloji grupları, yatay kaydırılabilir liste" : "Technology groups, horizontally scrollable list"}
+              tabIndex={0}
+            >
               {stackGroups.map((group, index) => {
                 const Icon = group.icon;
 
@@ -616,7 +651,14 @@ function App() {
               </a>
             </div>
 
-            <motion.div className="repo-grid github-rail" variants={container} {...revealProps}>
+            <motion.div
+              className="repo-grid github-rail"
+              variants={container}
+              role="region"
+              aria-label={lang === "tr" ? "Seçilmiş GitHub projeleri" : "Selected GitHub projects"}
+              tabIndex={0}
+              {...revealProps}
+            >
               {selectedRepos.map((repo, index) => (
                 <motion.a
                   className="repo-card spotlight-card"
@@ -727,7 +769,8 @@ function StageNav({ activeSection, t }: { activeSection: string; t: Copy }) {
               <Icon className="stage-icon" size={17} aria-hidden="true" />
               <span className="stage-number">{section.number}</span>
               <span className="stage-dash">-</span>
-              <span>{t.nav[section.id]}</span>
+              <span className="stage-label stage-label-desktop">{t.nav[section.id]}</span>
+              <span className="stage-label stage-label-mobile">{t.mobileNav[section.id]}</span>
             </a>
           );
         })}
