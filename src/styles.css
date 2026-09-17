@@ -1631,8 +1631,9 @@ figure {
 }
 
 .stack-size-full {
-  height: 144px;
+  height: 156px;
   grid-column: 1 / -1;
+  padding-bottom: 26px;
 }
 
 .stack-card-top {
@@ -1847,7 +1848,7 @@ figure {
   }
 
   .stack-size-full {
-    height: 148px;
+    height: 160px;
   }
 }
 
