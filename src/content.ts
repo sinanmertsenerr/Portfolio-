@@ -56,7 +56,14 @@ export type Copy = {
   };
   featuredProjects: FeaturedProject[];
   repos: { viewAll: string };
-  experience: { eyebrow: string; title: string; entries: ExperienceEntry[] };
+  experience: {
+    eyebrow: string;
+    title: string;
+    rangeLabel: string;
+    range: string;
+    note: string;
+    entries: ExperienceEntry[];
+  };
   stack: {
     eyebrow: string;
     title: string;
@@ -172,6 +179,9 @@ export const copy: Record<Lang, Copy> = {
     experience: {
       eyebrow: "Kilometre taşları",
       title: "Deneyim",
+      rangeLabel: "Profesyonel + topluluk deneyimi",
+      range: "2021 → 2026",
+      note: "Ürün geliştirme, ekip çalışması ve uluslararası organizasyon deneyiminin aynı çizgide büyüdüğü dönem.",
       entries: [
         {
           period: "May 2026 – Devam",
@@ -331,6 +341,9 @@ export const copy: Record<Lang, Copy> = {
     experience: {
       eyebrow: "The road so far",
       title: "Experience",
+      rangeLabel: "Professional + community experience",
+      range: "2021 → 2026",
+      note: "A period where product engineering, teamwork and international community leadership grew in parallel.",
       entries: [
         {
           period: "May 2026 – Present",

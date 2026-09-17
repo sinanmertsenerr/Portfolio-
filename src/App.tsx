@@ -19,7 +19,7 @@ import {
   useSpring,
   type Variants,
 } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { copy, type Copy, type Lang } from "./content";
 
 const profile = {
@@ -145,6 +145,15 @@ const item: Variants = {
     transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1] },
   },
 };
+
+function handleSpotlight(event: ReactPointerEvent<HTMLElement>) {
+  const rect = event.currentTarget.getBoundingClientRect();
+  const x = ((event.clientX - rect.left) / rect.width) * 100;
+  const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+  event.currentTarget.style.setProperty("--mx", `${x}%`);
+  event.currentTarget.style.setProperty("--my", `${y}%`);
+}
 
 function getInitialLang(): Lang {
   try {
@@ -312,6 +321,18 @@ function App() {
             </motion.figure>
           </motion.section>
 
+          <div
+            className="production-signal"
+            aria-label={lang === "tr" ? "Profil özeti" : "Profile summary"}
+          >
+            {t.highlights.slice(0, 3).map((highlight) => (
+              <div className="signal-item" key={highlight.label}>
+                <span>{highlight.label}</span>
+                <strong>{highlight.value}</strong>
+              </div>
+            ))}
+          </div>
+
           <section
             className="stage-section work-section"
             id="work"
@@ -323,8 +344,9 @@ function App() {
             </div>
 
             <motion.article
-              className="flagship-card"
+              className="flagship-card spotlight-card"
               variants={item}
+              onPointerMove={handleSpotlight}
               {...revealProps}
             >
               <div className="flagship-copy">
@@ -376,15 +398,67 @@ function App() {
                   ))}
                 </div>
               </div>
+
+              <div className="flagship-visual" aria-hidden="true">
+                <div className="system-window">
+                  <div className="system-window-bar">
+                    <div className="window-dots"><i /><i /><i /></div>
+                    <span>{lang === "tr" ? "Saha operasyon görünümü" : "Field operations view"}</span>
+                    <span className="live-pulse">LIVE</span>
+                  </div>
+                  <div className="system-window-body">
+                    <div className="system-sidebar">
+                      <span className="system-logo">FB</span>
+                      <i className="is-on" />
+                      <i />
+                      <i />
+                      <i />
+                    </div>
+                    <div className="system-main">
+                      <div className="system-topline">
+                        <span>{lang === "tr" ? "Altyapı seçmeleri" : "Academy tryouts"}</span>
+                        <span>{flagshipProject.year}</span>
+                      </div>
+                      <div className="system-grid">
+                        <div className="system-module qr-module">
+                          <span className="module-label">QR</span>
+                          <div className="qr-mark">
+                            <i /><i /><i /><i /><i /><i /><i /><i /><i />
+                          </div>
+                          <small>{lang === "tr" ? "Sporcu tanıma" : "Athlete ID"}</small>
+                        </div>
+                        <div className="system-module station-module">
+                          <span className="module-label">01</span>
+                          <strong>{lang === "tr" ? "Ölçüm istasyonları" : "Measurement stations"}</strong>
+                          <div className="station-lines"><i /><i /><i /></div>
+                        </div>
+                        <div className="system-module sync-module">
+                          <span className="module-label">SYNC</span>
+                          <strong>{lang === "tr" ? "Çevrimdışı hazır" : "Offline ready"}</strong>
+                          <div className="sync-track"><i /></div>
+                        </div>
+                        <div className="system-module flow-module">
+                          <span className="module-label">DATA</span>
+                          <strong>{lang === "tr" ? "Merkezi veri akışı" : "Central data flow"}</strong>
+                          <div className="flow-dots"><i /><i /><i /><i /></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="scan-line" />
+                </div>
+              </div>
             </motion.article>
 
-            <motion.div className="featured-grid" variants={container} {...revealProps}>
-              {supportingProjects.map((project) => (
+            <motion.div className="featured-grid project-bento" variants={container} {...revealProps}>
+              {supportingProjects.map((project, index) => (
                 <motion.article
-                  className="featured-card"
+                  className={`featured-card project-card spotlight-card project-card-${index + 1}`}
                   key={project.name}
                   variants={item}
+                  onPointerMove={handleSpotlight}
                 >
+                  <span className="project-index" aria-hidden="true">0{index + 2}</span>
                   <div className="featured-top">
                     <span
                       className={`status-chip ${
@@ -425,27 +499,37 @@ function App() {
             id="experience"
             aria-labelledby="experience-title"
           >
-            <div className="section-heading">
-              <p className="eyebrow">{t.experience.eyebrow}</p>
-              <h2 id="experience-title">{t.experience.title}</h2>
-            </div>
+            <div className="experience-layout">
+              <motion.div className="experience-sticky" variants={item} {...revealProps}>
+                <p className="eyebrow">{t.experience.eyebrow}</p>
+                <h2 id="experience-title">{t.experience.title}</h2>
+                <div className="experience-range">
+                  <span>{t.experience.rangeLabel}</span>
+                  <strong>{t.experience.range}</strong>
+                </div>
+                <p className="experience-note">{t.experience.note}</p>
+              </motion.div>
 
-            <motion.div className="timeline" variants={container} {...revealProps}>
-              {t.experience.entries.map((entry) => (
-                <motion.div
-                  className="timeline-item"
-                  key={`${entry.period}-${entry.role}`}
-                  variants={item}
-                >
-                  <span className="timeline-period">{entry.period}</span>
-                  <div>
-                    <h3>{entry.role}</h3>
-                    <p className="timeline-org">{entry.org}</p>
-                    <p className="timeline-summary">{entry.summary}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+              <motion.div className="timeline editorial-timeline" variants={container} {...revealProps}>
+                {t.experience.entries.map((entry, index) => (
+                  <motion.article
+                    className={`timeline-item ${index === t.experience.entries.length - 1 ? "is-education" : ""}`}
+                    key={`${entry.period}-${entry.role}`}
+                    variants={item}
+                  >
+                    <span className="timeline-index" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className="timeline-content">
+                      <span className="timeline-period">{entry.period}</span>
+                      <h3>{entry.role}</h3>
+                      <p className="timeline-org">{entry.org}</p>
+                      <p className="timeline-summary">{entry.summary}</p>
+                    </div>
+                  </motion.article>
+                ))}
+              </motion.div>
+            </div>
           </section>
 
           <motion.section
@@ -461,16 +545,18 @@ function App() {
               <p className="section-note">{t.stack.note}</p>
             </div>
 
-            <motion.div className="stack-group-grid" variants={container}>
-              {stackGroups.map((group) => {
+            <motion.div className="stack-group-grid stack-bento" variants={container}>
+              {stackGroups.map((group, index) => {
                 const Icon = group.icon;
 
                 return (
                 <motion.article
-                  className="stack-group-card"
+                  className={`stack-group-card spotlight-card stack-${group.key}`}
                   key={group.key}
                   variants={item}
+                  onPointerMove={handleSpotlight}
                 >
+                  <span className="stack-index" aria-hidden="true">0{index + 1}</span>
                   <div className="stack-group-heading">
                     <Icon size={22} aria-hidden="true" />
                     <h3>{t.stack.groups[group.key]}</h3>
@@ -508,16 +594,18 @@ function App() {
               </a>
             </div>
 
-            <motion.div className="repo-grid" variants={container} {...revealProps}>
-              {selectedRepos.map((repo) => (
+            <motion.div className="repo-grid github-rail" variants={container} {...revealProps}>
+              {selectedRepos.map((repo, index) => (
                 <motion.a
-                  className="repo-card"
+                  className="repo-card spotlight-card"
                   key={repo.id}
                   href={repo.htmlUrl}
                   target="_blank"
                   rel="noreferrer"
                   variants={item}
+                  onPointerMove={handleSpotlight}
                 >
+                  <span className="repo-index" aria-hidden="true">0{index + 1}</span>
                   <div className="repo-card-head">
                     <h3>{repo.displayName}</h3>
                     <ArrowUpRight size={16} aria-hidden="true" />
@@ -532,13 +620,15 @@ function App() {
           </section>
 
           <section
-            className="stage-section contact-section"
+            className="stage-section contact-section cinematic-contact"
             id="contact"
             aria-labelledby="contact-title"
           >
-            <p className="eyebrow">{t.contact.eyebrow}</p>
-            <h2 id="contact-title">{t.contact.title}</h2>
-            <p className="contact-note">{t.contact.note}</p>
+            <div className="contact-copy">
+              <p className="eyebrow">{t.contact.eyebrow}</p>
+              <h2 id="contact-title">{t.contact.title}</h2>
+              <p className="contact-note">{t.contact.note}</p>
+            </div>
             <div className="contact-actions">
               <a className="button button-primary" href={`mailto:${profile.email}`}>
                 <Mail size={18} aria-hidden="true" />
