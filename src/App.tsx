@@ -4,12 +4,15 @@ import {
   Code2,
   Database,
   Download,
+  BriefcaseBusiness,
+  FolderKanban,
   Github,
   Linkedin,
   Mail,
   Rocket,
   Server,
   Smartphone,
+  UserRound,
   Workflow,
 } from "lucide-react";
 import {
@@ -40,6 +43,16 @@ const stageSections = [
 ] as const;
 
 const stageSectionIds = stageSections.map((section) => section.id);
+type StageSectionId = (typeof stageSections)[number]["id"];
+
+const stageIcons: Record<StageSectionId, typeof Code2> = {
+  about: UserRound,
+  work: FolderKanban,
+  experience: BriefcaseBusiness,
+  stack: Code2,
+  github: Github,
+  contact: Mail,
+};
 
 type StackGroupKey = keyof Copy["stack"]["groups"];
 
@@ -696,6 +709,7 @@ function StageNav({ activeSection, t }: { activeSection: string; t: Copy }) {
     <nav className="stage-nav" aria-label={t.navAria}>
       <div className="stage-list">
         {stageSections.map((section, index) => {
+          const Icon = stageIcons[section.id];
           const state =
             index === activeIndex
               ? "is-active"
@@ -710,6 +724,7 @@ function StageNav({ activeSection, t }: { activeSection: string; t: Copy }) {
               key={section.id}
               aria-current={state === "is-active" ? "location" : undefined}
             >
+              <Icon className="stage-icon" size={17} aria-hidden="true" />
               <span className="stage-number">{section.number}</span>
               <span className="stage-dash">-</span>
               <span>{t.nav[section.id]}</span>

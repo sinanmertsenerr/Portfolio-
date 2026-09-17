@@ -238,11 +238,11 @@ export const copy: Record<Lang, Copy> = {
         workflow: "Workflow",
       },
       summaries: {
-        frontend: "Ürün arayüzleri, bileşen mimarisi ve hızlı web deneyimleri geliştirdiğim ana araçlar.",
-        backend: "API, servis mimarisi ve ürünün iş mantığını kurduğum backend teknolojileri.",
-        mobile: "Gerçek kullanıcıya çıkan mobil ürünlerde kullandığım native ve cross-platform araçlar.",
-        data: "Veri katmanı, cache, deployment ve production altyapısını destekleyen araçlar.",
-        workflow: "Versiyonlama, otomasyon, ORM ve AI destekli günlük geliştirme akışım.",
+        frontend: "UI, bileşen mimarisi ve web performansı.",
+        backend: "API, servisler ve ürün iş mantığı.",
+        mobile: "Native ve cross-platform mobil ürünler.",
+        data: "Veri, cache ve production altyapısı.",
+        workflow: "Otomasyon, ORM ve AI destekli geliştirme.",
       },
     },
     github: {
@@ -407,11 +407,11 @@ export const copy: Record<Lang, Copy> = {
         workflow: "Workflow",
       },
       summaries: {
-        frontend: "My core tools for product interfaces, component architecture and fast web experiences.",
-        backend: "Backend technologies I use for APIs, service architecture and product business logic.",
-        mobile: "Native and cross-platform tools I use for mobile products shipped to real users.",
-        data: "Tools supporting the data layer, caching, deployment and production infrastructure.",
-        workflow: "Version control, automation, ORM and AI-assisted tools in my daily development workflow.",
+        frontend: "UI, component architecture and web performance.",
+        backend: "APIs, services and product business logic.",
+        mobile: "Native and cross-platform mobile products.",
+        data: "Data, caching and production infrastructure.",
+        workflow: "Automation, ORM and AI-assisted development.",
       },
     },
     github: {
