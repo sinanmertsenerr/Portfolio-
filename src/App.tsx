@@ -1,12 +1,16 @@
 import {
   ArrowUpRight,
   CalendarDays,
+  Code2,
+  Database,
   Download,
   Github,
   Linkedin,
   Mail,
   Rocket,
-  Star,
+  Server,
+  Smartphone,
+  Workflow,
 } from "lucide-react";
 import {
   motion,
@@ -21,7 +25,6 @@ import { copy, type Copy, type Lang } from "./content";
 const profile = {
   name: "Sinan Mert Şener",
   email: "sinanmertsenerr@gmail.com",
-  githubUser: "sinanmertsenerr",
   github: "https://github.com/sinanmertsenerr",
   linkedin: "https://www.linkedin.com/in/sinanmertsener/",
   cvUrl: "/sinan-mert-sener-cv.pdf",
@@ -32,215 +35,98 @@ const stageSections = [
   { id: "work", number: "2" },
   { id: "experience", number: "3" },
   { id: "stack", number: "4" },
-  { id: "contact", number: "5" },
+  { id: "github", number: "5" },
+  { id: "contact", number: "6" },
 ] as const;
 
 const stageSectionIds = stageSections.map((section) => section.id);
 
-const stackItems = [
+type StackGroupKey = keyof Copy["stack"]["groups"];
+
+const stackGroups: Array<{
+  key: StackGroupKey;
+  icon: typeof Code2;
+  items: string[];
+}> = [
   {
-    name: "React",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+    key: "frontend",
+    icon: Code2,
+    items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
   },
   {
-    name: "TypeScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+    key: "backend",
+    icon: Server,
+    items: ["Nest.js", "Node.js", ".NET", "FastAPI"],
   },
   {
-    name: "JavaScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+    key: "mobile",
+    icon: Smartphone,
+    items: ["React Native", "Swift", "Flutter"],
   },
   {
-    name: "HTML5",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
+    key: "data",
+    icon: Database,
+    items: ["PostgreSQL", "Redis", "Docker", "Firebase", "Cloudflare"],
   },
   {
-    name: "CSS3",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
-  },
-  {
-    name: "Tailwind CSS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-  },
-  {
-    name: "React Native",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-  },
-  {
-    name: "Flutter",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
-  },
-  {
-    name: "Next.js",
-    icon: "https://cdn.simpleicons.org/nextdotjs/f5f0e8",
-  },
-  {
-    name: "Swift",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg",
-  },
-  {
-    name: ".NET",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg",
-  },
-  {
-    name: "Node.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "Nest.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg",
-  },
-  {
-    name: "Python",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-  },
-  {
-    name: "FastAPI",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
-  },
-  {
-    name: "Prisma",
-    icon: "https://cdn.simpleicons.org/prisma/f5f0e8",
-  },
-  {
-    name: "PostgreSQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "MySQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
-  },
-  {
-    name: "Redis",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
-  },
-  {
-    name: "Firebase",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
-  },
-  {
-    name: "Docker",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
-  },
-  {
-    name: "Git",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
-  },
-  {
-    name: "GitHub Actions",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
-  },
-  {
-    name: "Cloudflare",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg",
-  },
-  {
-    name: "Claude",
-    icon: "https://cdn.simpleicons.org/claude/D97757",
-  },
-  {
-    name: "Codex",
-    icon: "https://api.iconify.design/simple-icons/openai.svg?color=%23f5f0e8",
+    key: "workflow",
+    icon: Workflow,
+    items: ["Git", "GitHub Actions", "Prisma", "Claude", "Codex"],
   },
 ];
 
-type GithubRepo = {
-  id: number;
-  name: string;
-  description: string | null;
-  html_url: string;
-  language: string | null;
-  stargazers_count: number;
-  pushed_at: string;
-  updated_at: string;
-};
-
-type PortfolioRepo = {
+type SelectedRepo = {
   id: string;
   displayName: string;
-  description: string;
+  description: Record<Lang, string>;
   htmlUrl: string;
-  language: string;
-  stars: number;
-  updatedAt: string;
+  label: string;
 };
 
-const languageColors: Record<string, string> = {
-  TypeScript: "#4fb3ff",
-  JavaScript: "#f5d04b",
-  Python: "#7aa8ff",
-  Java: "#d95d39",
-  CSS: "#c084fc",
-  HTML: "#f06a3d",
-  Dart: "#12c7a5",
-  Swift: "#f05138",
-  "C#": "#9b7bff",
-};
-
-const REPO_CACHE_KEY = "portfolio-repos-v7";
-const REPO_CACHE_TTL = 60 * 60 * 1000;
 const LANG_STORAGE_KEY = "portfolio-lang";
 
-// Seritte SADECE bu repolar, bu sirayla gosterilir ("sahip/repo" formati).
-// Private olan repo, public yapilana kadar sessizce atlanir —
-// privateShowcase'te statik karti olanlar haric (onlar API'siz gosterilir).
-const showcaseRepos = [
-  "sinanmertsenerr/Performanz-Web-SistemTakipPlatformu",
-  "sinanmertsenerr/DynamicIsland",
-  "sinanmertsenerr/Duesday",
-  "sinanmertsenerr/duesday-data",
-  "sucreistaken/AIcelerate",
-  "sinanmertsenerr/NikiApp",
-  "sinanmertsenerr/SE380PTAssistant",
-  "sucreistaken/pdf-watermark-remover",
-  "Fanakartal/se354-fall2526-project",
-  "sinanmertsenerr/nodebb-plugin-recent-cards",
-];
-
-// Repo private oldugu icin GitHub API'den cekilemeyen projeler burada
-// statik kart olarak tanimlanir; kart GitHub profiline linklenir.
-type PrivateShowcaseEntry = {
-  slug: string;
-  displayName: string;
-  language: string;
-  updatedAt: string;
-  description: Record<Lang, string>;
-};
-
-const privateShowcase: PrivateShowcaseEntry[] = [
+const selectedRepos: SelectedRepo[] = [
   {
-    slug: "sinanmertsenerr/DynamicIsland",
-    displayName: "Dynamic Island",
-    language: "Swift",
-    updatedAt: "2026-07-14",
+    id: "sucreistaken/AIcelerate",
+    displayName: "AIcelerate",
+    htmlUrl: "https://github.com/sucreistaken/AIcelerate",
+    label: "Realtime · AI",
     description: {
-      tr: "MacBook çentiğini canlı bir Dynamic Island'a çeviren native macOS uygulaması — müzik, HUD'lar, dosya rafı.",
-      en: "Native macOS app that turns the MacBook notch into a live Dynamic Island — now playing, HUDs, a file shelf.",
+      tr: "AI transkripsiyonlu, gerçek zamanlı ortak çalışma ve çalışma platformu.",
+      en: "Real-time collaborative study platform with AI transcription.",
     },
   },
   {
-    slug: "sinanmertsenerr/Duesday",
-    displayName: "Duesday",
-    language: "Dart",
-    updatedAt: "2026-07-14",
+    id: "sucreistaken/pdf-watermark-remover",
+    displayName: "PDF Watermark Remover",
+    htmlUrl: "https://github.com/sucreistaken/pdf-watermark-remover",
+    label: "Computer Vision",
     description: {
-      tr: "Gizlilik odaklı abonelik takip uygulaması — Fiyat Radarı ile, sunucusuz ve cihaz üstü.",
-      en: "Privacy-first subscription tracker with a Price Radar — serverless and on-device.",
+      tr: "SIFT özellik eşleme ve OpenCV inpainting ile PDF'lerde tekrar eden logo ve filigranları tespit edip kaldıran araç.",
+      en: "Detects and removes recurring PDF logos and watermarks with SIFT feature matching and OpenCV inpainting.",
+    },
+  },
+  {
+    id: "sinanmertsenerr/nodebb-plugin-recent-cards",
+    displayName: "NodeBB Recent Cards",
+    htmlUrl: "https://github.com/sinanmertsenerr/nodebb-plugin-recent-cards",
+    label: "NodeBB Plugin",
+    description: {
+      tr: "NodeBB için son içerikleri kart formatında sunan açık kaynak eklenti.",
+      en: "Open-source NodeBB plugin that presents recent content in a card-based layout.",
+    },
+  },
+  {
+    id: "sinanmertsenerr/SE380PTAssistant",
+    displayName: "SE380 PT Assistant",
+    htmlUrl: "https://github.com/sinanmertsenerr/SE380PTAssistant",
+    label: "AI Fitness",
+    description: {
+      tr: "Yapay zekâ desteğiyle kişisel antrenör deneyimi sunan uygulama projesi.",
+      en: "Application project for an AI-assisted personal trainer experience.",
     },
   },
 ];
-
-function privateShowcaseToRepo(entry: PrivateShowcaseEntry, lang: Lang): PortfolioRepo {
-  return {
-    id: entry.slug,
-    displayName: entry.displayName,
-    description: entry.description[lang],
-    htmlUrl: profile.github,
-    language: entry.language,
-    stars: 0,
-    updatedAt: entry.updatedAt,
-  };
-}
 
 const container: Variants = {
   hidden: {},
@@ -284,10 +170,6 @@ function App() {
     restDelta: 0.001,
   });
   const [lang, setLang] = useState<Lang>(getInitialLang);
-  const [repos, setRepos] = useState<PortfolioRepo[]>([]);
-  const [repoStatus, setRepoStatus] = useState<"loading" | "ready" | "error">(
-    "loading",
-  );
 
   const t = copy[lang];
 
@@ -301,47 +183,6 @@ function App() {
     }
   }, [lang]);
 
-  useEffect(() => {
-    const cached = readRepoCache();
-
-    if (cached) {
-      setRepos(cached);
-      setRepoStatus("ready");
-      return;
-    }
-
-    const controller = new AbortController();
-    let isMounted = true;
-
-    async function loadRepos() {
-      try {
-        const data = await fetchShowcaseRepos(controller.signal);
-        const normalized = data.map(normalizeRepo);
-
-        if (!isMounted) {
-          return;
-        }
-
-        setRepos(normalized);
-        setRepoStatus(normalized.length > 0 ? "ready" : "error");
-        writeRepoCache(normalized);
-      } catch (error) {
-        if (!isMounted || controller.signal.aborted) {
-          return;
-        }
-
-        setRepoStatus("error");
-      }
-    }
-
-    loadRepos();
-
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
-  }, []);
-
   const revealProps = prefersReducedMotion
     ? {}
     : {
@@ -350,26 +191,15 @@ function App() {
         viewport: { once: true, margin: "-120px" },
       };
 
-  // GitHub'dan cekilen repolarla statik (private) kartlari,
-  // showcaseRepos'taki sirayi koruyarak tek listede birlestirir.
-  const displayRepos = showcaseRepos.flatMap((slug) => {
-    const staticEntry = privateShowcase.find((entry) => entry.slug === slug);
-
-    if (staticEntry) {
-      return [privateShowcaseToRepo(staticEntry, lang)];
-    }
-
-    const repoName = slug.split("/")[1].toLowerCase();
-    const match = repos.find((repo) =>
-      repo.htmlUrl.toLowerCase().endsWith(`/${repoName}`),
-    );
-
-    return match ? [match] : [];
-  });
+  const flagshipProject = t.featuredProjects[0];
+  const supportingProjects = t.featuredProjects.slice(1);
 
   return (
     <div className="app-shell">
-      <motion.div className="scroll-progress" style={{ scaleX }} />
+      <a className="skip-link" href="#main-content">
+        {lang === "tr" ? "İçeriğe geç" : "Skip to content"}
+      </a>
+      <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />
 
       <div className="lang-toggle" role="group" aria-label={t.langAria}>
         <button
@@ -393,7 +223,7 @@ function App() {
       <div className="stage-layout">
         <StageNav activeSection={activeSection} t={t} />
 
-        <main className="stage-content">
+        <main className="stage-content" id="main-content">
           <motion.section
             className="stage-section about-section"
             id="about"
@@ -457,10 +287,10 @@ function App() {
               </motion.div>
 
               <motion.div className="about-highlights" variants={container}>
-                {t.highlights.map((highlight, index) => (
+                {t.highlights.map((highlight) => (
                   <motion.div
                     className="about-highlight"
-                    key={index}
+                    key={highlight.label}
                     variants={item}
                   >
                     <span>{highlight.label}</span>
@@ -471,7 +301,14 @@ function App() {
             </motion.div>
 
             <motion.figure className="portrait-card" variants={item}>
-              <img src="/sinan-portrait.jpg" alt={t.hero.portraitAlt} />
+              <img
+                src="/sinan-portrait.jpg"
+                alt={t.hero.portraitAlt}
+                width="1200"
+                height="1600"
+                fetchPriority="high"
+                decoding="async"
+              />
             </motion.figure>
           </motion.section>
 
@@ -485,11 +322,67 @@ function App() {
               <h2 id="work-title">{t.work.title}</h2>
             </div>
 
+            <motion.article
+              className="flagship-card"
+              variants={item}
+              {...revealProps}
+            >
+              <div className="flagship-copy">
+                <div className="flagship-heading-row">
+                  <div>
+                    <p className="flagship-eyebrow">{t.flagship.eyebrow}</p>
+                    <h3>{flagshipProject.name}</h3>
+                  </div>
+                  <div className="flagship-meta">
+                    <span
+                      className={`status-chip ${
+                        flagshipProject.live ? "status-live" : "status-wip"
+                      }`}
+                    >
+                      {flagshipProject.status}
+                    </span>
+                    <span className="featured-year">
+                      <CalendarDays size={14} aria-hidden="true" />
+                      {flagshipProject.year}
+                    </span>
+                  </div>
+                </div>
+
+                <p className="flagship-tagline">{flagshipProject.tagline}</p>
+
+                <div className="flagship-proof-grid">
+                  <div className="flagship-proof">
+                    <span>{t.flagship.impactLabel}</span>
+                    <strong>{flagshipProject.impact}</strong>
+                  </div>
+                  <div className="flagship-proof">
+                    <span>{t.flagship.roleLabel}</span>
+                    <strong>{flagshipProject.role}</strong>
+                  </div>
+                </div>
+
+                <div className="flagship-details">
+                  <span>{t.flagship.detailsLabel}</span>
+                  <ul className="featured-points">
+                    {flagshipProject.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="tech-list">
+                  {flagshipProject.stack.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </motion.article>
+
             <motion.div className="featured-grid" variants={container} {...revealProps}>
-              {t.featuredProjects.map((project, index) => (
+              {supportingProjects.map((project) => (
                 <motion.article
                   className="featured-card"
-                  key={index}
+                  key={project.name}
                   variants={item}
                 >
                   <div className="featured-top">
@@ -508,10 +401,12 @@ function App() {
 
                   <h3>{project.name}</h3>
                   <p className="featured-tagline">{project.tagline}</p>
+                  <p className="project-impact">{project.impact}</p>
 
                   <ul className="featured-points">
-                    {project.points.map((point, pointIndex) => (
-                      <li key={pointIndex}>{point}</li>
+                    <li>{project.role}</li>
+                    {project.points.map((point) => (
+                      <li key={point}>{point}</li>
                     ))}
                   </ul>
 
@@ -523,77 +418,6 @@ function App() {
                 </motion.article>
               ))}
             </motion.div>
-
-            <div className="repo-strip">
-              <div className="repo-strip-head">
-                <h3>{t.repos.heading}</h3>
-                <a
-                  className="text-link"
-                  href={profile.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {t.repos.viewAll}
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              </div>
-
-              {repoStatus === "loading" && (
-                <p className="repo-note">{t.repos.loading}</p>
-              )}
-
-              {repoStatus === "error" && (
-                <p className="repo-note">
-                  {t.repos.errorPrefix}
-                  <a href={profile.github} target="_blank" rel="noreferrer">
-                    github.com/{profile.githubUser}
-                  </a>
-                  {t.repos.errorSuffix}
-                </p>
-              )}
-
-              {repoStatus !== "loading" && displayRepos.length > 0 && (
-                <motion.div className="repo-grid" variants={container} {...revealProps}>
-                  {displayRepos.map((repo) => (
-                    <motion.a
-                      className="repo-card"
-                      key={repo.id}
-                      href={repo.htmlUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      variants={item}
-                    >
-                      <div className="repo-card-head">
-                        <h4>{repo.displayName}</h4>
-                        <ArrowUpRight size={16} aria-hidden="true" />
-                      </div>
-                      <p>{repo.description || t.repos.noDescription}</p>
-                      <div className="repo-meta">
-                        <span>
-                          <i
-                            style={{
-                              backgroundColor:
-                                languageColors[repo.language] ?? "var(--teal)",
-                            }}
-                          />
-                          {repo.language || t.repos.otherLanguage}
-                        </span>
-                        {repo.stars > 0 && (
-                          <span>
-                            <Star size={15} aria-hidden="true" />
-                            {repo.stars}
-                          </span>
-                        )}
-                        <span>
-                          <CalendarDays size={15} aria-hidden="true" />
-                          {formatDate(repo.updatedAt, lang)}
-                        </span>
-                      </div>
-                    </motion.a>
-                  ))}
-                </motion.div>
-              )}
-            </div>
           </section>
 
           <section
@@ -607,10 +431,10 @@ function App() {
             </div>
 
             <motion.div className="timeline" variants={container} {...revealProps}>
-              {t.experience.entries.map((entry, index) => (
+              {t.experience.entries.map((entry) => (
                 <motion.div
                   className="timeline-item"
-                  key={index}
+                  key={`${entry.period}-${entry.role}`}
                   variants={item}
                 >
                   <span className="timeline-period">{entry.period}</span>
@@ -634,21 +458,78 @@ function App() {
             <div className="section-heading">
               <p className="eyebrow">{t.stack.eyebrow}</p>
               <h2 id="stack-title">{t.stack.title}</h2>
+              <p className="section-note">{t.stack.note}</p>
             </div>
 
-            <motion.div className="stack-logo-grid" variants={container}>
-              {stackItems.map((stackItem) => (
+            <motion.div className="stack-group-grid" variants={container}>
+              {stackGroups.map((group) => {
+                const Icon = group.icon;
+
+                return (
                 <motion.article
-                  className="stack-logo-card"
-                  key={stackItem.name}
+                  className="stack-group-card"
+                  key={group.key}
                   variants={item}
                 >
-                  <img src={stackItem.icon} alt="" loading="lazy" aria-hidden="true" />
-                  <span>{stackItem.name}</span>
+                  <div className="stack-group-heading">
+                    <Icon size={22} aria-hidden="true" />
+                    <h3>{t.stack.groups[group.key]}</h3>
+                  </div>
+                  <div className="stack-pill-list">
+                    {group.items.map((stackItem) => (
+                      <span key={stackItem}>{stackItem}</span>
+                    ))}
+                  </div>
                 </motion.article>
-              ))}
+                );
+              })}
             </motion.div>
           </motion.section>
+
+          <section
+            className="stage-section github-section"
+            id="github"
+            aria-labelledby="github-title"
+          >
+            <div className="section-heading section-heading-with-action">
+              <div>
+                <p className="eyebrow">{t.github.eyebrow}</p>
+                <h2 id="github-title">{t.github.title}</h2>
+                <p className="section-note">{t.github.note}</p>
+              </div>
+              <a
+                className="text-link"
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t.repos.viewAll}
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+            </div>
+
+            <motion.div className="repo-grid" variants={container} {...revealProps}>
+              {selectedRepos.map((repo) => (
+                <motion.a
+                  className="repo-card"
+                  key={repo.id}
+                  href={repo.htmlUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  variants={item}
+                >
+                  <div className="repo-card-head">
+                    <h3>{repo.displayName}</h3>
+                    <ArrowUpRight size={16} aria-hidden="true" />
+                  </div>
+                  <p>{repo.description[lang]}</p>
+                  <div className="repo-meta">
+                    <span>{repo.label}</span>
+                  </div>
+                </motion.a>
+              ))}
+            </motion.div>
+          </section>
 
           <section
             className="stage-section contact-section"
@@ -713,7 +594,7 @@ function StageNav({ activeSection, t }: { activeSection: string; t: Copy }) {
   );
 
   return (
-    <aside className="stage-nav" aria-label={t.navAria}>
+    <nav className="stage-nav" aria-label={t.navAria}>
       <div className="stage-list">
         {stageSections.map((section, index) => {
           const state =
@@ -724,7 +605,12 @@ function StageNav({ activeSection, t }: { activeSection: string; t: Copy }) {
                 : "is-queued";
 
           return (
-            <a className={`stage-link ${state}`} href={`#${section.id}`} key={section.id}>
+            <a
+              className={`stage-link ${state}`}
+              href={`#${section.id}`}
+              key={section.id}
+              aria-current={state === "is-active" ? "location" : undefined}
+            >
               <span className="stage-number">{section.number}</span>
               <span className="stage-dash">-</span>
               <span>{t.nav[section.id]}</span>
@@ -732,7 +618,7 @@ function StageNav({ activeSection, t }: { activeSection: string; t: Copy }) {
           );
         })}
       </div>
-    </aside>
+    </nav>
   );
 }
 
@@ -795,93 +681,6 @@ function useActiveSection() {
   }, []);
 
   return activeSection;
-}
-
-async function fetchShowcaseRepos(signal: AbortSignal) {
-  const fetchableRepos = showcaseRepos.filter(
-    (slug) => !privateShowcase.some((entry) => entry.slug === slug),
-  );
-  const results = await Promise.all(
-    fetchableRepos.map(async (slug) => {
-      try {
-        const response = await fetch(`https://api.github.com/repos/${slug}`, {
-          headers: { Accept: "application/vnd.github+json" },
-          signal,
-        });
-
-        if (!response.ok) {
-          return null;
-        }
-
-        return (await response.json()) as GithubRepo;
-      } catch {
-        return null;
-      }
-    }),
-  );
-
-  return results.filter((repo): repo is GithubRepo => repo !== null);
-}
-
-function normalizeRepo(repo: GithubRepo): PortfolioRepo {
-  return {
-    id: String(repo.id),
-    displayName: toTitle(repo.name),
-    description: repo.description?.trim() ?? "",
-    htmlUrl: repo.html_url,
-    language: repo.language ?? "",
-    stars: repo.stargazers_count,
-    updatedAt: repo.pushed_at || repo.updated_at,
-  };
-}
-
-function readRepoCache(): PortfolioRepo[] | null {
-  try {
-    const raw = sessionStorage.getItem(REPO_CACHE_KEY);
-
-    if (!raw) {
-      return null;
-    }
-
-    const parsed = JSON.parse(raw) as {
-      savedAt: number;
-      repos: PortfolioRepo[];
-    };
-
-    if (Date.now() - parsed.savedAt > REPO_CACHE_TTL) {
-      return null;
-    }
-
-    return parsed.repos;
-  } catch {
-    return null;
-  }
-}
-
-function writeRepoCache(repos: PortfolioRepo[]) {
-  try {
-    sessionStorage.setItem(
-      REPO_CACHE_KEY,
-      JSON.stringify({ savedAt: Date.now(), repos }),
-    );
-  } catch {
-    // sessionStorage kapali (gizli mod vb.) — cache olmadan devam
-  }
-}
-
-function toTitle(value: string) {
-  return value
-    .replace(/[-_]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
-}
-
-function formatDate(value: string, lang: Lang) {
-  return new Intl.DateTimeFormat(lang === "tr" ? "tr-TR" : "en-US", {
-    month: "short",
-    year: "numeric",
-  }).format(new Date(value));
 }
 
 export default App;

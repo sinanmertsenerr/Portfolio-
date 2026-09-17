@@ -10,6 +10,8 @@ export type FeaturedProject = {
   year: string;
   live: boolean;
   status: string;
+  role: string;
+  impact: string;
   tagline: string;
   points: string[];
   stack: string[];
@@ -28,6 +30,7 @@ export type Copy = {
     work: string;
     experience: string;
     stack: string;
+    github: string;
     contact: string;
   };
   navAria: string;
@@ -45,18 +48,28 @@ export type Copy = {
   };
   highlights: Highlight[];
   work: { eyebrow: string; title: string };
-  featuredProjects: FeaturedProject[];
-  repos: {
-    heading: string;
-    viewAll: string;
-    loading: string;
-    errorPrefix: string;
-    errorSuffix: string;
-    noDescription: string;
-    otherLanguage: string;
+  flagship: {
+    eyebrow: string;
+    impactLabel: string;
+    roleLabel: string;
+    detailsLabel: string;
   };
+  featuredProjects: FeaturedProject[];
+  repos: { viewAll: string };
   experience: { eyebrow: string; title: string; entries: ExperienceEntry[] };
-  stack: { eyebrow: string; title: string };
+  stack: {
+    eyebrow: string;
+    title: string;
+    note: string;
+    groups: {
+      frontend: string;
+      backend: string;
+      mobile: string;
+      data: string;
+      workflow: string;
+    };
+  };
+  github: { eyebrow: string; title: string; note: string };
   contact: { eyebrow: string; title: string; note: string; ctaEmail: string };
   footer: { email: string };
 };
@@ -68,6 +81,7 @@ export const copy: Record<Lang, Copy> = {
       work: "Projeler",
       experience: "Deneyim",
       stack: "Tech Stack",
+      github: "GitHub",
       contact: "İletişim",
     },
     navAria: "Sayfa bölümleri",
@@ -75,7 +89,7 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       eyebrow: "Full Stack Developer · İzmir",
       greeting: "Merhaba, ben",
-      lead: "Performanz'da part-time developer olarak web ve mobil uygulamalar geliştiriyorum. Backend'den arayüze uçtan uca sorumluluk alıyor; temiz, sürdürülebilir kod yazmaya ve kullanıcı odaklı ürünler geliştirmeye önem veriyorum.",
+      lead: "Web, mobil ve backend ürünleri geliştiriyorum. Fenerbahçe Basketbol altyapısı dahil gerçek kullanıcıya ulaşan ürünlerde uçtan uca sorumluluk alıyorum.",
       ctaProjects: "Projelere bak",
       ctaCv: "CV'yi indir",
       tooltipGithub: "GitHub",
@@ -84,22 +98,30 @@ export const copy: Record<Lang, Copy> = {
       portraitAlt: "Sinan Mert Şener portresi",
     },
     highlights: [
-      { label: "Şu an", value: "Performanz · Part-time Developer" },
-      { label: "Odak", value: "Fullstack Development · Mobil" },
       { label: "Sahada", value: "4 ürün gerçek kullanıcıda" },
+      { label: "Şu an", value: "Performanz · Software Engineer" },
+      { label: "Odak", value: "Web · Mobil · Backend" },
       { label: "Eğitim", value: "Bilgisayar Müh. · 2026" },
     ],
     work: { eyebrow: "Sahada çalışan işler", title: "Projeler" },
+    flagship: {
+      eyebrow: "Öne çıkan çalışma",
+      impactLabel: "Etki",
+      roleLabel: "Sorumluluğum",
+      detailsLabel: "Öne çıkan özellikler",
+    },
     featuredProjects: [
       {
         name: "Fenerbahçe Basketbol Altyapı Platformu",
         year: "2026",
         live: true,
         status: "Sahada",
+        role: "Web, mobil ve backend dahil sistemi uçtan uca tek başıma geliştirdim.",
+        impact: "Fenerbahçe Basketbol altyapısının seçme ve saha ölçüm süreçlerinde aktif olarak kullanılıyor.",
         tagline: "Sporcu başvurusundan saha ölçümlerine, altyapı seçmelerinin dijital hâli.",
         points: [
-          "Web, mobil ve backend dahil sistemin tamamını tek başıma geliştirdim; Fenerbahçe Basketbol altyapısı tarafından aktif olarak kullanılıyor.",
           "QR ile sporcu tanıma, ölçüm istasyonları, çevrimdışı senkronize çalışan mobil uygulama ve KVKK uyumlu veri akışları içeriyor.",
+          "Sahadaki bağlantı koşullarına dayanıklı mobil akışlar ve merkezi yönetim paneli aynı ürün altında çalışıyor.",
         ],
         stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
       },
@@ -108,6 +130,8 @@ export const copy: Record<Lang, Copy> = {
         year: "2025 – 2026",
         live: true,
         status: "Sahada",
+        role: "Spor Okulları modülünü, Veli Portalı'nı ve bildirim akışlarını uçtan uca geliştirdim.",
+        impact: "Spor kurumlarının antrenman, yoklama, aidat ve sporcu gelişim verilerini tek sistemde yönetmesini sağlıyor.",
         tagline: "Spor kurumları için sporcu gelişimini ölçen, izleyen ve raporlayan platform.",
         points: [
           "Spor Okulları modülünü (antrenman programı, yoklama, aidat) uçtan uca geliştirdim; Veli Portalı'nı ve anlık bildirim altyapısını ekledim.",
@@ -120,6 +144,8 @@ export const copy: Record<Lang, Copy> = {
         year: "2025",
         live: true,
         status: "Sahada",
+        role: "Mobil müşteri deneyimi ile işletme dashboard'unun ürün akışlarını geliştirdim.",
+        impact: "Sipariş, sadakat, kampanya ve işletme yönetimini tek ürün ailesinde birleştiriyor.",
         tagline: "Kampüs kahvecisinin cebe giren hâli.",
         points: [
           "QR ile ödeme, kampanya katılımı ve haftalık ödül çarkı: sipariş ve sadakat akışını uçtan uca geliştirdim.",
@@ -132,6 +158,8 @@ export const copy: Record<Lang, Copy> = {
         year: "2025",
         live: true,
         status: "Sahada",
+        role: "Stok, depo ve malzeme konumlandırma akışlarını tek web uygulamasında topladım.",
+        impact: "Üretim ekibinin malzeme ve satışa hazır ürün durumunu anlık takip etmesini sağlıyor.",
         tagline: "Üretimde “bu malzeme nerede?” sorusunu bitiren panel.",
         points: [
           "Stok, depo ve malzeme konumlandırmayı tek ekranda toplayan şirket içi web platformu.",
@@ -140,15 +168,7 @@ export const copy: Record<Lang, Copy> = {
         stack: ["Nest.js", "React", "PostgreSQL"],
       },
     ],
-    repos: {
-      heading: "GitHub'da daha fazlası",
-      viewAll: "Tümünü gör",
-      loading: "GitHub'dan yükleniyor…",
-      errorPrefix: "Şu anda GitHub'a ulaşılamıyor — projelerimi ",
-      errorSuffix: " adresinden inceleyebilirsiniz.",
-      noDescription: "Bu proje için henüz bir açıklama eklenmemiş.",
-      otherLanguage: "Diğer",
-    },
+    repos: { viewAll: "Tümünü gör" },
     experience: {
       eyebrow: "Kilometre taşları",
       title: "Deneyim",
@@ -189,7 +209,23 @@ export const copy: Record<Lang, Copy> = {
         },
       ],
     },
-    stack: { eyebrow: "Her gün kullandıklarım", title: "Tech Stack" },
+    stack: {
+      eyebrow: "Üretimde kullandığım araçlar",
+      title: "Tech Stack",
+      note: "Her teknolojiyi aynı seviyede göstermiyorum; en sık kullandığım araçları çalışma alanlarına göre gruplayarak sunuyorum.",
+      groups: {
+        frontend: "Frontend",
+        backend: "Backend",
+        mobile: "Mobile",
+        data: "Data & Infra",
+        workflow: "Workflow",
+      },
+    },
+    github: {
+      eyebrow: "Seçilmiş açık kaynak işler",
+      title: "GitHub",
+      note: "Ana ürün çalışmalarının dışında teknik yaklaşımımı gösteren birkaç seçilmiş proje.",
+    },
     contact: {
       eyebrow: "İletişim",
       title: "Aklınızda bir proje mi var? Konuşalım.",
@@ -204,6 +240,7 @@ export const copy: Record<Lang, Copy> = {
       work: "Projects",
       experience: "Experience",
       stack: "Tech Stack",
+      github: "GitHub",
       contact: "Contact",
     },
     navAria: "Page sections",
@@ -211,7 +248,7 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       eyebrow: "Full Stack Developer · İzmir, Türkiye",
       greeting: "Hi, I'm",
-      lead: "I'm a part-time developer at Performanz, where I build web and mobile applications. I take end-to-end ownership from backend to interface, with a focus on clean, maintainable code and user-centered products.",
+      lead: "I build web, mobile and backend products. I take end-to-end ownership on products used by real users, including systems for the Fenerbahçe Basketball youth academy.",
       ctaProjects: "See my projects",
       ctaCv: "Download CV (TR)",
       tooltipGithub: "GitHub",
@@ -220,22 +257,30 @@ export const copy: Record<Lang, Copy> = {
       portraitAlt: "Portrait of Sinan Mert Şener",
     },
     highlights: [
-      { label: "Currently", value: "Performanz · Part-time Developer" },
-      { label: "Focus", value: "Fullstack Development · Mobile" },
       { label: "Shipped", value: "4 products with real users" },
+      { label: "Currently", value: "Performanz · Software Engineer" },
+      { label: "Focus", value: "Web · Mobile · Backend" },
       { label: "Education", value: "Computer Eng. · 2026" },
     ],
     work: { eyebrow: "Running in production", title: "Projects" },
+    flagship: {
+      eyebrow: "Featured case study",
+      impactLabel: "Impact",
+      roleLabel: "My role",
+      detailsLabel: "Key capabilities",
+    },
     featuredProjects: [
       {
         name: "Fenerbahçe Basketball Academy Platform",
         year: "2026",
         live: true,
         status: "Live",
+        role: "I built the full system solo across web, mobile and backend.",
+        impact: "Actively used by the Fenerbahçe Basketball youth academy for tryouts and courtside measurement workflows.",
         tagline: "From athlete applications to courtside measurements: academy tryouts, digitized.",
         points: [
-          "I built the entire system solo, including web, mobile and backend; it is actively used by the Fenerbahçe Basketball youth academy.",
           "Features QR-based athlete identification, measurement stations, an offline-syncing mobile app and KVKK-compliant data flows.",
+          "Field-ready mobile flows and centralized administration work together as one product system.",
         ],
         stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
       },
@@ -244,6 +289,8 @@ export const copy: Record<Lang, Copy> = {
         year: "2025 – 2026",
         live: true,
         status: "Live",
+        role: "I built the Sports Schools module, Parent Portal and notification flows end to end.",
+        impact: "Helps sports organizations manage training, attendance, fees and athlete development data in one system.",
         tagline: "A platform that measures, tracks and reports athlete development for sports organizations.",
         points: [
           "I built the Sports Schools module (training schedules, attendance, fees) end to end, and added the Parent Portal and the push notification infrastructure.",
@@ -256,6 +303,8 @@ export const copy: Record<Lang, Copy> = {
         year: "2025",
         live: true,
         status: "Live",
+        role: "I worked across the mobile customer experience and the business management dashboard.",
+        impact: "Brings ordering, loyalty, campaigns and business operations into one product family.",
         tagline: "A campus coffee shop, right in your pocket.",
         points: [
           "QR payments, campaign check-ins and a weekly reward wheel: I built the ordering and loyalty flow end to end.",
@@ -268,6 +317,8 @@ export const copy: Record<Lang, Copy> = {
         year: "2025",
         live: true,
         status: "Live",
+        role: "I brought stock, warehouse and material location flows together in one web application.",
+        impact: "Gives the production team real-time visibility into materials and sales-ready product status.",
         tagline: "The panel that puts an end to “where is this part?” on the production floor.",
         points: [
           "An internal web platform that brings stock, warehouse and material locations into a single screen.",
@@ -276,15 +327,7 @@ export const copy: Record<Lang, Copy> = {
         stack: ["Nest.js", "React", "PostgreSQL"],
       },
     ],
-    repos: {
-      heading: "More on GitHub",
-      viewAll: "View all",
-      loading: "Loading from GitHub…",
-      errorPrefix: "GitHub can't be reached right now — you can browse my work at ",
-      errorSuffix: ".",
-      noDescription: "No description added yet.",
-      otherLanguage: "Other",
-    },
+    repos: { viewAll: "View all" },
     experience: {
       eyebrow: "The road so far",
       title: "Experience",
@@ -325,7 +368,23 @@ export const copy: Record<Lang, Copy> = {
         },
       ],
     },
-    stack: { eyebrow: "What I use every day", title: "Tech Stack" },
+    stack: {
+      eyebrow: "Tools I use in production",
+      title: "Tech Stack",
+      note: "I group the technologies I use most often by the work they support instead of presenting every tool at the same level.",
+      groups: {
+        frontend: "Frontend",
+        backend: "Backend",
+        mobile: "Mobile",
+        data: "Data & Infra",
+        workflow: "Workflow",
+      },
+    },
+    github: {
+      eyebrow: "Selected open-source work",
+      title: "GitHub",
+      note: "A small selection of projects that show how I work outside the main production products above.",
+    },
     contact: {
       eyebrow: "Contact",
       title: "Have a project in mind? Let's talk.",

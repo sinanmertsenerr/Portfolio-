@@ -1,15 +1,15 @@
 # Computer Engineering Portfolio
 
-Vite, React, Framer Motion ve lucide-react ile hazırlanmış modern, animasyonlu
-ve yayına hazır portföy sitesi.
+Vite, React, TypeScript, Framer Motion ve lucide-react ile hazırlanmış,
+TR/EN destekli kişisel portföy sitesi.
 
-Herkese açık proje kartları GitHub'dan sayfalama ile canlı yüklenir. GitHub API'ye
-ulaşılamazsa yerel yedek veriler gösterilir. Proje görselleri repo içindeki
-website bağlantısından canlı ekran görüntüsü üretir; canlı URL yoksa GitHub Open
-Graph önizlemesine düşer.
+Ana sayfa production projelerini etki ve sorumluluk odaklı gösterir. Seçilmiş
+GitHub projeleri doğrudan kendi repo sayfalarına bağlanan kontrollü içerikle
+sunulur; ana portfolio deneyimi üçüncü taraf API durumuna bağlı değildir.
 
-Sayfa, soldaki büyük sahne başlıklarıyla bölümlere ayrılır. Scroll sırasında
-aktif bölüm başlığı parlak görünür, diğer başlıklar geride kalır.
+Sayfa; profil, production projeleri, deneyim, kategorize tech stack, seçilmiş
+GitHub işleri ve iletişim bölümlerine ayrılır. Scroll sırasında aktif bölüm
+navigation içinde vurgulanır.
 
 ## Yerelde Çalıştırma
 
@@ -28,11 +28,12 @@ Yayınlanabilir çıktı `dist/` klasöründe oluşur.
 
 ## Özelleştirme
 
-Profil ve tech stack ayarları `src/App.tsx` içindedir.
+Profil, tech stack grupları ve GitHub showcase ayarları `src/App.tsx` içindedir.
+TR/EN metinleri ve proje içerikleri `src/content.ts` içinde tutulur.
 
-- `profile`: ad, e-posta, GitHub kullanıcı adı, GitHub URL ve LinkedIn URL
-- `fallbackRepos`: GitHub'a ulaşılamadığında gösterilen kartlar
-- `stackItems`: tech stack logo kartları
+- `profile`: ad, e-posta, CV, GitHub ve LinkedIn bağlantıları
+- `selectedRepos`: seçilmiş GitHub projeleri
+- `stackGroups`: kategori bazlı teknik yetkinlik grupları
 
 Hero görseli `public/hero-engineering.jpg` yolundadır.
 Portre görseli `public/sinan-portrait.jpg` yolundadır.
