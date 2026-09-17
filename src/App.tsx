@@ -47,31 +47,37 @@ const stackGroups: Array<{
   key: StackGroupKey;
   icon: typeof Code2;
   items: string[];
+  size: "wide" | "regular" | "full";
 }> = [
   {
     key: "frontend",
     icon: Code2,
     items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    size: "wide",
   },
   {
     key: "backend",
     icon: Server,
     items: ["Nest.js", "Node.js", ".NET", "FastAPI"],
+    size: "regular",
   },
   {
     key: "mobile",
     icon: Smartphone,
     items: ["React Native", "Swift", "Flutter"],
+    size: "regular",
   },
   {
     key: "data",
     icon: Database,
     items: ["PostgreSQL", "Redis", "Docker", "Firebase", "Cloudflare"],
+    size: "wide",
   },
   {
     key: "workflow",
     icon: Workflow,
     items: ["Git", "GitHub Actions", "Prisma", "Claude", "Codex"],
+    size: "full",
   },
 ];
 
@@ -551,16 +557,19 @@ function App() {
 
                 return (
                 <motion.article
-                  className={`stack-group-card spotlight-card stack-${group.key}`}
+                  className={`stack-group-card spotlight-card stack-${group.key} stack-size-${group.size}`}
                   key={group.key}
                   variants={item}
                   onPointerMove={handleSpotlight}
                 >
-                  <span className="stack-index" aria-hidden="true">0{index + 1}</span>
-                  <div className="stack-group-heading">
-                    <Icon size={22} aria-hidden="true" />
-                    <h3>{t.stack.groups[group.key]}</h3>
+                  <div className="stack-card-top">
+                    <div className="stack-group-heading">
+                      <Icon size={22} aria-hidden="true" />
+                      <h3>{t.stack.groups[group.key]}</h3>
+                    </div>
+                    <span className="stack-index" aria-hidden="true">0{index + 1}</span>
                   </div>
+                  <p className="stack-group-summary">{t.stack.summaries[group.key]}</p>
                   <div className="stack-pill-list">
                     {group.items.map((stackItem) => (
                       <span key={stackItem}>{stackItem}</span>
