@@ -346,10 +346,10 @@ function App() {
               </motion.div>
 
               <motion.div className="about-highlights" variants={container}>
-                {t.highlights.map((highlight) => (
+                {t.highlights.map((highlight, index) => (
                   <motion.div
                     className="about-highlight"
-                    key={highlight.label}
+                    key={index}
                     variants={item}
                   >
                     <span>{highlight.label}</span>
@@ -463,7 +463,7 @@ function App() {
                         const FlowIcon = flowIcons[index];
 
                         return (
-                          <li className={`flow-step flow-step-${index}`} key={step.name}>
+                          <li className={`flow-step flow-step-${index}`} key={index}>
                             <span className="flow-icon">
                               <FlowIcon size={20} aria-hidden="true" />
                             </span>
@@ -499,7 +499,7 @@ function App() {
               {supportingProjects.map((project, index) => (
                 <motion.article
                   className={`featured-card project-card spotlight-card project-card-${index + 1}`}
-                  key={project.name}
+                  key={index}
                   variants={item}
                   onPointerMove={handleSpotlight}
                 >
@@ -569,7 +569,7 @@ function App() {
                 {t.experience.entries.map((entry, index) => (
                   <motion.article
                     className={`timeline-item ${index === t.experience.entries.length - 1 ? "is-education" : ""}`}
-                    key={`${entry.period}-${entry.role}`}
+                    key={index}
                     variants={item}
                   >
                     <span className="timeline-index" aria-hidden="true">
