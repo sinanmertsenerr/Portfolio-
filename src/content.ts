@@ -46,6 +46,7 @@ export type Copy = {
   hero: {
     eyebrow: string;
     greeting: string;
+    headline: { before: string; mark: string; after: string };
     lead: string;
     ctaProjects: string;
     ctaCv: string;
@@ -61,6 +62,11 @@ export type Copy = {
     impactLabel: string;
     roleLabel: string;
     detailsLabel: string;
+    flowTitle: string;
+    flowSteps: Array<{ name: string; text: string }>;
+    flowOffline: string;
+    flowSynced: string;
+    flowNote: string;
   };
   featuredProjects: FeaturedProject[];
   repos: { viewAll: string };
@@ -76,6 +82,8 @@ export type Copy = {
     eyebrow: string;
     title: string;
     note: string;
+    footnote: string;
+    usageLabel: string;
     groups: {
       frontend: string;
       backend: string;
@@ -119,6 +127,11 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       eyebrow: "Full Stack Developer · İzmir",
       greeting: "Merhaba, ben",
+      headline: {
+        before: "Sahada üç ürün. Biri ",
+        mark: "Fenerbahçe Basketbol",
+        after: " altyapısında.",
+      },
       lead: "Web, mobil ve backend ürünleri geliştiriyorum. Fenerbahçe Basketbol altyapısı dahil gerçek kullanıcıya ulaşan ürünlerde uçtan uca sorumluluk alıyorum.",
       ctaProjects: "Projelere bak",
       ctaCv: "CV'yi indir",
@@ -128,8 +141,8 @@ export const copy: Record<Lang, Copy> = {
       portraitAlt: "Sinan Mert Şener portresi",
     },
     highlights: [
-      { label: "Sahada", value: "4 ürün gerçek kullanıcıda" },
-      { label: "Şu an", value: "Performanz · Software Engineer" },
+      { label: "Sahada", value: "3 ürün gerçek kullanıcıda" },
+      { label: "Son rol", value: "Performanz · Software Engineer" },
       { label: "Odak", value: "Web · Mobil · Backend" },
       { label: "Eğitim", value: "Bilgisayar Müh. · 2026" },
     ],
@@ -139,6 +152,17 @@ export const copy: Record<Lang, Copy> = {
       impactLabel: "Etki",
       roleLabel: "Sorumluluğum",
       detailsLabel: "Öne çıkan özellikler",
+      flowTitle: "Seçme gününde verinin yolu",
+      flowSteps: [
+        { name: "Başvuru", text: "Sporcu başvurusu sisteme düşer." },
+        { name: "QR", text: "Sporcu sahada QR ile tanınır." },
+        { name: "İstasyon", text: "Ölçüm istasyonlarında saha ölçümleri girilir." },
+        { name: "Mobil", text: "Uygulama bağlantı yokken de çalışır." },
+        { name: "Panel", text: "Veri merkezi yönetim panelinde toplanır." },
+      ],
+      flowOffline: "Çevrimdışı",
+      flowSynced: "Senkronize",
+      flowNote: "KVKK uyumlu veri akışları",
     },
     featuredProjects: [
       {
@@ -172,8 +196,8 @@ export const copy: Record<Lang, Copy> = {
       {
         name: "NikiApp",
         year: "2025",
-        live: true,
-        status: "Sahada",
+        live: false,
+        status: "Geliştiriliyor",
         role: "Mobil müşteri deneyimi ile işletme dashboard'unun ürün akışlarını geliştirdim.",
         impact: "Sipariş, sadakat, kampanya ve işletme yönetimini tek ürün ailesinde birleştiriyor.",
         tagline: "Kampüs kahvecisinin cebe giren hâli.",
@@ -187,7 +211,7 @@ export const copy: Record<Lang, Copy> = {
         name: "Sistem Takip Platformu",
         year: "2025",
         live: true,
-        status: "Sahada",
+        status: "Kısmen sahada",
         role: "Stok, depo ve malzeme konumlandırma akışlarını tek web uygulamasında topladım.",
         impact: "Üretim ekibinin malzeme ve satışa hazır ürün durumunu anlık takip etmesini sağlıyor.",
         tagline: "Üretimde “bu malzeme nerede?” sorusunu bitiren panel.",
@@ -207,11 +231,11 @@ export const copy: Record<Lang, Copy> = {
       note: "Ürün geliştirme, ekip çalışması ve uluslararası organizasyon deneyiminin aynı çizgide büyüdüğü dönem.",
       entries: [
         {
-          period: "May 2026 – Devam",
+          period: "May 2026 – Tem 2026",
           role: "Software Engineer (Part-time)",
           org: "Performanz Arge ve Yazılım",
           summary:
-            "Stajımın ardından aynı ekipte part-time olarak devam ediyorum; web ve mobilde uçtan uca ürün geliştiriyorum.",
+            "Stajımın ardından aynı ekipte part-time olarak devam ettim; web ve mobilde uçtan uca ürün geliştirdim.",
         },
         {
           period: "Ağu 2025 – May 2026",
@@ -246,6 +270,8 @@ export const copy: Record<Lang, Copy> = {
       eyebrow: "Üretimde kullandığım araçlar",
       title: "Tech Stack",
       note: "Her teknolojiyi aynı seviyede göstermiyorum; en sık kullandığım araçları çalışma alanlarına göre gruplayarak sunuyorum.",
+      footnote: "Küçük sayı, teknolojinin sahadaki kaç üründe kullanıldığını gösterir.",
+      usageLabel: "Sahadaki ürün sayısı",
       groups: {
         frontend: "Frontend",
         backend: "Backend",
@@ -296,6 +322,11 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       eyebrow: "Full Stack Developer · İzmir, Türkiye",
       greeting: "Hi, I'm",
+      headline: {
+        before: "Three products in production. One runs inside ",
+        mark: "Fenerbahçe Basketball",
+        after: "'s youth academy.",
+      },
       lead: "I build web, mobile and backend products. I take end-to-end ownership on products used by real users, including systems for the Fenerbahçe Basketball youth academy.",
       ctaProjects: "See my projects",
       ctaCv: "Download CV (TR)",
@@ -305,8 +336,8 @@ export const copy: Record<Lang, Copy> = {
       portraitAlt: "Portrait of Sinan Mert Şener",
     },
     highlights: [
-      { label: "Shipped", value: "4 products with real users" },
-      { label: "Currently", value: "Performanz · Software Engineer" },
+      { label: "Shipped", value: "3 products with real users" },
+      { label: "Latest role", value: "Performanz · Software Engineer" },
       { label: "Focus", value: "Web · Mobile · Backend" },
       { label: "Education", value: "Computer Eng. · 2026" },
     ],
@@ -316,6 +347,17 @@ export const copy: Record<Lang, Copy> = {
       impactLabel: "Impact",
       roleLabel: "My role",
       detailsLabel: "Key capabilities",
+      flowTitle: "The path of data on tryout day",
+      flowSteps: [
+        { name: "Application", text: "The athlete's application enters the system." },
+        { name: "QR", text: "Athletes are identified courtside by QR." },
+        { name: "Station", text: "Measurements are recorded at the stations." },
+        { name: "Mobile", text: "The app keeps working without a connection." },
+        { name: "Panel", text: "Data lands in the central admin panel." },
+      ],
+      flowOffline: "Offline",
+      flowSynced: "Synced",
+      flowNote: "KVKK-compliant data flows",
     },
     featuredProjects: [
       {
@@ -349,8 +391,8 @@ export const copy: Record<Lang, Copy> = {
       {
         name: "NikiApp",
         year: "2025",
-        live: true,
-        status: "Live",
+        live: false,
+        status: "In development",
         role: "I worked across the mobile customer experience and the business management dashboard.",
         impact: "Brings ordering, loyalty, campaigns and business operations into one product family.",
         tagline: "A campus coffee shop, right in your pocket.",
@@ -364,7 +406,7 @@ export const copy: Record<Lang, Copy> = {
         name: "Production Tracking Platform",
         year: "2025",
         live: true,
-        status: "Live",
+        status: "Partially live",
         role: "I brought stock, warehouse and material location flows together in one web application.",
         impact: "Gives the production team real-time visibility into materials and sales-ready product status.",
         tagline: "The panel that puts an end to “where is this part?” on the production floor.",
@@ -384,11 +426,11 @@ export const copy: Record<Lang, Copy> = {
       note: "A period where product engineering, teamwork and international community leadership grew in parallel.",
       entries: [
         {
-          period: "May 2026 – Present",
+          period: "May 2026 – Jul 2026",
           role: "Software Engineer (Part-time)",
           org: "Performanz Arge ve Yazılım",
           summary:
-            "After my internship, I stayed on the same team as a part-time engineer; I continue to build products end to end across web and mobile.",
+            "After my internship, I stayed on the same team as a part-time engineer and kept building products end to end across web and mobile.",
         },
         {
           period: "Aug 2025 – May 2026",
@@ -423,6 +465,8 @@ export const copy: Record<Lang, Copy> = {
       eyebrow: "Tools I use in production",
       title: "Tech Stack",
       note: "I group the technologies I use most often by the work they support instead of presenting every tool at the same level.",
+      footnote: "The small number shows how many shipped products use the technology.",
+      usageLabel: "Shipped products using it",
       groups: {
         frontend: "Frontend",
         backend: "Backend",

@@ -5,13 +5,17 @@ import {
   Database,
   Download,
   BriefcaseBusiness,
+  FileText,
   FolderKanban,
   Github,
+  LayoutDashboard,
   Linkedin,
   Mail,
+  QrCode,
   Rocket,
   Server,
   Smartphone,
+  Timer,
   UserRound,
   Workflow,
 } from "lucide-react";
@@ -103,6 +107,21 @@ type SelectedRepo = {
 };
 
 const LANG_STORAGE_KEY = "portfolio-lang";
+
+const flowIcons = [FileText, QrCode, Timer, Smartphone, LayoutDashboard];
+
+// Teknolojinin sahadaki (live) kac urunde gectigi (".NET 8" -> ".NET")
+const stackUsage = copy.tr.featuredProjects
+  .filter((project) => project.live)
+  .reduce<Record<string, number>>((usage, project) => {
+    project.stack.forEach((tech) => {
+      const key = tech.replace(/\s\d+$/, "");
+      usage[key] = (usage[key] ?? 0) + 1;
+    });
+    return usage;
+  }, {});
+
+const maxStackUsage = Math.max(...Object.values(stackUsage));
 
 const selectedRepos: SelectedRepo[] = [
   {
@@ -230,6 +249,11 @@ function App() {
       </a>
       <motion.div className="scroll-progress" style={{ scaleX: progressScaleX }} aria-hidden="true" />
 
+      <div className="top-tools">
+      <a className="cv-quick" href={profile.cvUrl} download aria-label={t.hero.ctaCv}>
+        <Download size={16} aria-hidden="true" />
+        CV
+      </a>
       <div className="lang-toggle" role="group" aria-label={t.langAria}>
         <button
           type="button"
@@ -247,6 +271,7 @@ function App() {
         >
           EN
         </button>
+      </div>
       </div>
 
       <div className="stage-layout">
@@ -269,6 +294,11 @@ function App() {
                 <span className="hero-greeting">{t.hero.greeting}</span>
                 {profile.name}
               </motion.h1>
+              <motion.p className="hero-headline" variants={item}>
+                {t.hero.headline.before}
+                <mark>{t.hero.headline.mark}</mark>
+                {t.hero.headline.after}
+              </motion.p>
               <motion.p className="about-lead" variants={item}>
                 {t.hero.lead}
               </motion.p>
@@ -430,53 +460,42 @@ function App() {
                 </details>
               </div>
 
-              <div className="flagship-visual" aria-hidden="true">
+              <div className="flagship-visual">
                 <div className="system-window">
-                  <div className="system-window-bar">
+                  <div className="system-window-bar" aria-hidden="true">
                     <div className="window-dots"><i /><i /><i /></div>
-                    <span>{lang === "tr" ? "Saha operasyon görünümü" : "Field operations view"}</span>
+                    <span>{lang === "tr" ? "Saha operasyon akışı" : "Field operations flow"}</span>
                     <span className="live-pulse">LIVE</span>
                   </div>
-                  <div className="system-window-body">
-                    <div className="system-sidebar">
-                      <span className="system-logo">FB</span>
-                      <i className="is-on" />
-                      <i />
-                      <i />
-                      <i />
-                    </div>
-                    <div className="system-main">
-                      <div className="system-topline">
-                        <span>{lang === "tr" ? "Altyapı seçmeleri" : "Academy tryouts"}</span>
-                        <span>{flagshipProject.year}</span>
-                      </div>
-                      <div className="system-grid">
-                        <div className="system-module qr-module">
-                          <span className="module-label">QR</span>
-                          <div className="qr-mark">
-                            <i /><i /><i /><i /><i /><i /><i /><i /><i />
-                          </div>
-                          <small>{lang === "tr" ? "Sporcu tanıma" : "Athlete ID"}</small>
-                        </div>
-                        <div className="system-module station-module">
-                          <span className="module-label">01</span>
-                          <strong>{lang === "tr" ? "Ölçüm istasyonları" : "Measurement stations"}</strong>
-                          <div className="station-lines"><i /><i /><i /></div>
-                        </div>
-                        <div className="system-module sync-module">
-                          <span className="module-label">SYNC</span>
-                          <strong>{lang === "tr" ? "Çevrimdışı hazır" : "Offline ready"}</strong>
-                          <div className="sync-track"><i /></div>
-                        </div>
-                        <div className="system-module flow-module">
-                          <span className="module-label">DATA</span>
-                          <strong>{lang === "tr" ? "Merkezi veri akışı" : "Central data flow"}</strong>
-                          <div className="flow-dots"><i /><i /><i /><i /></div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="flow-body">
+                    <p className="flow-title">{t.flagship.flowTitle}</p>
+                    <ol className="flow-list">
+                      <li className="flow-rail" aria-hidden="true"><i /></li>
+                      {t.flagship.flowSteps.map((step, index) => {
+                        const FlowIcon = flowIcons[index];
+
+                        return (
+                          <li className={`flow-step flow-step-${index}`} key={step.name}>
+                            <span className="flow-icon">
+                              <FlowIcon size={20} aria-hidden="true" />
+                            </span>
+                            <div>
+                              <span className="flow-no">0{index + 1}</span>
+                              <strong>{step.name}</strong>
+                              <small>{step.text}</small>
+                            </div>
+                            {index === 3 ? (
+                              <span className="flow-sync">
+                                <b className="is-off">{t.flagship.flowOffline}</b>
+                                <b className="is-on">{t.flagship.flowSynced}</b>
+                              </span>
+                            ) : null}
+                          </li>
+                        );
+                      })}
+                    </ol>
+                    <p className="flow-note">{t.flagship.flowNote}</p>
                   </div>
-                  <div className="scan-line" />
                 </div>
               </div>
             </motion.article>
@@ -620,13 +639,23 @@ function App() {
                   <p className="stack-group-summary">{t.stack.summaries[group.key]}</p>
                   <div className="stack-pill-list">
                     {group.items.map((stackItem) => (
-                      <span key={stackItem}>{stackItem}</span>
+                      <span key={stackItem}>
+                        {stackItem}
+                        {stackUsage[stackItem] ? (
+                          <sup title={`${t.stack.usageLabel}: ${stackUsage[stackItem]}`}>
+                            {stackUsage[stackItem]}
+                          </sup>
+                        ) : null}
+                      </span>
                     ))}
                   </div>
                 </motion.article>
                 );
               })}
             </motion.div>
+            <p className="stack-footnote">
+              <sup>1–{maxStackUsage}</sup> {t.stack.footnote}
+            </p>
           </motion.section>
 
           <section
