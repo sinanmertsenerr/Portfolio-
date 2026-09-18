@@ -131,9 +131,8 @@ figure {
   padding: 4px;
   border: 1px solid rgba(245, 240, 232, 0.16);
   border-radius: 8px;
-  background: rgba(11, 14, 13, 0.72);
+  background: #0d1110;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(14px);
 }
 
 .lang-toggle button {
@@ -600,7 +599,6 @@ figure {
 
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -992,53 +990,6 @@ figure {
 /* Redesign layer: hero keeps its existing language; the portfolio becomes richer below it. */
 .stage-section:not(.about-section) {
   position: relative;
-}
-
-.production-signal {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: -8px 0 40px;
-  overflow: hidden;
-  border-block: 1px solid rgba(245, 240, 232, 0.1);
-  background: #0a0e0d;
-}
-
-.production-signal::before {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--teal), var(--amber), var(--rust));
-  content: "";
-}
-
-.signal-item {
-  display: grid;
-  min-width: 0;
-  gap: 6px;
-  padding: 18px 22px;
-  border-right: 1px solid rgba(245, 240, 232, 0.08);
-}
-
-.signal-item:last-child {
-  border-right: 0;
-}
-
-.signal-item span {
-  color: var(--amber);
-  font-size: 0.72rem;
-  font-weight: 850;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.signal-item strong {
-  overflow: hidden;
-  color: var(--text);
-  font-size: 0.94rem;
-  line-height: 1.35;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .work-section,
@@ -1638,13 +1589,12 @@ figure {
     padding: 8px;
     border: 1px solid rgba(245, 240, 232, 0.14);
     border-radius: 8px;
-    background: rgba(11, 14, 13, 0.74);
-    backdrop-filter: blur(16px);
+    background: #0d1110;
   }
 
   .stage-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
     gap: 6px;
   }
 
@@ -1816,14 +1766,6 @@ figure {
 }
 
 @media (max-width: 900px) {
-  .production-signal {
-    margin-top: 4px;
-  }
-
-  .signal-item {
-    padding: 16px;
-  }
-
   .flagship-card {
     min-height: 0;
   }
@@ -2068,10 +2010,6 @@ figure {
 
   .about-highlight strong {
     font-size: 0.88rem;
-  }
-
-  .production-signal {
-    display: none;
   }
 
   .section-heading {
@@ -2363,9 +2301,8 @@ figure {
   padding: 0 13px;
   border: 1px solid rgba(245, 240, 232, 0.16);
   border-radius: 8px;
-  background: rgba(11, 14, 13, 0.72);
+  background: #0d1110;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(14px);
   color: var(--text);
   font-size: 0.82rem;
   font-weight: 800;
@@ -2631,5 +2568,12 @@ figure {
   .flow-sync b {
     right: auto;
     left: 0;
+  }
+}
+
+/* Dar tablet: gezinme 4+2 yerine dengeli 3+3 dizilsin */
+@media (min-width: 621px) and (max-width: 760px) {
+  .stage-list {
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
   }
 }

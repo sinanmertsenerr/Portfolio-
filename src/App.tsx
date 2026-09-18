@@ -371,18 +371,6 @@ function App() {
             </motion.figure>
           </motion.section>
 
-          <div
-            className="production-signal"
-            aria-label={lang === "tr" ? "Profil özeti" : "Profile summary"}
-          >
-            {t.highlights.slice(0, 3).map((highlight) => (
-              <div className="signal-item" key={highlight.label}>
-                <span>{highlight.label}</span>
-                <strong>{highlight.value}</strong>
-              </div>
-            ))}
-          </div>
-
           <section
             className="stage-section work-section"
             id="work"
