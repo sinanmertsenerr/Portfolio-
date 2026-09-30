@@ -1,498 +1,442 @@
-// Sitedeki TUM metinler burada durur. Bir ceviri eklemek/duzeltmek icin
-// sadece bu dosyayi duzenlemek yeterli.
+// Sitedeki tum metinler burada. Ceviri eklemek ya da duzeltmek icin sadece
+// bu dosyayi duzenlemek yeterli. Bilgiler CV'den ve canli siteden alindi.
+// **iki yildiz** arasi goz tarayinca yakalansin diye kalin gosterilir.
 
 export type Lang = "tr" | "en";
 
-export type Highlight = { label: string; value: string };
+export type ProductStatus = "live" | "partial" | "building";
 
-export type FeaturedProject = {
+export type Product = {
   name: string;
-  year: string;
-  live: boolean;
-  status: string;
-  role: string;
-  impact: string;
   tagline: string;
-  points: string[];
+  role: string;
+  // Sadece one cikan urunde gosterilir
+  result?: string;
   stack: string[];
+  status: ProductStatus;
+  years: string;
 };
 
-export type ExperienceEntry = {
+export type Fact = { term: string; detail: string };
+
+// Sure ay cinsinden tutulur; ekrana dile gore "1 yil 2 ay" gibi yazilir
+export type Figure = { months: number; label: string };
+
+export type Role = {
   period: string;
-  role: string;
+  title: string;
   org: string;
-  summary: string;
+  note: string;
+  months: number | null;
 };
 
 export type Copy = {
-  nav: {
-    about: string;
-    work: string;
-    experience: string;
-    stack: string;
-    github: string;
-    contact: string;
-  };
-  mobileNav: {
-    about: string;
-    work: string;
-    experience: string;
-    stack: string;
-    github: string;
-    contact: string;
-  };
-  navAria: string;
-  langAria: string;
-  hero: {
-    eyebrow: string;
-    greeting: string;
-    headline: { before: string; mark: string; after: string };
-    lead: string;
-    ctaProjects: string;
-    ctaCv: string;
-    tooltipGithub: string;
-    tooltipLinkedin: string;
-    tooltipEmail: string;
+  skip: string;
+  langLabel: string;
+  newTab: string;
+  navLabel: string;
+  nav: { products: string; experience: string; stack: string; contact: string };
+  mobileNav: { profile: string; products: string; experience: string; stack: string; contact: string };
+  profile: {
+    role: string;
+    status: string;
+    cv: string;
+    cvShort: string;
+    email: string;
     portraitAlt: string;
   };
-  highlights: Highlight[];
-  work: { eyebrow: string; title: string };
-  flagship: {
-    eyebrow: string;
-    impactLabel: string;
-    roleLabel: string;
-    detailsLabel: string;
-    flowTitle: string;
-    flowSteps: Array<{ name: string; text: string }>;
-    flowOffline: string;
-    flowSynced: string;
-    flowNote: string;
+  intro: {
+    claim: string;
+    claimDetail: string;
+    lead: string;
+    facts: Fact[];
   };
-  featuredProjects: FeaturedProject[];
-  repos: { viewAll: string };
-  experience: {
-    eyebrow: string;
+  statusLabels: Record<ProductStatus, string>;
+  products: {
     title: string;
-    rangeLabel: string;
-    range: string;
     note: string;
-    entries: ExperienceEntry[];
+    roleLabel: string;
+    resultLabel: string;
+    stackLabel: string;
+    featuredHighlightsLabel: string;
+    featuredHighlights: string[];
+    items: Product[];
+    githubTitle: string;
+    githubAll: string;
+  };
+  experience: {
+    title: string;
+    note: string;
+    figures: Figure[];
+    roles: Role[];
   };
   stack: {
-    eyebrow: string;
     title: string;
     note: string;
-    footnote: string;
-    usageLabel: string;
-    groups: {
-      frontend: string;
-      backend: string;
-      mobile: string;
-      data: string;
-      workflow: string;
-    };
-    summaries: {
-      frontend: string;
-      backend: string;
-      mobile: string;
-      data: string;
-      workflow: string;
-    };
+    countLabel: (count: number) => string;
+    groups: Array<{ name: string; items: string[] }>;
   };
-  github: { eyebrow: string; title: string; note: string };
-  contact: { eyebrow: string; title: string; note: string; ctaEmail: string };
-  footer: { email: string };
+  contact: {
+    title: string;
+    note: string;
+  };
+  footer: { updated: string };
+  formatDuration: (months: number) => string;
 };
 
 export const copy: Record<Lang, Copy> = {
   tr: {
-    nav: {
-      about: "Hakkımda",
-      work: "Projeler",
-      experience: "Deneyim",
-      stack: "Tech Stack",
-      github: "GitHub",
-      contact: "İletişim",
-    },
+    skip: "İçeriğe geç",
+    langLabel: "Dil seçimi",
+    newTab: "(yeni sekmede açılır)",
+    navLabel: "Sayfa bölümleri",
+    nav: { products: "Ürünler", experience: "Deneyim", stack: "Teknolojiler", contact: "İletişim" },
     mobileNav: {
-      about: "Profil",
-      work: "Projeler",
+      profile: "Profil",
+      products: "Ürünler",
       experience: "Deneyim",
-      stack: "Stack",
-      github: "GitHub",
+      stack: "Teknoloji",
       contact: "İletişim",
     },
-    navAria: "Sayfa bölümleri",
-    langAria: "Dil seçimi",
-    hero: {
-      eyebrow: "Full Stack Developer · İzmir",
-      greeting: "Merhaba, ben",
-      headline: {
-        before: "Sahada üç ürün. Biri ",
-        mark: "Fenerbahçe Basketbol",
-        after: " altyapısında.",
-      },
-      lead: "Web, mobil ve backend ürünleri geliştiriyorum. Fenerbahçe Basketbol altyapısı dahil gerçek kullanıcıya ulaşan ürünlerde uçtan uca sorumluluk alıyorum.",
-      ctaProjects: "Projelere bak",
-      ctaCv: "CV'yi indir",
-      tooltipGithub: "GitHub",
-      tooltipLinkedin: "LinkedIn",
-      tooltipEmail: "E-posta",
-      portraitAlt: "Sinan Mert Şener portresi",
+    profile: {
+      role: "Full Stack Developer, İzmir",
+      status: "Yeni rollere açık",
+      cv: "CV'yi indir (PDF)",
+      cvShort: "CV",
+      email: "E-posta gönder",
+      portraitAlt: "Sinan Mert Şener'in portresi",
     },
-    highlights: [
-      { label: "Sahada", value: "3 ürün gerçek kullanıcıda" },
-      { label: "Son rol", value: "Performanz · Software Engineer" },
-      { label: "Odak", value: "Web · Mobil · Backend" },
-      { label: "Eğitim", value: "Bilgisayar Müh. · 2026" },
-    ],
-    work: { eyebrow: "Sahada çalışan işler", title: "Projeler" },
-    flagship: {
-      eyebrow: "Öne çıkan çalışma",
-      impactLabel: "Etki",
-      roleLabel: "Sorumluluğum",
-      detailsLabel: "Öne çıkan özellikler",
-      flowTitle: "Seçme gününde verinin yolu",
-      flowSteps: [
-        { name: "Başvuru", text: "Sporcu başvurusu sisteme düşer." },
-        { name: "QR", text: "Sporcu sahada QR ile tanınır." },
-        { name: "İstasyon", text: "Ölçüm istasyonlarında saha ölçümleri girilir." },
-        { name: "Mobil", text: "Uygulama bağlantı yokken de çalışır." },
-        { name: "Panel", text: "Veri merkezi yönetim panelinde toplanır." },
+    intro: {
+      claim: "Sahada üç ürün.",
+      claimDetail: "Biri Fenerbahçe Basketbol altyapısında.",
+      lead: "Web, mobil ve backend'i **uçtan uca** geliştiriyorum.",
+      facts: [
+        { term: "Son rol", detail: "Software Engineer, Performanz" },
+        { term: "Eğitim", detail: "Bilgisayar Mühendisliği, 2026" },
+        { term: "Diller", detail: "Türkçe, İngilizce (akıcı)" },
       ],
-      flowOffline: "Çevrimdışı",
-      flowSynced: "Senkronize",
-      flowNote: "KVKK uyumlu veri akışları",
     },
-    featuredProjects: [
-      {
-        name: "Fenerbahçe Basketbol Altyapı Platformu",
-        year: "2026",
-        live: true,
-        status: "Sahada",
-        role: "Web, mobil ve backend dahil sistemi uçtan uca tek başıma geliştirdim.",
-        impact: "Fenerbahçe Basketbol altyapısının seçme ve saha ölçüm süreçlerinde aktif olarak kullanılıyor.",
-        tagline: "Sporcu başvurusundan saha ölçümlerine, altyapı seçmelerinin dijital hâli.",
-        points: [
-          "QR ile sporcu tanıma, ölçüm istasyonları, çevrimdışı senkronize çalışan mobil uygulama ve KVKK uyumlu veri akışları içeriyor.",
-          "Sahadaki bağlantı koşullarına dayanıklı mobil akışlar ve merkezi yönetim paneli aynı ürün altında çalışıyor.",
-        ],
-        stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
-      },
-      {
-        name: "VAP · Veri Analiz Portalı",
-        year: "2025 – 2026",
-        live: true,
-        status: "Sahada",
-        role: "Spor Okulları modülünü, Veli Portalı'nı ve bildirim akışlarını uçtan uca geliştirdim.",
-        impact: "Spor kurumlarının antrenman, yoklama, aidat ve sporcu gelişim verilerini tek sistemde yönetmesini sağlıyor.",
-        tagline: "Spor kurumları için sporcu gelişimini ölçen, izleyen ve raporlayan platform.",
-        points: [
-          "Spor Okulları modülünü (antrenman programı, yoklama, aidat) uçtan uca geliştirdim; Veli Portalı'nı ve anlık bildirim altyapısını ekledim.",
-          "Yetenek karşılaştırma ekranları ve çok sayfalı PDF rapor üretimi üzerinde çalıştım.",
-        ],
-        stack: ["Next.js", ".NET 8", "PostgreSQL"],
-      },
-      {
-        name: "NikiApp",
-        year: "2025",
-        live: false,
-        status: "Geliştiriliyor",
-        role: "Mobil müşteri deneyimi ile işletme dashboard'unun ürün akışlarını geliştirdim.",
-        impact: "Sipariş, sadakat, kampanya ve işletme yönetimini tek ürün ailesinde birleştiriyor.",
-        tagline: "Kampüs kahvecisinin cebe giren hâli.",
-        points: [
-          "QR ile ödeme, kampanya katılımı ve haftalık ödül çarkı: sipariş ve sadakat akışını uçtan uca geliştirdim.",
-          "İşletmeye özel dashboard: menü, kampanya ve kredi yönetimi tek panelden.",
-        ],
-        stack: ["React Native", "Nest.js", "PostgreSQL"],
-      },
-      {
-        name: "Sistem Takip Platformu",
-        year: "2025",
-        live: true,
-        status: "Kısmen sahada",
-        role: "Stok, depo ve malzeme konumlandırma akışlarını tek web uygulamasında topladım.",
-        impact: "Üretim ekibinin malzeme ve satışa hazır ürün durumunu anlık takip etmesini sağlıyor.",
-        tagline: "Üretimde “bu malzeme nerede?” sorusunu bitiren panel.",
-        points: [
-          "Stok, depo ve malzeme konumlandırmayı tek ekranda toplayan şirket içi web platformu.",
-          "Satışa hazır ürün durumu artık anlık olarak izlenebiliyor.",
-        ],
-        stack: ["Nest.js", "React", "PostgreSQL"],
-      },
-    ],
-    repos: { viewAll: "Tümünü gör" },
+    statusLabels: {
+      live: "Sahada",
+      partial: "Kısmen sahada",
+      building: "Geliştiriliyor",
+    },
+    products: {
+      title: "Ürünler",
+      note: "4 üründen 3'ü sahada.",
+      roleLabel: "Rolüm",
+      resultLabel: "Sonuç",
+      stackLabel: "Teknoloji",
+      featuredHighlightsLabel: "Neler var",
+      featuredHighlights: [
+        "QR ile sporcu tanıma",
+        "Ölçüm istasyonları",
+        "Çevrimdışı çalışan mobil",
+        "KVKK uyumlu veri",
+      ],
+      items: [
+        {
+          name: "Fenerbahçe Basketbol Altyapı Platformu",
+          tagline: "Altyapı seçmelerinin dijital hâli.",
+          role: "Web, mobil ve backend'i **tek başıma** geliştirdim.",
+          result: "**Seçmelerde ve saha ölçümlerinde** kullanılıyor.",
+          stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
+          status: "live",
+          years: "2026",
+        },
+        {
+          name: "VAP (Veri Analiz Portalı)",
+          tagline: "Spor kurumları için sporcu gelişim platformu.",
+          role: "**Spor Okulları modülü**, Veli Portalı ve bildirimler.",
+          stack: ["Next.js", ".NET 8", "PostgreSQL"],
+          status: "live",
+          years: "2025–2026",
+        },
+        {
+          name: "Sistem Takip Platformu",
+          tagline: "Üretimde “bu malzeme nerede?” sorusunu bitiren panel.",
+          role: "**Stok, depo ve konum** takibi tek uygulamada.",
+          stack: ["Nest.js", "React", "PostgreSQL"],
+          status: "partial",
+          years: "2025",
+        },
+        {
+          name: "NikiApp",
+          tagline: "Kampüs kahvecisinin cebe giren hâli.",
+          role: "**Mobil uygulama** ve işletme paneli.",
+          stack: ["React Native", "Nest.js", "PostgreSQL"],
+          status: "building",
+          years: "2025",
+        },
+      ],
+      githubTitle: "GitHub'dan seçmeler",
+      githubAll: "Tüm repolar",
+    },
     experience: {
-      eyebrow: "Kilometre taşları",
       title: "Deneyim",
-      rangeLabel: "Profesyonel + topluluk deneyimi",
-      range: "2021 → 2026",
-      note: "Ürün geliştirme, ekip çalışması ve uluslararası organizasyon deneyiminin aynı çizgide büyüdüğü dönem.",
-      entries: [
+      note: "",
+      figures: [
+        { months: 12, label: "Performanz'da yazılım mühendisliği" },
+        { months: 60, label: "ESTIEM'de uluslararası organizasyon" },
+      ],
+      roles: [
         {
-          period: "May 2026 – Tem 2026",
-          role: "Software Engineer (Part-time)",
+          period: "May–Tem 2026",
+          title: "Software Engineer (Part-time)",
           org: "Performanz Arge ve Yazılım",
-          summary:
-            "Stajımın ardından aynı ekipte part-time olarak devam ettim; web ve mobilde uçtan uca ürün geliştirdim.",
+          note: "**Web ve mobil** ürün geliştirme.",
+          months: 3,
         },
         {
-          period: "Ağu 2025 – May 2026",
-          role: "Software Engineer Intern",
+          period: "Ağu 2025–May 2026",
+          title: "Software Engineer Intern",
           org: "Performanz Arge ve Yazılım",
-          summary:
-            "Web ve mobil projelerde uçtan uca geliştirme yaptım; Claude ile yapay zekâ destekli geliştirme süreçlerinde çalıştım.",
+          note: "Web, mobil ve **yapay zekâ destekli** geliştirme.",
+          months: 10,
         },
         {
-          period: "2024 – 2025",
-          role: "Tanıtım Görevlisi (Part-time)",
+          period: "Kas 2024–Ağu 2025",
+          title: "Tanıtım Görevlisi (Part-time)",
           org: "İzmir Ekonomi Üniversitesi",
-          summary:
-            "Aday öğrencilere ve ailelerine kampüs tanıtımı yaptım; sunum ve iletişim becerilerimi bu görevde geliştirdim.",
+          note: "Aday öğrencilere **kampüs tanıtımı**.",
+          months: 10,
         },
         {
-          period: "2021 – 2026",
-          role: "Activity Committee Leader · Yönetim Kurulu",
-          org: "ESTIEM",
-          summary:
-            "25'ten fazla ülkeden öğrencinin katıldığı uluslararası etkinlikler düzenledim.",
+          period: "2021–2026",
+          title: "Activity Committee Leader",
+          org: "ESTIEM, yönetim kurulu (2023–2024)",
+          note: "**25+ ülkeden** öğrenciyle uluslararası etkinlikler.",
+          months: 60,
         },
         {
-          period: "2019 – 2026",
-          role: "Bilgisayar Mühendisliği Lisans",
+          period: "2019–2026",
+          title: "Bilgisayar Mühendisliği, lisans",
           org: "İzmir Ekonomi Üniversitesi",
-          summary: "2026'da mezun oluyorum.",
+          note: "",
+          months: null,
         },
       ],
     },
     stack: {
-      eyebrow: "Üretimde kullandığım araçlar",
-      title: "Tech Stack",
-      note: "Her teknolojiyi aynı seviyede göstermiyorum; en sık kullandığım araçları çalışma alanlarına göre gruplayarak sunuyorum.",
-      footnote: "Küçük sayı, teknolojinin sahadaki kaç üründe kullanıldığını gösterir.",
-      usageLabel: "Sahadaki ürün sayısı",
-      groups: {
-        frontend: "Frontend",
-        backend: "Backend",
-        mobile: "Mobile",
-        data: "Data & Infra",
-        workflow: "Workflow",
-      },
-      summaries: {
-        frontend: "UI, bileşen mimarisi ve web performansı.",
-        backend: "API, servisler ve ürün iş mantığı.",
-        mobile: "Native ve cross-platform mobil ürünler.",
-        data: "Veri, cache ve production altyapısı.",
-        workflow: "Otomasyon, ORM ve AI destekli geliştirme.",
-      },
-    },
-    github: {
-      eyebrow: "Seçilmiş açık kaynak işler",
-      title: "GitHub",
-      note: "Ana ürün çalışmalarının dışında teknik yaklaşımımı gösteren birkaç seçilmiş proje.",
+      title: "Teknolojiler",
+      note: "Küçük sayı: sahadaki kaç üründe kullanıldığı.",
+      countLabel: (count) => `Sahadaki ${count} üründe`,
+      groups: [
+        { name: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
+        { name: "Backend", items: ["Nest.js", "Node.js", ".NET", "FastAPI"] },
+        { name: "Mobil", items: ["React Native", "Swift", "Flutter"] },
+        { name: "Veri ve altyapı", items: ["PostgreSQL", "Redis", "Docker", "Firebase", "Cloudflare"] },
+        { name: "Araçlar ve yapay zekâ", items: ["Git", "GitHub Actions", "Prisma", "Claude", "Codex"] },
+      ],
     },
     contact: {
-      eyebrow: "İletişim",
-      title: "Aklınızda bir proje mi var? Konuşalım.",
-      note: "E-postanıza genellikle 24 saat içinde dönüş yaparım.",
-      ctaEmail: "E-posta gönder",
+      title: "Görüşme için bir e-posta yeterli.",
+      note: "Genellikle 24 saat içinde dönüyorum.",
     },
-    footer: { email: "E-posta" },
+    footer: { updated: "Son güncelleme: Eylül 2026" },
+    formatDuration: (months) => {
+      const years = Math.floor(months / 12);
+      const rest = months % 12;
+      return [years ? `${years} yıl` : "", rest ? `${rest} ay` : ""].filter(Boolean).join(" ");
+    },
   },
   en: {
-    nav: {
-      about: "About",
-      work: "Projects",
-      experience: "Experience",
-      stack: "Tech Stack",
-      github: "GitHub",
-      contact: "Contact",
-    },
+    skip: "Skip to content",
+    langLabel: "Language",
+    newTab: "(opens in a new tab)",
+    navLabel: "Page sections",
+    nav: { products: "Products", experience: "Experience", stack: "Technologies", contact: "Contact" },
     mobileNav: {
-      about: "Profile",
-      work: "Projects",
+      profile: "Profile",
+      products: "Products",
       experience: "Career",
       stack: "Stack",
-      github: "GitHub",
       contact: "Contact",
     },
-    navAria: "Page sections",
-    langAria: "Language",
-    hero: {
-      eyebrow: "Full Stack Developer · İzmir, Türkiye",
-      greeting: "Hi, I'm",
-      headline: {
-        before: "Three products in production. One runs inside ",
-        mark: "Fenerbahçe Basketball",
-        after: "'s youth academy.",
-      },
-      lead: "I build web, mobile and backend products. I take end-to-end ownership on products used by real users, including systems for the Fenerbahçe Basketball youth academy.",
-      ctaProjects: "See my projects",
-      ctaCv: "Download CV (TR)",
-      tooltipGithub: "GitHub",
-      tooltipLinkedin: "LinkedIn",
-      tooltipEmail: "Email",
+    profile: {
+      role: "Full Stack Developer, İzmir, Türkiye",
+      status: "Open to new roles",
+      cv: "Download CV (PDF, Turkish)",
+      cvShort: "CV",
+      email: "Send an email",
       portraitAlt: "Portrait of Sinan Mert Şener",
     },
-    highlights: [
-      { label: "Shipped", value: "3 products with real users" },
-      { label: "Latest role", value: "Performanz · Software Engineer" },
-      { label: "Focus", value: "Web · Mobile · Backend" },
-      { label: "Education", value: "Computer Eng. · 2026" },
-    ],
-    work: { eyebrow: "Running in production", title: "Projects" },
-    flagship: {
-      eyebrow: "Featured case study",
-      impactLabel: "Impact",
-      roleLabel: "My role",
-      detailsLabel: "Key capabilities",
-      flowTitle: "The path of data on tryout day",
-      flowSteps: [
-        { name: "Application", text: "The athlete's application enters the system." },
-        { name: "QR", text: "Athletes are identified courtside by QR." },
-        { name: "Station", text: "Measurements are recorded at the stations." },
-        { name: "Mobile", text: "The app keeps working without a connection." },
-        { name: "Panel", text: "Data lands in the central admin panel." },
+    intro: {
+      claim: "Three products in production.",
+      claimDetail: "One runs inside Fenerbahçe Basketball's youth academy.",
+      lead: "I build web, mobile and backend **end to end**.",
+      facts: [
+        { term: "Latest role", detail: "Software Engineer, Performanz" },
+        { term: "Education", detail: "B.Sc. Computer Engineering, 2026" },
+        { term: "Languages", detail: "Turkish, English (fluent)" },
       ],
-      flowOffline: "Offline",
-      flowSynced: "Synced",
-      flowNote: "KVKK-compliant data flows",
     },
-    featuredProjects: [
-      {
-        name: "Fenerbahçe Basketball Academy Platform",
-        year: "2026",
-        live: true,
-        status: "Live",
-        role: "I built the full system solo across web, mobile and backend.",
-        impact: "Actively used by the Fenerbahçe Basketball youth academy for tryouts and courtside measurement workflows.",
-        tagline: "From athlete applications to courtside measurements: academy tryouts, digitized.",
-        points: [
-          "Features QR-based athlete identification, measurement stations, an offline-syncing mobile app and KVKK-compliant data flows.",
-          "Field-ready mobile flows and centralized administration work together as one product system.",
-        ],
-        stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
-      },
-      {
-        name: "VAP · Data Analysis Portal",
-        year: "2025 – 2026",
-        live: true,
-        status: "Live",
-        role: "I built the Sports Schools module, Parent Portal and notification flows end to end.",
-        impact: "Helps sports organizations manage training, attendance, fees and athlete development data in one system.",
-        tagline: "A platform that measures, tracks and reports athlete development for sports organizations.",
-        points: [
-          "I built the Sports Schools module (training schedules, attendance, fees) end to end, and added the Parent Portal and the push notification infrastructure.",
-          "I also worked on talent comparison screens and multi-page PDF report generation.",
-        ],
-        stack: ["Next.js", ".NET 8", "PostgreSQL"],
-      },
-      {
-        name: "NikiApp",
-        year: "2025",
-        live: false,
-        status: "In development",
-        role: "I worked across the mobile customer experience and the business management dashboard.",
-        impact: "Brings ordering, loyalty, campaigns and business operations into one product family.",
-        tagline: "A campus coffee shop, right in your pocket.",
-        points: [
-          "QR payments, campaign check-ins and a weekly reward wheel: I built the ordering and loyalty flow end to end.",
-          "A dedicated dashboard for the business: menu, campaigns and credit management in one panel.",
-        ],
-        stack: ["React Native", "Nest.js", "PostgreSQL"],
-      },
-      {
-        name: "Production Tracking Platform",
-        year: "2025",
-        live: true,
-        status: "Partially live",
-        role: "I brought stock, warehouse and material location flows together in one web application.",
-        impact: "Gives the production team real-time visibility into materials and sales-ready product status.",
-        tagline: "The panel that puts an end to “where is this part?” on the production floor.",
-        points: [
-          "An internal web platform that brings stock, warehouse and material locations into a single screen.",
-          "Sales-ready product status is now tracked in real time.",
-        ],
-        stack: ["Nest.js", "React", "PostgreSQL"],
-      },
-    ],
-    repos: { viewAll: "View all" },
+    statusLabels: {
+      live: "Live",
+      partial: "Partially live",
+      building: "In development",
+    },
+    products: {
+      title: "Products",
+      note: "3 of 4 products are live.",
+      roleLabel: "My role",
+      resultLabel: "Outcome",
+      stackLabel: "Stack",
+      featuredHighlightsLabel: "Inside",
+      featuredHighlights: [
+        "QR athlete check-in",
+        "Measurement stations",
+        "Offline-first mobile app",
+        "KVKK-compliant data",
+      ],
+      items: [
+        {
+          name: "Fenerbahçe Basketball Academy Platform",
+          tagline: "Academy tryouts, digitized.",
+          role: "Built web, mobile and backend **on my own**.",
+          result: "Used in **tryouts and courtside measurements**.",
+          stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
+          status: "live",
+          years: "2026",
+        },
+        {
+          name: "VAP (Data Analysis Portal)",
+          tagline: "Athlete development platform for sports organizations.",
+          role: "**Sports Schools module**, Parent Portal and notifications.",
+          stack: ["Next.js", ".NET 8", "PostgreSQL"],
+          status: "live",
+          years: "2025–2026",
+        },
+        {
+          name: "Production Tracking Platform",
+          tagline: "The panel that ends “where is this part?” on the shop floor.",
+          role: "**Stock, warehouse and location** tracking in one app.",
+          stack: ["Nest.js", "React", "PostgreSQL"],
+          status: "partial",
+          years: "2025",
+        },
+        {
+          name: "NikiApp",
+          tagline: "A campus coffee shop in your pocket.",
+          role: "**Mobile app** and business dashboard.",
+          stack: ["React Native", "Nest.js", "PostgreSQL"],
+          status: "building",
+          years: "2025",
+        },
+      ],
+      githubTitle: "Picks from GitHub",
+      githubAll: "All repositories",
+    },
     experience: {
-      eyebrow: "The road so far",
       title: "Experience",
-      rangeLabel: "Professional + community experience",
-      range: "2021 → 2026",
-      note: "A period where product engineering, teamwork and international community leadership grew in parallel.",
-      entries: [
+      note: "",
+      figures: [
+        { months: 12, label: "software engineering at Performanz" },
+        { months: 60, label: "international events with ESTIEM" },
+      ],
+      roles: [
         {
-          period: "May 2026 – Jul 2026",
-          role: "Software Engineer (Part-time)",
+          period: "May–Jul 2026",
+          title: "Software Engineer (Part-time)",
           org: "Performanz Arge ve Yazılım",
-          summary:
-            "After my internship, I stayed on the same team as a part-time engineer and kept building products end to end across web and mobile.",
+          note: "**Web and mobile** product development.",
+          months: 3,
         },
         {
-          period: "Aug 2025 – May 2026",
-          role: "Software Engineer Intern",
+          period: "Aug 2025–May 2026",
+          title: "Software Engineer Intern",
           org: "Performanz Arge ve Yazılım",
-          summary:
-            "I worked on end-to-end product development for web and mobile, using AI-assisted development workflows with Claude.",
+          note: "Web, mobile and **AI-assisted** development.",
+          months: 10,
         },
         {
-          period: "2024 – 2025",
-          role: "Campus Guide (Part-time)",
+          period: "Nov 2024–Aug 2025",
+          title: "Campus Guide (Part-time)",
           org: "İzmir University of Economics",
-          summary:
-            "I gave campus tours and presentations to prospective students and their families, which strengthened my presentation and communication skills.",
+          note: "**Campus tours** for prospective students.",
+          months: 10,
         },
         {
-          period: "2021 – 2026",
-          role: "Activity Committee Leader · Board Member",
-          org: "ESTIEM",
-          summary:
-            "I organized international events that brought together students from more than 25 countries.",
+          period: "2021–2026",
+          title: "Activity Committee Leader",
+          org: "ESTIEM, board member (2023–2024)",
+          note: "International events with students from **25+ countries**.",
+          months: 60,
         },
         {
-          period: "2019 – 2026",
-          role: "B.Sc. Computer Engineering",
+          period: "2019–2026",
+          title: "B.Sc. Computer Engineering",
           org: "İzmir University of Economics",
-          summary: "I am graduating in 2026.",
+          note: "",
+          months: null,
         },
       ],
     },
     stack: {
-      eyebrow: "Tools I use in production",
-      title: "Tech Stack",
-      note: "I group the technologies I use most often by the work they support instead of presenting every tool at the same level.",
-      footnote: "The small number shows how many shipped products use the technology.",
-      usageLabel: "Shipped products using it",
-      groups: {
-        frontend: "Frontend",
-        backend: "Backend",
-        mobile: "Mobile",
-        data: "Data & Infra",
-        workflow: "Workflow",
-      },
-      summaries: {
-        frontend: "UI, component architecture and web performance.",
-        backend: "APIs, services and product business logic.",
-        mobile: "Native and cross-platform mobile products.",
-        data: "Data, caching and production infrastructure.",
-        workflow: "Automation, ORM and AI-assisted development.",
-      },
-    },
-    github: {
-      eyebrow: "Selected open-source work",
-      title: "GitHub",
-      note: "A small selection of projects that show how I work outside the main production products above.",
+      title: "Technologies",
+      note: "Small number: how many live products use it.",
+      countLabel: (count) => `In ${count} live products`,
+      groups: [
+        { name: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
+        { name: "Backend", items: ["Nest.js", "Node.js", ".NET", "FastAPI"] },
+        { name: "Mobile", items: ["React Native", "Swift", "Flutter"] },
+        { name: "Data and infrastructure", items: ["PostgreSQL", "Redis", "Docker", "Firebase", "Cloudflare"] },
+        { name: "Tools and AI", items: ["Git", "GitHub Actions", "Prisma", "Claude", "Codex"] },
+      ],
     },
     contact: {
-      eyebrow: "Contact",
-      title: "Have a project in mind? Let's talk.",
+      title: "One email is enough to set up a call.",
       note: "I usually reply within 24 hours.",
-      ctaEmail: "Send an email",
     },
-    footer: { email: "Email" },
+    footer: { updated: "Last updated: September 2026" },
+    formatDuration: (months) => {
+      const years = Math.floor(months / 12);
+      const rest = months % 12;
+      return [
+        years ? `${years} ${years === 1 ? "year" : "years"}` : "",
+        rest ? `${rest} ${rest === 1 ? "month" : "months"}` : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+    },
   },
 };
+
+export const selectedRepos: Array<{
+  name: string;
+  url: string;
+  description: Record<Lang, string>;
+}> = [
+  {
+    name: "AIcelerate",
+    url: "https://github.com/sucreistaken/AIcelerate",
+    description: {
+      tr: "AI transkripsiyonlu, gerçek zamanlı çalışma platformu.",
+      en: "Real-time study platform with AI transcription.",
+    },
+  },
+  {
+    name: "PDF Watermark Remover",
+    url: "https://github.com/sucreistaken/pdf-watermark-remover",
+    description: {
+      tr: "PDF'lerdeki logo ve filigranları OpenCV ile kaldırır.",
+      en: "Removes logos and watermarks from PDFs with OpenCV.",
+    },
+  },
+  {
+    name: "NodeBB Recent Cards",
+    url: "https://github.com/sinanmertsenerr/nodebb-plugin-recent-cards",
+    description: {
+      tr: "Son içerikleri kart olarak gösteren NodeBB eklentisi.",
+      en: "NodeBB plugin that shows recent content as cards.",
+    },
+  },
+  {
+    name: "SE380 PT Assistant",
+    url: "https://github.com/sinanmertsenerr/SE380PTAssistant",
+    description: {
+      tr: "Yapay zekâ destekli kişisel antrenör uygulaması.",
+      en: "AI-assisted personal trainer app.",
+    },
+  },
+];

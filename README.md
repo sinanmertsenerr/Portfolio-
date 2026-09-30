@@ -1,15 +1,11 @@
 # Computer Engineering Portfolio
 
-Vite, React, TypeScript, Framer Motion ve lucide-react ile hazırlanmış,
-TR/EN destekli kişisel portföy sitesi.
+Vite, React, TypeScript ve lucide-react ile hazırlanmış, TR/EN destekli kişisel
+portföy sitesi. Hedef okur işe alım uzmanları: ilk bakışta kişi, rol ve CV;
+hemen yanında sahadaki ürünler.
 
-Ana sayfa production projelerini etki ve sorumluluk odaklı gösterir. Seçilmiş
-GitHub projeleri doğrudan kendi repo sayfalarına bağlanan kontrollü içerikle
-sunulur; ana portfolio deneyimi üçüncü taraf API durumuna bağlı değildir.
-
-Sayfa; profil, production projeleri, deneyim, kategorize tech stack, seçilmiş
-GitHub işleri ve iletişim bölümlerine ayrılır. Scroll sırasında aktif bölüm
-navigation içinde vurgulanır.
+Tasarım sözleşmesi `DESIGN.md` içindedir: renkler, yazı tipi, ölçek ve kurallar.
+Yeni bir renk ya da boyut eklemeden önce oraya bakın.
 
 ## Yerelde Çalıştırma
 
@@ -28,12 +24,12 @@ Yayınlanabilir çıktı `dist/` klasöründe oluşur.
 
 ## Özelleştirme
 
-Profil, tech stack grupları ve GitHub showcase ayarları `src/App.tsx` içindedir.
-TR/EN metinleri ve proje içerikleri `src/content.ts` içinde tutulur.
+- Tüm TR/EN metinler, ürünler, deneyim ve teknolojiler: `src/content.ts`
+  - `**iki yıldız**` arasındaki kelimeler kalın gösterilir.
+  - Süreler ay cinsinden tutulur; ekranda "1 yıl 2 ay" gibi yazılır.
+- Profil bağlantıları (e-posta, CV, GitHub, LinkedIn): `src/App.tsx` içindeki `profile`
+- Stiller ve tokenlar: `src/styles.css`
+- Yazı tipi: `src/fonts` (Onest, OFL lisanslı, latin + latin-ext)
+- Portre: `public/sinan-portrait-crop.webp` (orijinali `public/sinan-portrait.jpg`)
 
-- `profile`: ad, e-posta, CV, GitHub ve LinkedIn bağlantıları
-- `selectedRepos`: seçilmiş GitHub projeleri
-- `stackGroups`: kategori bazlı teknik yetkinlik grupları
-
-Hero görseli `public/hero-engineering.jpg` yolundadır.
-Portre görseli `public/sinan-portrait.jpg` yolundadır.
+İngilizce sürüm doğrudan paylaşılabilir: `https://sinansener.com/?lang=en`
