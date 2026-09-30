@@ -404,7 +404,7 @@ function Experience({ t }: { t: Copy }) {
         {t.experience.figures.map((figure) => (
           <div className="figure" key={figure.label}>
             <dt>{figure.label}</dt>
-            <dd>{t.formatDuration(figure.months)}</dd>
+            <dd>{"months" in figure ? t.formatDuration(figure.months) : figure.value}</dd>
           </div>
         ))}
       </dl>

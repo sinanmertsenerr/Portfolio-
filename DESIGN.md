@@ -137,7 +137,7 @@ One family, **Onest** (variable 300–800, large x-height, open shapes), self-ho
 
 - Desktop: sticky profile card on the left (portrait, name, status, CV, section links), content on the right.
 - Products are surfaces; the featured one lists four features with icons (no boxes inside the card); every product ends with technology tags. Technologies sit on the canvas as ruled rows.
-- Experience opens with two large figures (1 yıl yazılım, 5 yıl ESTIEM; süreler "1 yıl 2 ay" biçiminde yazılır), then a CV-like list with duration badges.
+- Experience opens with two large figures (1 yıl yazılım, 25+ ülke; süreler "1 yıl 2 ay" biçiminde yazılır), then a CV-like list with duration badges.
 - Mobile: profile first, then content; the floating bottom navigation the owner explicitly wants stays.
 
 ## Elevation & Depth

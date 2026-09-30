@@ -20,7 +20,8 @@ export type Product = {
 export type Fact = { term: string; detail: string };
 
 // Sure ay cinsinden tutulur; ekrana dile gore "1 yil 2 ay" gibi yazilir
-export type Figure = { months: number; label: string };
+// Buyuk sayi: ya ay cinsinden sure ("1 yil" diye yazilir) ya da hazir deger ("25+")
+export type Figure = { label: string } & ({ months: number } | { value: string });
 
 export type Role = {
   period: string;
@@ -177,7 +178,7 @@ export const copy: Record<Lang, Copy> = {
       note: "",
       figures: [
         { months: 12, label: "Performanz'da yazılım mühendisliği" },
-        { months: 60, label: "ESTIEM'de uluslararası organizasyon" },
+        { value: "25+", label: "ülkeden katılımcıyla uluslararası etkinlik" },
       ],
       roles: [
         {
@@ -202,11 +203,11 @@ export const copy: Record<Lang, Copy> = {
           months: 10,
         },
         {
-          period: "2021–2026",
+          period: "2023–2024",
           title: "Activity Committee Leader",
-          org: "ESTIEM, yönetim kurulu (2023–2024)",
+          org: "ESTIEM, yönetim kurulu",
           note: "**25+ ülkeden** öğrenciyle uluslararası etkinlikler.",
-          months: 60,
+          months: 12,
         },
         {
           period: "2019–2026",
@@ -332,7 +333,7 @@ export const copy: Record<Lang, Copy> = {
       note: "",
       figures: [
         { months: 12, label: "software engineering at Performanz" },
-        { months: 60, label: "international events with ESTIEM" },
+        { value: "25+", label: "countries at the international events I organized" },
       ],
       roles: [
         {
@@ -357,11 +358,11 @@ export const copy: Record<Lang, Copy> = {
           months: 10,
         },
         {
-          period: "2021–2026",
+          period: "2023–2024",
           title: "Activity Committee Leader",
-          org: "ESTIEM, board member (2023–2024)",
+          org: "ESTIEM, board member",
           note: "International events with students from **25+ countries**.",
-          months: 60,
+          months: 12,
         },
         {
           period: "2019–2026",
