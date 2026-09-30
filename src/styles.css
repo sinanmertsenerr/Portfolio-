@@ -402,6 +402,7 @@ strong {
 
 .intro {
   padding-top: 52px;
+  container-type: inline-size;
 }
 
 .claim {
@@ -436,9 +437,10 @@ strong {
   line-height: 1.5;
 }
 
+/* Her bilgi iki kisa satir; sutunlar icerik kadar genis, hicbir satir kirilmaz */
 .facts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, auto);
   gap: 24px;
   margin-top: 44px;
   padding-top: 22px;
@@ -469,6 +471,39 @@ strong {
   font-size: var(--text-read);
   font-weight: 600;
   line-height: 1.4;
+}
+
+.fact dd + dd {
+  margin-top: 0;
+}
+
+.fact .fact-sub {
+  color: var(--body);
+  font-size: var(--text-small);
+  font-weight: 420;
+}
+
+/* Dar dizustu ve tablette uc sutun sigsin diye ikon etiketin yanina gecer */
+@media (min-width: 641px) {
+  @container (max-width: 700px) {
+    .facts {
+      column-gap: 16px;
+    }
+
+    .fact {
+      padding-left: 0;
+    }
+
+    .fact dt {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fact-icon {
+      position: static;
+    }
+  }
 }
 
 .block-head {

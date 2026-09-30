@@ -209,7 +209,10 @@ function App() {
                       <Icon className="fact-icon" size={20} strokeWidth={1.75} aria-hidden="true" />
                       {fact.term}
                     </dt>
-                    <dd>{fact.detail}</dd>
+                    {fact.details.map((detail) => (
+                      <dd key={detail}>{detail}</dd>
+                    ))}
+                    {fact.sub && <dd className="fact-sub">{fact.sub}</dd>}
                   </div>
                 );
               })}

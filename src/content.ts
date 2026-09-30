@@ -17,7 +17,8 @@ export type Product = {
   years: string;
 };
 
-export type Fact = { term: string; detail: string };
+// details kalin yazilir; sub varsa altinda normal agirlikta
+export type Fact = { term: string; details: string[]; sub?: string };
 
 // Sure ay cinsinden tutulur; ekrana dile gore "1 yil 2 ay" gibi yazilir
 // Buyuk sayi: ya ay cinsinden sure ("1 yil" diye yazilir) ya da hazir deger ("25+")
@@ -112,9 +113,9 @@ export const copy: Record<Lang, Copy> = {
       claimDetail: "Biri Fenerbahçe Basketbol altyapısında.",
       lead: "Web, mobil ve backend'i **uçtan uca** geliştiriyorum.",
       facts: [
-        { term: "Son rol", detail: "Software Engineer, Performanz" },
-        { term: "Eğitim", detail: "Bilgisayar Mühendisliği, 2026" },
-        { term: "Diller", detail: "Türkçe, İngilizce (akıcı)" },
+        { term: "Son rol", details: ["Software Engineer"], sub: "Performanz" },
+        { term: "Eğitim", details: ["Bilgisayar Mühendisliği, 2026"], sub: "İzmir Ekonomi Üniversitesi" },
+        { term: "Diller", details: ["Türkçe (ana dil)", "İngilizce (akıcı)"] },
       ],
     },
     statusLabels: {
@@ -267,9 +268,9 @@ export const copy: Record<Lang, Copy> = {
       claimDetail: "One runs inside Fenerbahçe Basketball's youth academy.",
       lead: "I build web, mobile and backend **end to end**.",
       facts: [
-        { term: "Latest role", detail: "Software Engineer, Performanz" },
-        { term: "Education", detail: "B.Sc. Computer Engineering, 2026" },
-        { term: "Languages", detail: "Turkish, English (fluent)" },
+        { term: "Latest role", details: ["Software Engineer"], sub: "Performanz" },
+        { term: "Education", details: ["B.Sc. Computer Engineering, 2026"], sub: "İzmir University of Economics" },
+        { term: "Languages", details: ["Turkish (native)", "English (fluent)"] },
       ],
     },
     statusLabels: {
