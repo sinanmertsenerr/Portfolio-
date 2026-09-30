@@ -275,62 +275,72 @@ function Products({ t, lang }: { t: Copy; lang: Lang }) {
     <section className="block products" id="products" aria-labelledby="products-title">
       <BlockHead id="products-title" title={t.products.title} note={t.products.note} />
 
+      {/* Defter duzeni: baslik sol ustte, alt bilgiler birer basamak iceriden */}
       <article className="surface product is-featured" aria-labelledby="product-0">
-        <StatusLine product={featured} t={t} />
-        <h3 id="product-0">{featured.name}</h3>
-        <p className="product-tagline">{featured.tagline}</p>
+        <ProductHead id="product-0" product={featured} t={t} />
 
-        <ul className="product-points">
-          <li>
-            <PointIcon />
-            <span>
-              <span className="sr-only">{t.products.roleLabel}: </span>
-              <Rich text={featured.role} />
-            </span>
-          </li>
-          {featured.result ? (
+        <div className="product-body">
+          <p className="product-tagline">{featured.tagline}</p>
+
+          <ul className="product-points">
             <li>
               <PointIcon />
               <span>
-                <span className="sr-only">{t.products.resultLabel}: </span>
-                <Rich text={featured.result} />
+                <span className="sr-only">{t.products.roleLabel}: </span>
+                <Rich text={featured.role} />
               </span>
             </li>
-          ) : null}
-        </ul>
-
-        <h4 className="sr-only">{t.products.featuredHighlightsLabel}</h4>
-        <ul className="highlights">
-          {t.products.featuredHighlights.map((highlight, index) => {
-            const Icon = highlightIcons[index];
-
-            return (
-              <li key={highlight}>
-                <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
-                {highlight}
+            {featured.result ? (
+              <li>
+                <PointIcon />
+                <span>
+                  <span className="sr-only">{t.products.resultLabel}: </span>
+                  <Rich text={featured.result} />
+                </span>
               </li>
-            );
-          })}
-        </ul>
+            ) : null}
+          </ul>
 
-        <TechTags label={t.products.stackLabel} items={featured.stack} />
+          <div className="product-detail">
+            <h4 className="sr-only">{t.products.featuredHighlightsLabel}</h4>
+            <ul className="highlights">
+              {t.products.featuredHighlights.map((highlight, index) => {
+                const Icon = highlightIcons[index];
+
+                return (
+                  <li key={highlight}>
+                    <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
+                    {highlight}
+                  </li>
+                );
+              })}
+            </ul>
+
+            <TechTags label={t.products.stackLabel} items={featured.stack} />
+          </div>
+        </div>
       </article>
 
       <ol className="product-list">
         {others.map((product, index) => (
           <li key={product.name}>
             <article className="surface product" aria-labelledby={`product-${index + 1}`}>
-              <StatusLine product={product} t={t} />
-              <h3 id={`product-${index + 1}`}>{product.name}</h3>
-              <p className="product-tagline">{product.tagline}</p>
-              <p className="product-role">
-                <PointIcon />
-                <span>
-                  <span className="sr-only">{t.products.roleLabel}: </span>
-                  <Rich text={product.role} />
-                </span>
-              </p>
-              <TechTags label={t.products.stackLabel} items={product.stack} />
+              <ProductHead id={`product-${index + 1}`} product={product} t={t} />
+
+              <div className="product-body">
+                <p className="product-tagline">{product.tagline}</p>
+                <p className="product-role">
+                  <PointIcon />
+                  <span>
+                    <span className="sr-only">{t.products.roleLabel}: </span>
+                    <Rich text={product.role} />
+                  </span>
+                </p>
+
+                <div className="product-detail">
+                  <TechTags label={t.products.stackLabel} items={product.stack} />
+                </div>
+              </div>
             </article>
           </li>
         ))}
@@ -365,6 +375,16 @@ function Products({ t, lang }: { t: Copy; lang: Lang }) {
 // Urun kartlarinda "ne yaptim / sonuc" satirlarinin basindaki tik
 function PointIcon() {
   return <Check className="point-icon" size={18} strokeWidth={2.5} aria-hidden="true" />;
+}
+
+// Baslik solda, durum ve yil ayni satirin saginda
+function ProductHead({ id, product, t }: { id: string; product: Product; t: Copy }) {
+  return (
+    <div className="product-head">
+      <h3 id={id}>{product.name}</h3>
+      <StatusLine product={product} t={t} />
+    </div>
+  );
 }
 
 function StatusLine({ product, t }: { product: Product; t: Copy }) {
