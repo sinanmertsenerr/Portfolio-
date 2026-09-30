@@ -417,27 +417,28 @@ export const selectedRepos: Array<{
     },
   },
   {
-    name: "PDF Watermark Remover",
-    url: "https://github.com/sucreistaken/pdf-watermark-remover",
+    // Office Commun'un tarayicisinin fork'u; ozellik dallari bu hesapta
+    name: "Search (macOS tarayıcı)",
+    url: "https://github.com/sinanmertsenerr/Search",
     description: {
-      tr: "PDF'lerdeki logo ve filigranları OpenCV ile kaldırır.",
-      en: "Removes logos and watermarks from PDFs with OpenCV.",
+      tr: "WebKit tarayıcısına katkılarım: Claude için MCP sunucusu, otomatik doldurma, çeviri, site izinleri.",
+      en: "My additions to a WebKit browser: an MCP server for Claude, autofill, translation, site permissions.",
     },
   },
   {
-    name: "NodeBB Recent Cards",
-    url: "https://github.com/sinanmertsenerr/nodebb-plugin-recent-cards",
+    name: "YKS Hazırlık",
+    url: "https://github.com/sinanmertsenerr/YKSHazirlikTakvimi",
     description: {
-      tr: "Son içerikleri kart olarak gösteren NodeBB eklentisi.",
-      en: "NodeBB plugin that shows recent content as cards.",
+      tr: "TYT/AYT için internetsiz çalışan konu ve deneme takibi. Expo, React Native.",
+      en: "Offline-first study tracker for Turkey's university entrance exam. Expo, React Native.",
     },
   },
   {
-    name: "SE380 PT Assistant",
-    url: "https://github.com/sinanmertsenerr/SE380PTAssistant",
+    name: "İEÜ Erasmus+ sayfası",
+    url: "https://github.com/sinanmertsenerr/nodebb-plugin-ieu-erasmus",
     description: {
-      tr: "Yapay zekâ destekli kişisel antrenör uygulaması.",
-      en: "AI-assisted personal trainer app.",
+      tr: "forum.ieu.app için bölüme göre okul bulma, hibe hesaplayıcı ve rota haritası.",
+      en: "Erasmus+ page for forum.ieu.app: schools by department, grant calculator, route map.",
     },
   },
 ];
