@@ -31,5 +31,8 @@ Yayınlanabilir çıktı `dist/` klasöründe oluşur.
 - Stiller ve tokenlar: `src/styles.css`
 - Yazı tipi: `src/fonts` (Onest, OFL lisanslı, latin + latin-ext)
 - Portre: `public/sinan-portrait-crop.webp` (orijinali `public/sinan-portrait.jpg`)
+- Ana ekrana ekleme (web app): `public/manifest.webmanifest`, `public/icon-*.png`,
+  `public/apple-touch-icon.png`. Renk ya da logo değişirse `index.html` içindeki
+  `theme-color` ile birlikte güncelleyin.
 
 İngilizce sürüm doğrudan paylaşılabilir: `https://sinansener.com/?lang=en`

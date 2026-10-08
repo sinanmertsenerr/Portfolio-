@@ -155,7 +155,7 @@ strong {
 
 .skip-link {
   position: fixed;
-  top: 10px;
+  top: calc(10px + env(safe-area-inset-top));
   left: 10px;
   z-index: 100;
   padding: 10px 14px;
@@ -802,7 +802,7 @@ strong {
 
 .figures {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
   margin-bottom: 28px;
   padding: 24px 0;
@@ -1015,7 +1015,7 @@ strong {
   }
 
   html {
-    scroll-padding-top: 72px;
+    scroll-padding-top: calc(72px + env(safe-area-inset-top));
   }
 
   .mobile-top {
@@ -1023,11 +1023,13 @@ strong {
     top: 0;
     z-index: 50;
     display: flex;
-    height: 60px;
+    /* Ana ekrana eklenince icerik durum cubugunun altina uzanir; centik payi */
+    height: calc(60px + env(safe-area-inset-top));
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 0 20px;
+    padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-right)) 0
+      max(20px, env(safe-area-inset-left));
     border-bottom: 1px solid var(--border);
     background: var(--bg);
   }
@@ -1047,7 +1049,10 @@ strong {
   }
 
   .layout {
-    width: min(820px, 100% - 40px);
+    width: min(
+      820px,
+      100% - 2 * max(20px, env(safe-area-inset-left), env(safe-area-inset-right))
+    );
     grid-template-columns: 1fr;
     gap: 0;
     padding-top: 20px;
@@ -1132,7 +1137,8 @@ strong {
   }
 
   .mobile-top {
-    padding: 0 16px;
+    padding-right: 16px;
+    padding-left: 16px;
   }
 
   .layout {
@@ -1186,7 +1192,42 @@ strong {
   }
 
   .products {
-    margin-top: 72px;
+    margin-top: 64px;
+  }
+
+  /* One cikan urun digerlerinden ayrissin: kenarinda marka rengi */
+  .product.is-featured {
+    border-color: color-mix(in srgb, var(--accent) 34%, var(--border));
+  }
+
+  /* Diger urunler yana kaydirilir; siradaki kartin kenari gorunur kalir */
+  .product-list {
+    /* relative: kartlardaki gizli (sr-only) metinler sayfayi yana tasirmasin */
+    position: relative;
+    display: flex;
+    gap: 10px;
+    margin-right: -16px;
+    margin-left: -16px;
+    padding: 0 16px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding: 0 16px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .product-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-list > li {
+    display: flex;
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
+
+  .product-list > li > .product {
+    flex: 1;
   }
 
   .product,
@@ -1199,17 +1240,39 @@ strong {
     align-items: flex-start;
   }
 
+  /* Dar ekranda basamakli girinti yok: metin tam genislikte, daha az satir */
   .product-body {
     margin-top: 12px;
-    padding-left: 16px;
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
   }
 
   .product-detail {
-    padding-left: 12px;
+    padding-left: 0;
   }
 
+  /* Ozellikler sakin: govde rengi, normal agirlik */
   .highlights {
     grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .highlights li {
+    padding: 4px 0;
+    color: var(--body);
+    font-weight: 420;
+  }
+
+  /* Etiketler cercevesiz ve kucuk; kutu kalabaligi azalir */
+  .tags {
+    gap: 6px;
+  }
+
+  .tags li {
+    padding: 3px 10px;
+    border-color: transparent;
+    font-size: var(--text-caption);
   }
 
   .repo-list {
@@ -1217,18 +1280,111 @@ strong {
   }
 
   .experience {
-    margin-top: 88px;
+    margin-top: 64px;
   }
 
+  /* Sayilar tek yuzeyde iki satir: solda buyuk sayi, saginda aciklamasi */
   .figures {
-    grid-template-columns: 1fr;
-    gap: 18px;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0 20px;
+    margin-bottom: 32px;
+    padding: 0 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  /* subgrid: sayi sutunu en genis sayiya gore, aciklamalar ayni hizadan baslar */
+  .figure {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    align-items: center;
+    gap: 0 20px;
+    padding: 16px 0;
+  }
+
+  .figure + .figure {
+    border-top: 1px solid var(--border);
+  }
+
+  .figure dd {
+    grid-row: 1;
+    grid-column: 1;
+    font-size: 2rem;
+    white-space: nowrap;
+  }
+
+  .figure dt {
+    grid-row: 1;
+    grid-column: 2;
+    max-width: none;
+  }
+
+  /* Roller zaman cizgisinde: urun kartlarindaki kenar cizgisinin devami */
+  .roles {
+    margin-left: 5px;
+    padding-left: 22px;
+    border-left: 2px solid var(--border);
+  }
+
+  .role {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    padding: 0 0 28px;
+    border-bottom: 0;
+  }
+
+  .role:last-child {
+    padding-bottom: 4px;
+  }
+
+  .role::before {
+    position: absolute;
+    top: 7px;
+    left: -29px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--border-strong);
+    border-radius: 50%;
+    background: var(--bg);
+    content: "";
+  }
+
+  .role:first-child::before {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  /* Baslik tam satir; sure rozeti kurum satirinin sagina iner, baslik kirilmaz */
+  .role-head {
+    display: contents;
+  }
+
+  .role-head h3,
+  .role-note {
+    grid-column: 1 / -1;
+  }
+
+  .role-meta {
+    grid-row: 2;
+    grid-column: 1;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .role-duration {
+    grid-row: 2;
+    grid-column: 2;
+    align-self: start;
+    margin-top: 6px;
   }
 
   .stack {
-    margin-top: 80px;
+    margin-top: 64px;
   }
-
 
   .stack-row {
     grid-template-columns: 1fr;
@@ -1236,7 +1392,7 @@ strong {
   }
 
   .contact {
-    margin-top: 88px;
+    margin-top: 64px;
   }
 
   .contact-email {

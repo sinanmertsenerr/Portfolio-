@@ -17,7 +17,7 @@ import {
   UserRound,
   WifiOff,
 } from "lucide-react";
-import { Fragment, useEffect, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { copy, selectedRepos, type Copy, type Lang, type Product } from "./content";
 
 const profile = {
@@ -45,6 +45,9 @@ const factIcons = [Briefcase, GraduationCap, Languages];
 const highlightIcons = [QrCode, Timer, WifiOff, ShieldCheck];
 
 const LANG_STORAGE_KEY = "portfolio-lang";
+
+// styles.css icindeki "Telefon" kirilimiyla ayni
+const PHONE_QUERY = "(max-width: 640px)";
 
 // Teknolojinin sahadaki (tamamen ya da kismen) kac urunde calistigi. ".NET 8" -> ".NET"
 const fieldProducts = copy.tr.products.items.filter((product) => product.status !== "building");
@@ -273,6 +276,7 @@ function App() {
 
 function Products({ t, lang }: { t: Copy; lang: Lang }) {
   const [featured, ...others] = t.products.items;
+  const isPhone = useIsPhone();
 
   return (
     <section className="block products" id="products" aria-labelledby="products-title">
@@ -324,7 +328,12 @@ function Products({ t, lang }: { t: Copy; lang: Lang }) {
         </div>
       </article>
 
-      <ol className="product-list">
+      {/* Telefonda liste yana kayar; klavyeyle de kaydirilabilsin diye odaklanabilir */}
+      <ol
+        className="product-list"
+        tabIndex={isPhone ? 0 : undefined}
+        aria-labelledby={isPhone ? "products-title" : undefined}
+      >
         {others.map((product, index) => (
           <li key={product.name}>
             <article className="surface product" aria-labelledby={`product-${index + 1}`}>
@@ -555,6 +564,17 @@ function MobileNav({ t, activeSection }: { t: Copy; activeSection: SectionId }) 
       </ul>
     </nav>
   );
+}
+
+function subscribeToPhoneQuery(onChange: () => void) {
+  const query = window.matchMedia(PHONE_QUERY);
+
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function useIsPhone() {
+  return useSyncExternalStore(subscribeToPhoneQuery, () => window.matchMedia(PHONE_QUERY).matches);
 }
 
 function useActiveSection() {

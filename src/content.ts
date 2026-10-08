@@ -140,14 +140,14 @@ export const copy: Record<Lang, Copy> = {
         {
           name: "Fenerbahçe Basketbol Altyapı Platformu",
           tagline: "Altyapı seçmelerinin dijital hâli.",
-          role: "Web, mobil ve backend'i **tek başıma** geliştirdim.",
-          result: "**Seçmelerde ve saha ölçümlerinde** kullanılıyor.",
+          role: "Sistemi uçtan uca tasarladım; web ve backend'i **tek başıma**, mobili bir ekip arkadaşımla geliştirdim.",
+          result: "**1,5 ayda** canlıya çıktı; yaklaşık **2.000 sporcu** buradan başvurdu.",
           stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
           status: "live",
           years: "2026",
         },
         {
-          name: "VAP (Veri Analiz Portalı)",
+          name: "VAP (Veri Analiz Platformu)",
           tagline: "Spor kurumları için sporcu gelişim platformu.",
           role: "**Spor Okulları modülü**, Veli Portalı ve bildirimler.",
           stack: ["Next.js", ".NET 8", "PostgreSQL"],
@@ -178,27 +178,28 @@ export const copy: Record<Lang, Copy> = {
       title: "Deneyim",
       note: "",
       figures: [
-        { months: 12, label: "Performanz'da yazılım mühendisliği" },
+        { months: 11, label: "Performanz'da yazılım mühendisliği" },
+        { value: "9.000+", label: "üyeli İEÜ Forum'da geliştirici" },
         { value: "25+", label: "ülkeden katılımcıyla uluslararası etkinlik" },
       ],
       roles: [
         {
-          period: "May–Tem 2026",
+          period: "Nis–Tem 2026",
           title: "Software Engineer (Part-time)",
           org: "Performanz Arge ve Yazılım",
           note: "**Web ve mobil** ürün geliştirme.",
-          months: 3,
+          months: 4,
         },
         {
-          period: "Ağu 2025–May 2026",
+          period: "Eyl 2025–Nis 2026",
           title: "Software Engineer Intern",
           org: "Performanz Arge ve Yazılım",
           note: "Web, mobil ve **yapay zekâ destekli** geliştirme.",
-          months: 10,
+          months: 7,
         },
         {
-          period: "Kas 2024–Ağu 2025",
-          title: "Tanıtım Görevlisi (Part-time)",
+          period: "Kas 2023–Ağu 2024",
+          title: "Tanıtım Öğrenci Stajyeri",
           org: "İzmir Ekonomi Üniversitesi",
           note: "Aday öğrencilere **kampüs tanıtımı**.",
           months: 10,
@@ -235,7 +236,7 @@ export const copy: Record<Lang, Copy> = {
       title: "Görüşme için bir e-posta yeterli.",
       note: "Genellikle 24 saat içinde dönüyorum.",
     },
-    footer: { updated: "Son güncelleme: Eylül 2026" },
+    footer: { updated: "Son güncelleme: Ekim 2026" },
     formatDuration: (months) => {
       const years = Math.floor(months / 12);
       const rest = months % 12;
@@ -295,14 +296,14 @@ export const copy: Record<Lang, Copy> = {
         {
           name: "Fenerbahçe Basketball Academy Platform",
           tagline: "Academy tryouts, digitized.",
-          role: "Built web, mobile and backend **on my own**.",
-          result: "Used in **tryouts and courtside measurements**.",
+          role: "Designed the system end to end; built web and backend **on my own**, mobile with a teammate.",
+          result: "Live in **1.5 months**; about **2,000 athletes** applied through it.",
           stack: ["React", "React Native", "Nest.js", "PostgreSQL"],
           status: "live",
           years: "2026",
         },
         {
-          name: "VAP (Data Analysis Portal)",
+          name: "VAP (Data Analysis Platform)",
           tagline: "Athlete development platform for sports organizations.",
           role: "**Sports Schools module**, Parent Portal and notifications.",
           stack: ["Next.js", ".NET 8", "PostgreSQL"],
@@ -333,27 +334,28 @@ export const copy: Record<Lang, Copy> = {
       title: "Experience",
       note: "",
       figures: [
-        { months: 12, label: "software engineering at Performanz" },
+        { months: 11, label: "software engineering at Performanz" },
+        { value: "9,000+", label: "İEÜ Forum members; I build its features" },
         { value: "25+", label: "countries at the international events I organized" },
       ],
       roles: [
         {
-          period: "May–Jul 2026",
+          period: "Apr–Jul 2026",
           title: "Software Engineer (Part-time)",
           org: "Performanz Arge ve Yazılım",
           note: "**Web and mobile** product development.",
-          months: 3,
+          months: 4,
         },
         {
-          period: "Aug 2025–May 2026",
+          period: "Sep 2025–Apr 2026",
           title: "Software Engineer Intern",
           org: "Performanz Arge ve Yazılım",
           note: "Web, mobile and **AI-assisted** development.",
-          months: 10,
+          months: 7,
         },
         {
-          period: "Nov 2024–Aug 2025",
-          title: "Campus Guide (Part-time)",
+          period: "Nov 2023–Aug 2024",
+          title: "Campus Guide (Student Intern)",
           org: "İzmir University of Economics",
           note: "**Campus tours** for prospective students.",
           months: 10,
@@ -390,7 +392,7 @@ export const copy: Record<Lang, Copy> = {
       title: "One email is enough to set up a call.",
       note: "I usually reply within 24 hours.",
     },
-    footer: { updated: "Last updated: September 2026" },
+    footer: { updated: "Last updated: October 2026" },
     formatDuration: (months) => {
       const years = Math.floor(months / 12);
       const rest = months % 12;
