@@ -1321,6 +1321,32 @@ strong {
     max-width: none;
   }
 
+  /* Ingilizce sayilar ("11 months") genis: yan yana aciklama 3-4 satira iniyordu, sayi uste cikar */
+  :lang(en) .figures {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  :lang(en) .figure dd {
+    grid-column: 1;
+  }
+
+  :lang(en) .figure dt {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  /* Telefonda kalin sadece giriste ve one cikan sonucta: her satirda vurgu goz yoruyordu */
+  strong {
+    color: inherit;
+    font-weight: inherit;
+  }
+
+  .lead strong,
+  .product-result strong {
+    color: var(--ink);
+    font-weight: 650;
+  }
+
   /* Roller zaman cizgisinde: urun kartlarindaki kenar cizgisinin devami */
   .roles {
     margin-left: 5px;

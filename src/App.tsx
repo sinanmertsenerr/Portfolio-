@@ -298,7 +298,7 @@ function Products({ t, lang }: { t: Copy; lang: Lang }) {
               </span>
             </li>
             {featured.result ? (
-              <li>
+              <li className="product-result">
                 <PointIcon />
                 <span>
                   <span className="sr-only">{t.products.resultLabel}: </span>
