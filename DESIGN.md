@@ -1,161 +1,162 @@
 ---
 version: alpha
-name: "Sinan Mert Şener Portfolio"
-description: "Yumusak komur siyahi, kirik beyaz tipografi, kalin basliklar; teal yalnizca durum vurgusu. Once kisi, sonra kanit; kolay taranan metin."
+name: 'Sinan Mert Şener Portfolyo'
+description: 'Taş zemin, lacivert mürekkep, tek vurgu rengi kobalt. Sayfa bir pafta; bölümden bölüme tek bir rota çizgisi geçer. Portre renkli ama sayfanın tonunda; ekran görüntüleri taşa baskı gibi durur.'
 colors:
-  primary: "#f5f2ed"
-  body: "#dcd8d1"
-  secondary: "#a39e95"
-  tertiary: "#58d7bf"
-  tertiary-hover: "#7ae2cf"
-  neutral: "#151413"
-  surface: "#1d1c1a"
-  surface-hover: "#242320"
-  on-surface: "#f5f2ed"
-  border: "#2e2c29"
-  border-strong: "#3f3c38"
-  tag: "#262421"
-  on-tag: "#d5d1ca"
-  on-tertiary: "#0a0a0a"
-  warning: "#eab765"
-  error: "#ff9b8f"
-  focus-ring: "#58d7bf"
+  primary: '#141c3a'
+  secondary: '#454c69'
+  tertiary: '#0047d0'
+  neutral: '#ebebe6'
+  surface: '#f6f6f2'
+  on-surface: '#141c3a'
+  faint: '#666b84'
+  border: '#c9c9bf'
+  on-tertiary: '#ffffff'
+  tertiary-hover: '#0035bf'
+  tertiary-pressed: '#0026b1'
+  link: '#141c3a'
+  error: '#b42318'
+  success: '#166534'
+  warning: '#8a5200'
+  info: '#0369a1'
+  focus-ring: '#0047d0'
 typography:
-  display:
-    fontFamily: Onest
-    fontSize: "76px"
+  headline-display:
+    fontFamily: Public Sans
+    fontSize: '68px'
     fontWeight: 800
-    lineHeight: 1
-    letterSpacing: -0.04em
+    lineHeight: 1.04
+    letterSpacing: -0.01em
   headline-lg:
-    fontFamily: Onest
-    fontSize: "44px"
+    fontFamily: Public Sans
+    fontSize: '38px'
     fontWeight: 800
-    lineHeight: 1.05
-    letterSpacing: -0.035em
+    lineHeight: 1.12
+    letterSpacing: -0.01em
   headline-md:
-    fontFamily: Onest
-    fontSize: "34px"
-    fontWeight: 750
-    lineHeight: 1.15
-    letterSpacing: -0.025em
-  title-md:
-    fontFamily: Onest
-    fontSize: "26px"
-    fontWeight: 750
-    lineHeight: 1.15
+    fontFamily: Public Sans
+    fontSize: '22px'
+    fontWeight: 700
+    lineHeight: 1.3
   figure:
-    fontFamily: Onest
-    fontSize: "48px"
+    fontFamily: Public Sans
+    fontSize: '92px'
     fontWeight: 800
-    lineHeight: 1
+    lineHeight: 0.95
   body-lg:
-    fontFamily: Onest
-    fontSize: "22px"
-    fontWeight: 420
+    fontFamily: Atkinson Hyperlegible Next
+    fontSize: '21px'
+    fontWeight: 400
     lineHeight: 1.5
   body-md:
-    fontFamily: Onest
-    fontSize: "18px"
-    fontWeight: 420
-    lineHeight: 1.65
+    fontFamily: Atkinson Hyperlegible Next
+    fontSize: '17px'
+    fontWeight: 400
+    lineHeight: 1.55
   body-sm:
-    fontFamily: Onest
-    fontSize: "16px"
-    fontWeight: 420
+    fontFamily: Atkinson Hyperlegible Next
+    fontSize: '15px'
+    fontWeight: 400
     lineHeight: 1.5
   label-md:
-    fontFamily: Onest
-    fontSize: "16px"
+    fontFamily: Atkinson Hyperlegible Next
+    fontSize: '16px'
     fontWeight: 600
-    lineHeight: 1.2
-  caption:
-    fontFamily: Onest
-    fontSize: "14px"
-    fontWeight: 500
-    lineHeight: 1.4
+    lineHeight: 1
 rounded:
-  sm: "8px"
-  md: "12px"
-  lg: "20px"
-  full: "999px"
+  sm: '2px'
+  md: '4px'
+  lg: '6px'
 spacing:
-  unit: "4px"
-  control-gap: "12px"
-  content-gap: "24px"
-  section-gap: "104px"
+  unit: '4px'
+  control-gap: '12px'
+  content-gap: '24px'
+  section-gap: '136px'
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.neutral}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.md}"
-    padding: "12px 20px"
+    backgroundColor: '{colors.tertiary}'
+    textColor: '{colors.on-tertiary}'
+    typography: '{typography.label-md}'
+    rounded: '{rounded.md}'
+    height: '44px'
   button-secondary:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.primary}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.md}"
-    padding: "12px 20px"
-  surface:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.lg}"
-    padding: "32px"
-  tag:
-    backgroundColor: "{colors.tag}"
-    textColor: "{colors.on-tag}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.sm}"
-    padding: "5px 12px"
+    backgroundColor: '{colors.surface}'
+    textColor: '{colors.primary}'
+    rounded: '{rounded.md}'
+    height: '44px'
+  button-quiet:
+    backgroundColor: '{colors.surface}'
+    textColor: '{colors.tertiary}'
+  focus-indicator:
+    backgroundColor: '{colors.focus-ring}'
+    width: '2px'
+  divider:
+    backgroundColor: '{colors.border}'
+    height: '1px'
 ---
 
-# Sinan Mert Şener Portfolio
+# Sinan Mert Şener Portfolyo
 
 ## Overview
 
-Hedef okur Türkiye'deki İK ve işe alım uzmanları. İlk bakışta kişi görünür: büyük portre, isim, rol, CV. Hemen yanında iddia ("Sahada üç ürün") ve kanıtı olan ürünler. Masaüstünde sol profil kartı sabit kalır.
+Hedef okur işe alım uzmanları ve mühendislik ekipleri. His: sakin, özenli, teknik. Odak hikâyede: özet, ana proje ve yan projeler, deneyim, GitHub, stack, iletişim.
 
-Sahibin geri bildirimi (2026-09-30): renkler yumuşak olsun, yazılar "duvar gibi" durmasın, okuma isteği artsın. Bu yüzden: büyük gövde yazısı, tek okunaklı font, kısa cümleler, kalın anahtar kelimeler, ikonlu özellik listesi, teknoloji etiketleri, deneyimde iki büyük sayı.
-
-- Audience and feel: developer, calm, trustworthy, premium. Göz yormayan sıcak kömür siyahı, parlama yok, animasyon yok.
-- Page shape: **Photographic**, portre ilk ekranın odağı. Sonrası kısa, taranabilir bir kanıt listesi.
-- Structure: Deep Tide (glass-deep-tide) katmanları; zemin, çalışma yüzeyi, yüzen kontroller.
+- Dil: Türkçe ve İngilizce aynı sayfada. Kaynak (`src/page.html`) yalnızca Türkçe yazılır; İngilizce karşılıklar `src/en.mjs` içindedir ve derlemede eklenir. Seçim sırası: `?lang=` bağlantısı, kayıtlı seçim, tarayıcı dili. Yeni metin eklenince derleme eksik çeviriyi listeler.
+- Sanat yönü: **Stone & Cobalt** (minimal-stone-cobalt~11). Taş baskı provası: soluk taş zemin, okumak için lacivert mürekkep, önemli olan için kobalt.
+- Sayfa biçimi: **rota**. Sayfa bir pafta; sağ üstten başlayan tek çizgi her bölüm geçişinde paftayı boydan boya geçer ve solda, iletişim butonunda biter. Üst bardaki bölüm başlıkları bu rotanın duraklarıdır.
+- İmza an (sayfada bir kez): **ana projenin şeması**. Akış çizgileri çizilir, sonra üç kobalt açıklama sırayla parçasına bağlanır.
+- Portre doğrudan renkli, ama tonu sayfaya uydurulmuş (doygunluk 0,68; mürekkep karışımı 0,28; `tools/portrait.mjs`). Üstüne gelince değişmez. Sahibin kararı, 13 Ekim 2026: renk açılma efekti garip durdu, ham renk fazla parladı.
+- Ekran görüntüleri iki tonla basılır; üstüne gelince gerçek renk çıkar.
 
 ## Colors
 
-Soft warm charcoal canvas #151413 (never pure black), surfaces #1d1c1a, hairlines #2e2c29. Headings soft white #f5f2ed (16.5:1), reading text #dcd8d1 (13:1), labels #a39e95 (6.4:1 on surface). Primary action is soft white on charcoal. Teal #58d7bf only as the brand signal: "Sahada" badges, availability, fact and feature icons, usage counts, focus ring, active mobile tab. Amber #eab765 only for "in development".
+Zemin taş (#ebebe6), pafta bir ton açık (#f6f6f2). İki mürekkep var: okumak için lacivert (#141c3a), vurgu ve eylem için kobalt (#0047d0). Griler taştan gelir (#454c69 ikincil metin, #666b84 henüz okunmamış geçiş kelimesi, #c9c9bf ince çizgi).
+
+- Kobalt yalnızca şunlarda: ana buton, bölümün tek büyük sayısı, işaretçi, şemadaki açıklama çizgileri, stack'teki kullanım sayısı, odak halkası.
+- Durum bir kelimedir ve kendi rengindedir: Sahada (#166534), Kısmen sahada (#8a5200), Geliştiriliyor (#0369a1). Nokta ya da hap yok.
+- Tüm metin çiftleri WCAG AA.
 
 ## Typography
 
-One family, **Onest** (variable 300–800, large x-height, open shapes), self-hosted from `src/fonts`, latin + latin-ext for Turkish. Hierarchy comes from a decisive scale (76px claim, 44px sections, 26–34px titles, 18px body) and weight (800 headings, 420 body, 650 bold keywords).
+Başlıklar **Public Sans** 800, okuma metni **Atkinson Hyperlegible Next**. İkisi de değişken font, latin + latin-ext (Türkçe), dosyaya gömülü. Monospace yok.
 
-- Body text 18px on desktop, 17px on phones; nothing readable below 14px.
-- Key phrases in sentences are bold and one step brighter so a scanning reader catches them.
-- Sentence case; no eyebrows, no uppercase tracked labels, no painted headline words.
+- Ekran başına tek büyük öge: ilk ekranda başlık, diğerlerinde bir sayı.
+- Cümle düzeni; büyük harfli etiket, boyalı başlık kelimesi yok.
+- Okuma genişliği en fazla ~44 karakter; başlıklarda `text-wrap: balance`.
 
 ## Layout
 
-- Desktop: sticky profile card on the left (portrait, name, status, CV, section links), content on the right.
-- Products are surfaces; the featured one lists four features with icons (no boxes inside the card); every product ends with technology tags. Technologies sit on the canvas as ruled rows.
-- Experience opens with three large figures (Performanz süresi, 9.000+ İEÜ Forum üyesi, 25+ ülke; süreler "1 yıl 2 ay" biçiminde yazılır), then a CV-like list with duration badges.
-- Mobile: profile first, then content; the floating bottom navigation the owner explicitly wants stays. On phones the other products scroll sideways with the next card peeking, roles sit on a timeline, figures share one surface as rows, product cards drop the stepped indent and tags lose their border. Installable as a home screen app (manifest, icons, safe-area insets).
+- Pafta: içerik çerçeveli tek yüzeyde; kenar boşluğu (gutter) rotanın şeritlerini taşır.
+- Ritim: dolu bölüm, sonra tek cümlelik geçiş, sonra yine dolu bölüm. Geçiş cümlesi bir sonraki bölümü söyler.
+- Başlıklar sol üstte. Kutu yok. Repolar ve stack aynı çizgili listeyi kullanır: üstte 1px mürekkep çizgi, satır aralarında ince çizgi, ilk sütun hep 3/12.
+- Deneyim bir hat ve duraklardır (sahibin kararı, 13 Ekim 2026: yatay zaman ekseni yoruyordu, düz tablo ise hikâyeyi kesiyordu). Solda başlangıç yılı, ortada aşağı inen hat ve durak, sağda rol ve tek cümle. Kaydırdıkça durak mürekkebe döner, işaretçi okunan durağı gösterir. Yeni rol en üste bir durak olarak eklenir.
+- Ayırıcı: rotanın yatay geçişi. Rota yoksa (dar ekran, JS kapalı) aynı yerde 2px düz mürekkep çizgi.
+- Üst bar: solda Özet, Projeler, Deneyim; ortada isim; sağda GitHub, Stack, İletişim. Başlıkları ayıran çizgi, kaydırdıkça mürekkeple dolar. Sağ uçta TR / EN dil seçimi durur: kutu yok, gezinmeyle aynı dil (seçili dilin önünde kobalt işaretçi).
+- Telefon ve tablet (1024px altı) uygulama düzeni (sahibin kararı, 13 Ekim 2026: "mobile özel web app", büyük fotoğraf akışı kesiyordu): üstte küçük yuvarlak profil fotoğrafı, ad ve rol; sağ üstte dil seçimi; bölümler altta yüzen sekme çubuğunda (ikon + etiket, bulunulan sekme kobalt çizgiyle işaretli). Büyük portre ve rota çizgisi yalnızca masaüstünde.
 
 ## Elevation & Depth
 
-Depth by lightness steps. Resting surfaces: 1px #2e2c29 border, no shadow; hover lightens the surface. Only the floating mobile navigation carries shadow and blur.
+Düz. Yüzeyler tonla ve ince çizgiyle ayrılır. Tek istisna yüzen katman: telefondaki sekme çubuğu `--shadow-float` taşır.
 
 ## Shapes
 
-8px tags and small controls, 12px buttons and feature tiles, 20px surfaces; badges are pills.
+2px küçük öğeler ve şema kutuları, 4px butonlar, 6px ekran görüntüsü çerçeveleri ve sekme çubuğu. Tam yuvarlak yalnızca telefondaki profil fotoğrafı.
 
 ## Components
 
-- Every control ships hover, focus-visible (teal ring), active; icon-only controls have an accessible name.
-- Icons: Lucide outline 1.75px, only where they depict the thing (role, education, languages, QR, stations, offline, data protection, download, mail).
-- Motion: only 160–180ms colour/border transitions on interaction.
+Tek dil: işaretçi (çizilmiş küçük üçgen) okuyucunun nerede olduğunu gösterir; değişim mürekkep gibi emilir (yalnızca renk ve opaklık, 320ms).
+
+- Butonlar: ana (kobalt dolgu, ekranda bir tane), ikincil (mürekkep çerçeve), sessiz (kobalt yazı). 44px. Hover dolguyu koyultur; hiçbir şey büyümez, kalkmaz.
+- Bağlantılar: mürekkep rengi, altı çizili. İleri götürende çizilmiş ok hover'da 2px ilerler; dışarı açılanda küçük dış bağlantı oku.
+- Seçili satır (repolar): solunda işaretçi, bir ton koyu zemin; bağlantı tüm satırı kaplar.
+- Stack: grup adı solda, logolar sağda. Küçük mavi sayı, aracın sahadaki kaç üründe kullanıldığını söyler.
+- Şema: üstüne gelinen parça kobaltla dolar, altında adı ve işi yazar.
+- Logolar: Simple Icons, tek renk mürekkep, adının yanında. Emoji yok. Sekme çubuğu ikonları tek aileden: 16'lık ızgara, 1,5px çizgi.
+- Hareket: rota ve geçiş cümleleri kaydırmayı birebir izler; şema bir kez çizilir. "Hareketi azalt" açıksa hiçbiri oynamaz.
 
 ## Do's and Don'ts
 
-- Do: short sentences, one idea each; bold the phrase that matters.
-- Do: real content from the owner's CV and live site only.
-- Don't: walls of text, label/value forms, product diagrams in the hero, gradients, glow, reveal-on-scroll, glass on resting surfaces.
+- Do: içerik yalnızca CV'den ve canlı sitelerden; sayılar gerçek.
+- Do: kısa cümle, bir fikir; görsel önde.
+- Don't: yeni renk, gölge, gradyan, parıltı, döngüyle dönen efekt.
+- Don't: her bloğa aynı kaydırma animasyonu; her başlığın altına gri alt başlık.

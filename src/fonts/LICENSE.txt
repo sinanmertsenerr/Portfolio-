@@ -1,2 +1,4 @@
-Onest: SIL Open Font License 1.1 (https://openfontlicense.org).
-Dosyalar Google Fonts'tan indirildi; yalnizca latin ve latin-ext alt kumeleri.
+Public Sans (https://github.com/uswds/public-sans) ve Atkinson Hyperlegible Next
+(https://www.brailleinstitute.org/freefont/) SIL Open Font License 1.1 ile
+lisanslidir: https://openfontlicense.org
+Dosyalar Fontsource uzerinden alindi (degisken, latin + latin-ext).

@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sinan Mert Şener | Full Stack Developer</title>
+    <meta
+      name="description"
+      content="Sinan Mert Şener, İzmir'de full stack geliştirici. Sahada üç ürün; biri Fenerbahçe Basketbol altyapısında."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://sinansener.com/" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Sinan Mert Şener" />
+    <meta property="og:title" content="Sinan Mert Şener | Full Stack Developer" />
+    <meta
+      property="og:description"
+      content="Sahada üç ürün; biri Fenerbahçe Basketbol altyapısında. Web, mobil ve backend."
+    />
+    <meta property="og:url" content="https://sinansener.com/" />
+    <meta property="og:image" content="https://sinansener.com/sinan-portrait.jpg" />
+    <meta property="og:image:alt" content="Sinan Mert Şener'in portresi" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sinan Mert Şener",
+        "url": "https://sinansener.com/",
+        "image": "https://sinansener.com/sinan-portrait.jpg",
+        "jobTitle": "Full Stack Developer",
+        "knowsLanguage": ["tr", "en", "de"],
+        "alumniOf": "İzmir Ekonomi Üniversitesi",
+        "sameAs": ["https://github.com/sinanmertsenerr", "https://www.linkedin.com/in/sinanmertsener/"],
+        "address": { "@type": "PostalAddress", "addressLocality": "İzmir", "addressCountry": "TR" }
+      }
+    </script>
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f6f6f2" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Sinan Şener" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <!--@css-->
+    <script>
+      // Dil: once ?lang= baglantisi, sonra kayitli secim, sonra tarayici dili
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        var lang = new URLSearchParams(location.search).get("lang");
+        if (lang !== "tr" && lang !== "en") {
+          try {
+            lang = localStorage.getItem("portfolio-lang");
+          } catch (error) {
+            lang = null;
+          }
+        }
+        if (lang !== "tr" && lang !== "en") {
+          lang = (navigator.language || "tr").toLowerCase().indexOf("tr") === 0 ? "tr" : "en";
+        }
+        root.lang = lang;
+      })();
+    </script>
+  </head>
+  <body>
+    <svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+      <symbol id="i-ptr" viewBox="0 0 7 9"><path d="M0 0l7 4.5L0 9z" /></symbol>
+      <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" /></symbol>
+      <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2v11M4 9l4 4 4-4" /></symbol>
+      <symbol id="i-up" viewBox="0 0 16 16"><path d="M8 14V3M4 7l4-4 4 4" /></symbol>
+      <symbol id="i-ext" viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M6 4.5h5.5V10" /></symbol>
+      <symbol id="i-mail" viewBox="0 0 16 16"><path d="M2 3.5h12v9H2zM2 4l6 5 6-5" /></symbol>
+      <symbol id="i-copy" viewBox="0 0 16 16"><path d="M6 6h8v8H6zM3 10.5V2h7.5" /></symbol>
+      <symbol id="i-dl" viewBox="0 0 16 16"><path d="M8 2v8M4.5 7L8 10.5 11.5 7M3 13.5h10" /></symbol>
+      <symbol id="t-user" viewBox="0 0 16 16">
+        <circle cx="8" cy="5.25" r="2.75" />
+        <path d="M2.75 13.5c.6-2.5 2.6-3.9 5.25-3.9s4.65 1.4 5.25 3.9" />
+      </symbol>
+      <symbol id="t-folder" viewBox="0 0 16 16"><path d="M2 3.5h4.5L8 5.5h6v7H2z" /></symbol>
+      <symbol id="t-case" viewBox="0 0 16 16"><path d="M2 5.5h12V13H2zM5.75 5.5v-2h4.5v2M2 9h12" /></symbol>
+      <symbol id="t-branch" viewBox="0 0 16 16">
+        <circle cx="4.5" cy="3.5" r="1.5" />
+        <circle cx="4.5" cy="12.5" r="1.5" />
+        <circle cx="11.5" cy="5" r="1.5" />
+        <path d="M4.5 5v6M11.5 6.5c0 3.5-7 2-7 4.5" />
+      </symbol>
+      <symbol id="t-layers" viewBox="0 0 16 16">
+        <path d="M8 2.5l6 3-6 3-6-3zM2.5 8.5L8 11.25l5.5-2.75M2.5 11.25L8 14l5.5-2.75" />
+      </symbol>
+    </svg>
+
+    <a class="skip" href="#icerik">İçeriğe geç</a>
+
+    <header class="bar" id="ust">
+      <div class="bar-inner">
+        <a class="brand" href="#ozet">Sinan Mert Şener</a>
+        <nav class="stops-nav" aria-label="Sayfa bölümleri">
+          <ul class="stops stops-a">
+            <li data-seg="0">
+              <a class="stop" href="#ozet" data-stop="ozet" aria-current="true"><svg class="icon tab-ico" aria-hidden="true"><use href="#t-user" /></svg>Özet</a>
+            </li>
+            <li data-seg="1">
+              <a class="stop" href="#projeler" data-stop="projeler"><svg class="icon tab-ico" aria-hidden="true"><use href="#t-folder" /></svg>Projeler</a>
+            </li>
+            <li data-seg="2a">
+              <a class="stop" href="#deneyim" data-stop="deneyim"><svg class="icon tab-ico" aria-hidden="true"><use href="#t-case" /></svg>Deneyim</a>
+            </li>
+          </ul>
+          <ul class="stops stops-b">
+            <li data-seg="2b">
+              <a class="stop" href="#github" data-stop="github"><svg class="icon tab-ico" aria-hidden="true"><use href="#t-branch" /></svg>GitHub</a>
+            </li>
+            <li data-seg="3">
+              <a class="stop" href="#stack" data-stop="stack"><svg class="icon tab-ico" aria-hidden="true"><use href="#t-layers" /></svg>Stack</a>
+            </li>
+            <li data-seg="4">
+              <a class="stop" href="#iletisim" data-stop="iletisim"><svg class="icon tab-ico" aria-hidden="true"><use href="#i-mail" /></svg>İletişim</a>
+            </li>
+          </ul>
+        </nav>
+        <fieldset class="lang">
+          <legend class="sr-only">Dil seçimi</legend>
+          <label class="lang-opt"><input type="radio" name="lang" value="tr" aria-label="Türkçe" />TR</label>
+          <label class="lang-opt"><input type="radio" name="lang" value="en" aria-label="English" />EN</label>
+        </fieldset>
+      </div>
+    </header>
+
+    <div class="sheet">
+      <svg class="route" aria-hidden="true" focusable="false">
+        <path class="route-base" />
+        <path class="route-ink" />
+        <path class="route-ptr" d="M-5 -6L7 0L-5 6z" />
+      </svg>
+
+      <main id="icerik">
+
+      <!-- Ozet -->
+      <section id="ozet" class="hero" aria-labelledby="ozet-baslik" data-section>
+        <p class="profile">
+          <span class="profile-name">Sinan Mert Şener</span>
+          <span class="profile-role">Full Stack Developer, İzmir</span>
+        </p>
+        <div class="hero-text">
+          <h1 id="ozet-baslik">Sahada üç ürün. <span>Biri Fenerbahçe Basketbol altyapısında.</span></h1>
+          <p class="lede">
+            Full stack geliştiriciyim, İzmir'deyim. Web, mobil ve backend'i uçtan uca yazıyorum.
+          </p>
+          <div class="actions">
+            <a
+              class="btn btn-primary"
+              href="https://sinansener.com/sinan-mert-sener-cv.pdf"
+              target="_blank"
+              rel="noopener"
+              ><svg class="icon" aria-hidden="true"><use href="#i-dl" /></svg>CV'yi indir (PDF)<span class="sr-only">
+                (yeni sekmede açılır)</span
+              ></a
+            >
+            <a class="go" href="#projeler"
+              >Ana projeyi gör<svg class="icon icon-down" aria-hidden="true"><use href="#i-down" /></svg
+            ></a>
+          </div>
+          <div class="hero-meta">
+            <p><span class="state state-live">Yeni rollere açık</span></p>
+            <ul class="spoken" aria-label="Konuştuğum diller">
+              <li><span class="spoken-name">Türkçe</span> ana dil</li>
+              <li><span class="spoken-name">İngilizce</span> akıcı</li>
+              <li><span class="spoken-name">Almanca</span> temel</li>
+            </ul>
+          </div>
+        </div>
+        <figure class="portrait">
+          <img
+            src="@asset/assets/portrait-color.webp"
+            alt="Sinan Mert Şener; kollarını kavuşturmuş, gülümsüyor"
+            width="760"
+            height="844"
+            fetchpriority="high"
+          />
+        </figure>
+      </section>
+
+      <p class="bridge">
+        <span class="bridge-text" data-bridge
+          >En çok emek verdiğim iş, bir altyapı seçmesini dijitale taşımak oldu.</span
+        >
+      </p>
+
+      <!-- Ana proje ve yan projeler -->
+      <section id="projeler" aria-labelledby="projeler-baslik" data-section>
+        <div class="case">
+          <div class="case-text">
+            <h2 id="projeler-baslik">Fenerbahçe Basketbol Altyapı Platformu</h2>
+            <div class="figure">
+              <span class="figure-value">~2.000</span>
+              <p class="figure-unit">sporcu bu platformdan başvurdu</p>
+              <p class="figure-source">2026 altyapı seçmeleri</p>
+            </div>
+            <p class="case-body">
+              1,5 ayda canlıya çıktı. Web ve backend'i tek başıma, mobil uygulamayı bir ekip arkadaşımla
+              yazdım.
+            </p>
+            <p class="case-meta"><span class="state state-live">Sahada</span> · Performanz, 2026</p>
+            <ul class="logos" aria-label="Kullanılan teknolojiler">
+              <li><!--@icon react-->React ve React Native</li>
+              <li><!--@icon nestjs-->NestJS</li>
+              <li><!--@icon postgresql-->PostgreSQL</li>
+            </ul>
+          </div>
+
+          <figure class="diagram" data-diagram>
+            <!-- Genis ekran semasi -->
+            <svg class="dg dg-wide" viewBox="0 0 640 404" aria-hidden="true" focusable="false">
+              <path class="dg-flow" style="--i: 0" pathLength="1" d="M170 46H229" />
+              <path class="dg-head" style="--i: 0" d="M223 41l7 5-7 5" />
+              <path class="dg-flow" style="--i: 1" pathLength="1" d="M410 46H469" />
+              <path class="dg-head" style="--i: 1" d="M463 41l7 5-7 5" />
+              <path
+                class="dg-flow"
+                style="--i: 2"
+                pathLength="1"
+                d="M550 73V142a8 8 0 0 1-8 8H328a8 8 0 0 0-8 8V269"
+              />
+              <path class="dg-head" style="--i: 2" d="M545 80l5-7 5 7M315 263l5 7 5-7" />
+              <path class="dg-flow" style="--i: 3" pathLength="1" d="M170 296H229" />
+              <path class="dg-head" style="--i: 3" d="M223 291l7 5-7 5" />
+              <path class="dg-flow" style="--i: 4" pathLength="1" d="M470 296H411" />
+              <path class="dg-head" style="--i: 4" d="M417 291l-7 5 7 5" />
+
+              <g class="dg-node" data-part="sporcu">
+                <rect x="10" y="20" width="160" height="52" rx="2" />
+                <text class="dg-label" x="90" y="42">Sporcu</text>
+                <text class="dg-sub" x="90" y="60">başvurur</text>
+              </g>
+              <g class="dg-node" data-part="web">
+                <rect x="230" y="20" width="180" height="52" rx="2" />
+                <text class="dg-label" x="320" y="42">Web başvuru formu</text>
+                <text class="dg-sub" x="320" y="60">React</text>
+              </g>
+              <g class="dg-node" data-part="api">
+                <rect x="470" y="20" width="160" height="52" rx="2" />
+                <text class="dg-label" x="550" y="42">API ve veritabanı</text>
+                <text class="dg-sub" x="550" y="60">NestJS · PostgreSQL</text>
+              </g>
+              <g class="dg-node" data-part="saha">
+                <rect x="10" y="270" width="160" height="52" rx="2" />
+                <text class="dg-label" x="90" y="292">Sporcu, sahada</text>
+                <text class="dg-sub" x="90" y="310">QR koduyla</text>
+              </g>
+              <g class="dg-node" data-part="mobil">
+                <rect x="230" y="270" width="180" height="52" rx="2" />
+                <text class="dg-label" x="320" y="292">Antrenör uygulaması</text>
+                <text class="dg-sub" x="320" y="310">React Native</text>
+              </g>
+              <g class="dg-node" data-part="cihaz">
+                <rect x="470" y="270" width="160" height="52" rx="2" />
+                <text class="dg-label" x="550" y="301">Ölçüm cihazı</text>
+              </g>
+
+              <path class="dg-rule" style="--i: 0" pathLength="1" d="M204 214H318" />
+              <circle class="dg-dot" style="--i: 0" cx="320" cy="214" r="3" />
+              <text class="dg-note dg-end" style="--i: 0" x="196" y="209">
+                İnternetsiz çalışır,<tspan x="196" dy="18">sonra eşitlenir.</tspan>
+              </text>
+
+              <path class="dg-rule" style="--i: 1" pathLength="1" d="M200 356V299" />
+              <circle class="dg-dot" style="--i: 1" cx="200" cy="296" r="3" />
+              <text class="dg-note dg-mid" style="--i: 1" x="200" y="376">
+                QR okutulur,<tspan x="200" dy="18">sporcu tanınır.</tspan>
+              </text>
+
+              <path class="dg-rule" style="--i: 2" pathLength="1" d="M440 356V299" />
+              <circle class="dg-dot" style="--i: 2" cx="440" cy="296" r="3" />
+              <text class="dg-note dg-mid" style="--i: 2" x="440" y="376">
+                Ölçüm, cihazdan<tspan x="440" dy="18">Bluetooth ile gelir.</tspan>
+              </text>
+            </svg>
+
+            <!-- Dar ekran semasi: ayni parcalar, dikey -->
+            <svg class="dg dg-narrow" viewBox="0 0 340 448" aria-hidden="true" focusable="false">
+              <path class="dg-flow" style="--i: 0" pathLength="1" d="M170 48V75" />
+              <path class="dg-head" style="--i: 0" d="M165 69l5 7 5-7" />
+              <path class="dg-flow" style="--i: 1" pathLength="1" d="M170 124V151" />
+              <path class="dg-head" style="--i: 1" d="M165 145l5 7 5-7" />
+              <path class="dg-flow" style="--i: 2" pathLength="1" d="M170 201V261" />
+              <path class="dg-head" style="--i: 2" d="M165 208l5-7 5 7M165 255l5 7 5-7" />
+              <path class="dg-flow" style="--i: 3" pathLength="1" d="M110 396V311" />
+              <path class="dg-head" style="--i: 3" d="M105 317l5-7 5 7" />
+              <path class="dg-flow" style="--i: 4" pathLength="1" d="M230 396V311" />
+              <path class="dg-head" style="--i: 4" d="M225 317l5-7 5 7" />
+
+              <g class="dg-node" data-part="sporcu">
+                <rect x="80" y="0" width="180" height="48" rx="2" />
+                <text class="dg-label" x="170" y="20">Sporcu</text>
+                <text class="dg-sub" x="170" y="37">başvurur</text>
+              </g>
+              <g class="dg-node" data-part="web">
+                <rect x="70" y="76" width="200" height="48" rx="2" />
+                <text class="dg-label" x="170" y="96">Web başvuru formu</text>
+                <text class="dg-sub" x="170" y="113">React</text>
+              </g>
+              <g class="dg-node" data-part="api">
+                <rect x="70" y="152" width="200" height="48" rx="2" />
+                <text class="dg-label" x="170" y="172">API ve veritabanı</text>
+                <text class="dg-sub" x="170" y="189">NestJS · PostgreSQL</text>
+              </g>
+              <g class="dg-node" data-part="mobil">
+                <rect x="70" y="262" width="200" height="48" rx="2" />
+                <text class="dg-label" x="170" y="282">Antrenör uygulaması</text>
+                <text class="dg-sub" x="170" y="299">React Native</text>
+              </g>
+              <g class="dg-node" data-part="saha">
+                <rect x="10" y="396" width="150" height="48" rx="2" />
+                <text class="dg-label" x="85" y="416">Sporcu, sahada</text>
+                <text class="dg-sub" x="85" y="433">QR koduyla</text>
+              </g>
+              <g class="dg-node" data-part="cihaz">
+                <rect x="180" y="396" width="150" height="48" rx="2" />
+                <text class="dg-label" x="255" y="425">Ölçüm cihazı</text>
+              </g>
+
+              <path class="dg-rule" style="--i: 0" pathLength="1" d="M190 231H173" />
+              <circle class="dg-dot" style="--i: 0" cx="170" cy="231" r="3" />
+              <text class="dg-note" style="--i: 0" x="196" y="227">
+                İnternetsiz çalışır,<tspan x="196" dy="17">sonra eşitlenir.</tspan>
+              </text>
+
+              <path class="dg-rule" style="--i: 1" pathLength="1" d="M100 354H107" />
+              <circle class="dg-dot" style="--i: 1" cx="110" cy="354" r="3" />
+              <text class="dg-note dg-end" style="--i: 1" x="96" y="350">
+                QR okutulur,<tspan x="96" dy="17">sporcu tanınır.</tspan>
+              </text>
+
+              <path class="dg-rule" style="--i: 2" pathLength="1" d="M240 354H233" />
+              <circle class="dg-dot" style="--i: 2" cx="230" cy="354" r="3" />
+              <text class="dg-note" style="--i: 2" x="244" y="350">
+                Bluetooth ile<tspan x="244" dy="17">ölçüm gelir.</tspan>
+              </text>
+            </svg>
+
+            <figcaption class="diagram-cap" data-diagram-cap>
+              Şemada bir parçaya dokun ya da üzerine gel: ne yaptığını burada okursun.
+            </figcaption>
+
+            <!-- Semanin metin karsiligi; ekran okuyucu ve hover aciklamalari buradan -->
+            <ul class="sr-only" data-diagram-parts>
+              <li data-part="sporcu" data-name="Sporcu">Başvurusunu web formundan yapar.</li>
+              <li data-part="web" data-name="Web başvuru formu">Logo, renk ve form alanları kulübe göre ayarlanır; başka
+                kulüp ve okullar da kullanabilir.
+              </li>
+              <li data-part="api" data-name="API ve veritabanı">Rol bazlı yetki, işlem kaydı ve KVKK'ya uygun veri silme
+                ve dışa aktarma burada.
+              </li>
+              <li data-part="saha" data-name="Sporcu, sahada">Sahaya QR koduyla gelir; uygulama onu koddan tanır.
+              </li>
+              <li data-part="mobil" data-name="Antrenör uygulaması">10 antrenör ölçümleri sahada bu uygulamadan girdi.
+                İnternetsiz çalışır, sonra eşitlenir.
+              </li>
+              <li data-part="cihaz" data-name="Ölçüm cihazı">Uygulamaya Bluetooth ile bağlanır; ölçüm kendiliğinden gelir.
+              </li>
+            </ul>
+          </figure>
+        </div>
+
+        <h3 class="sub">Yan projeler</h3>
+        <ul class="rows">
+          <li class="row">
+            <div>
+              <h4>VAP (Veri Analiz Platformu)</h4>
+              <p class="row-meta"><span class="state state-live">Sahada</span> · 2025–2026</p>
+            </div>
+            <p>
+              Spor kulüpleri için sporcu gelişim platformu; yeni sürümü 5–10 kulüpte denendi. Spor Okulları
+              modülünü ve Veli Portalı'nı ben yazdım.
+            </p>
+            <ul class="logos" aria-label="Kullanılan teknolojiler">
+              <li><!--@icon nextdotjs-->Next.js</li>
+              <li><!--@icon dotnet-->.NET 8</li>
+              <li><!--@icon postgresql-->PostgreSQL</li>
+            </ul>
+          </li>
+          <li class="row">
+            <div>
+              <h4>Sistem Takip Platformu</h4>
+              <p class="row-meta"><span class="state state-partial">Kısmen sahada</span> · 2025</p>
+            </div>
+            <p>
+              Üretimde “bu malzeme nerede?” sorusunu bitiren panel. Stok, depo ve konum tek uygulamada.
+            </p>
+            <ul class="logos" aria-label="Kullanılan teknolojiler">
+              <li><!--@icon nestjs-->NestJS</li>
+              <li><!--@icon react-->React</li>
+              <li><!--@icon postgresql-->PostgreSQL</li>
+            </ul>
+          </li>
+          <li class="row">
+            <div>
+              <h4>NikiApp</h4>
+              <p class="row-meta">
+                <span class="state state-building">Geliştiriliyor</span> · 2025 ·
+                <a class="ext" href="https://github.com/sinanmertsenerr/NikiApp" target="_blank" rel="noopener"
+                  >Kaynak kod<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+                ></a>
+              </p>
+            </div>
+            <p>Kampüs kahvecisi için mobil uygulama ve işletme paneli.</p>
+            <ul class="logos" aria-label="Kullanılan teknolojiler">
+              <li><!--@icon react-->React Native</li>
+              <li><!--@icon nestjs-->NestJS</li>
+              <li><!--@icon postgresql-->PostgreSQL</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <p class="bridge">
+        <span class="bridge-text" data-bridge>Bu ürünlerden üçünü Performanz'da yazdım.</span>
+      </p>
+
+      <!-- Deneyim -->
+      <section id="deneyim" aria-labelledby="deneyim-baslik" data-section>
+        <div class="split-head">
+          <h2 id="deneyim-baslik">Deneyim</h2>
+          <div class="figure">
+            <span class="figure-value">11 ay</span>
+            <p class="figure-unit">Performanz'da yazılım mühendisliği</p>
+            <p class="figure-source">Eylül 2025 – Temmuz 2026</p>
+          </div>
+        </div>
+
+        <ol class="xp">
+          <li class="xp-row">
+            <div class="xp-head">
+              <p class="xp-year">2026</p>
+              <div class="xp-what">
+                <h3>Yazılım Mühendisi <span class="h-note">(part-time)</span></h3>
+                <p class="xp-org">Performanz Arge ve Yazılım</p>
+                <p class="xp-when">Nisan – Temmuz 2026 <span class="xp-len">4 ay</span></p>
+              </div>
+            </div>
+            <p class="xp-note">Fenerbahçe Basketbol altyapı platformunu sıfırdan kurdum.</p>
+          </li>
+          <li class="xp-row">
+            <div class="xp-head">
+              <p class="xp-year">2025</p>
+              <div class="xp-what">
+                <h3>Stajyer Yazılım Mühendisi</h3>
+                <p class="xp-org">Performanz Arge ve Yazılım</p>
+                <p class="xp-when">Eylül 2025 – Nisan 2026 <span class="xp-len">7 ay</span></p>
+              </div>
+            </div>
+            <p class="xp-note">VAP'ta Spor Okulları modülünü ve Veli Portalı'nı, ardından Sistem Takip Platformu'nu yazdım.</p>
+          </li>
+          <li class="xp-row">
+            <div class="xp-head">
+              <p class="xp-year">2023</p>
+              <div class="xp-what">
+                <h3>Tanıtım Öğrenci Stajyeri</h3>
+                <p class="xp-org">İzmir Ekonomi Üniversitesi</p>
+                <p class="xp-when">Kasım 2023 – Ağustos 2024 <span class="xp-len">10 ay</span></p>
+              </div>
+            </div>
+            <p class="xp-note">Aday öğrencilere ve ailelerine kampüsü tanıttım.</p>
+          </li>
+          <li class="xp-row">
+            <div class="xp-head">
+              <div class="xp-what">
+                <h3>Aktivite Komitesi Lideri</h3>
+                <p class="xp-org">ESTIEM</p>
+                <p class="xp-when">Eylül 2023 – Mayıs 2024 <span class="xp-len">9 ay</span></p>
+              </div>
+            </div>
+            <p class="xp-note">25'ten fazla ülkeden öğrencinin geldiği uluslararası etkinlikleri organize ettim.</p>
+          </li>
+          <li class="xp-row">
+            <div class="xp-head">
+              <p class="xp-year">2019</p>
+              <div class="xp-what">
+                <h3>Bilgisayar Mühendisliği <span class="h-note">(lisans)</span></h3>
+                <p class="xp-org">İzmir Ekonomi Üniversitesi</p>
+                <p class="xp-when">2019 – 2026 <span class="xp-len">%50 burslu</span></p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <p class="bridge">
+        <span class="bridge-text" data-bridge
+          >İş dışında arkadaşlarımla İEÜ Forum'u yürütüyor, kendi ürünlerimi geliştiriyorum.</span
+        >
+      </p>
+
+      <!-- GitHub ve projeler -->
+      <section id="github" aria-labelledby="github-baslik" data-section>
+        <div class="split-head">
+          <h2 id="github-baslik">GitHub ve kendi projelerim</h2>
+          <div class="figure">
+            <span class="figure-value">9.000+</span>
+            <p class="figure-unit">üyeli İEÜ Forum'da moderatör ve geliştiriciyim</p>
+            <p class="figure-source">Kaynak: forum.ieu.app, Ekim 2026</p>
+          </div>
+        </div>
+
+        <ul class="plates">
+          <li class="plate">
+            <a
+              class="plate-shot"
+              href="https://forum.ieu.app/erasmus"
+              target="_blank"
+              rel="noopener"
+              aria-label="Erasmus+ sayfasını aç (yeni sekmede açılır)"
+            >
+              <img src="@asset/assets/screens/erasmus.webp" alt="" width="900" height="596" loading="lazy" />
+              <img
+                class="plate-duo"
+                src="@asset/assets/screens/erasmus-duo.webp"
+                alt="İEÜ Forum'daki Erasmus+ sayfası: başvuru durumu ve sık sorulan sorular"
+                width="900"
+                height="596"
+                loading="lazy"
+              />
+            </a>
+            <h3>Erasmus+ sayfası <span class="plate-where">İEÜ Forum</span></h3>
+            <p class="plate-body">Bölüme göre okul bulma, hibe hesaplayıcı ve rota haritası.</p>
+            <p class="plate-links">
+              <a class="ext" href="https://forum.ieu.app/erasmus" target="_blank" rel="noopener"
+                >Canlı sayfa<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+              <a
+                class="ext"
+                href="https://github.com/sinanmertsenerr/nodebb-plugin-ieu-erasmus"
+                target="_blank"
+                rel="noopener"
+                >Kaynak kod<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+            </p>
+          </li>
+          <li class="plate">
+            <a
+              class="plate-shot"
+              href="https://yu.uniforum.app/pdf"
+              target="_blank"
+              rel="noopener"
+              aria-label="PDF Araçları'nı aç (yeni sekmede açılır)"
+            >
+              <img src="@asset/assets/screens/pdf.webp" alt="" width="900" height="596" loading="lazy" />
+              <img
+                class="plate-duo"
+                src="@asset/assets/screens/pdf-duo.webp"
+                alt="Yaşar Forum'daki PDF Araçları: birleştir, böl, düzenle, imzala ve diğerleri"
+                width="900"
+                height="596"
+                loading="lazy"
+              />
+            </a>
+            <h3>PDF Araçları <span class="plate-where">Yaşar Forum</span></h3>
+            <p class="plate-body">19 araç tarayıcıda çalışır; dosya cihazdan çıkmaz.</p>
+            <p class="plate-links">
+              <a class="ext" href="https://yu.uniforum.app/pdf" target="_blank" rel="noopener"
+                >Canlı sayfa<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+              <a
+                class="ext"
+                href="https://github.com/sinanmertsenerr/nodebb-plugin-pdf-araclari"
+                target="_blank"
+                rel="noopener"
+                >Kaynak kod<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+            </p>
+          </li>
+          <li class="plate">
+            <a
+              class="plate-shot"
+              href="https://yu.uniforum.app/ortalama"
+              target="_blank"
+              rel="noopener"
+              aria-label="Ortalama hesaplayıcıyı aç (yeni sekmede açılır)"
+            >
+              <img src="@asset/assets/screens/ortalama.webp" alt="" width="900" height="596" loading="lazy" />
+              <img
+                class="plate-duo"
+                src="@asset/assets/screens/ortalama-duo.webp"
+                alt="Yaşar Forum'daki ortalama hesaplayıcı: program seçimi ve not kuralları"
+                width="900"
+                height="596"
+                loading="lazy"
+              />
+            </a>
+            <h3>Ortalama hesaplayıcı <span class="plate-where">Yaşar Forum</span></h3>
+            <p class="plate-body">Öğrenci kendi müfredatı ve AKTS'leriyle ortalamasını hesaplar.</p>
+            <p class="plate-links">
+              <a class="ext" href="https://yu.uniforum.app/ortalama" target="_blank" rel="noopener"
+                >Canlı sayfa<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+              <a
+                class="ext"
+                href="https://github.com/sinanmertsenerr/nodebb-plugin-ortalama-yu"
+                target="_blank"
+                rel="noopener"
+                >Kaynak kod<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+            </p>
+          </li>
+          <li class="plate">
+            <a
+              class="plate-shot"
+              href="https://yu.uniforum.app/cv"
+              target="_blank"
+              rel="noopener"
+              aria-label="CV oluşturucuyu aç (yeni sekmede açılır)"
+            >
+              <img src="@asset/assets/screens/cv.webp" alt="" width="900" height="596" loading="lazy" />
+              <img
+                class="plate-duo"
+                src="@asset/assets/screens/cv-duo.webp"
+                alt="Yaşar Forum'daki CV oluşturucu: solda bölümler, sağda A4 önizleme"
+                width="900"
+                height="596"
+                loading="lazy"
+              />
+            </a>
+            <h3>CV oluşturucu <span class="plate-where">Yaşar Forum</span></h3>
+            <p class="plate-body">Gerçek A4 sayfalama ve baskıya hazır PDF.</p>
+            <p class="plate-links">
+              <a class="ext" href="https://yu.uniforum.app/cv" target="_blank" rel="noopener"
+                >Canlı sayfa<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+              <a
+                class="ext"
+                href="https://github.com/sinanmertsenerr/nodebb-plugin-cv-yu"
+                target="_blank"
+                rel="noopener"
+                >Kaynak kod<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+            </p>
+          </li>
+        </ul>
+
+        <h3 class="sub">Diğer repolar</h3>
+        <ul class="ruled repos">
+          <li class="repo">
+            <svg class="ptr" aria-hidden="true"><use href="#i-ptr" /></svg>
+            <div class="repo-main">
+              <h4 class="repo-name">
+                <a href="https://github.com/sucreistaken/AIcelerate" target="_blank" rel="noopener"
+                  >AIcelerate<span class="sr-only"> (GitHub, yeni sekmede açılır)</span></a
+                >
+              </h4>
+              <p class="repo-kind">Web uygulaması · ekip projesi</p>
+            </div>
+            <p class="repo-desc">Ortak çalışma odaları: yüklenen ders notundan yapay zekâ soru ve zihin haritası üretir, ses kaydını yazıya döker.</p>
+            <p class="repo-lang"><!--@icon typescript-->TypeScript</p>
+            <p class="repo-links">
+              <svg class="icon repo-go" aria-hidden="true"><use href="#i-ext" /></svg>
+            </p>
+          </li>
+          <li class="repo">
+            <svg class="ptr" aria-hidden="true"><use href="#i-ptr" /></svg>
+            <div class="repo-main">
+              <h4 class="repo-name">
+                <a href="https://github.com/sinanmertsenerr/Search" target="_blank" rel="noopener"
+                  >Search<span class="sr-only"> (GitHub, yeni sekmede açılır)</span></a
+                >
+              </h4>
+              <p class="repo-kind">macOS tarayıcı · açık kaynağa katkı</p>
+            </div>
+            <p class="repo-desc">Eklediklerim: Claude için MCP sunucusu, otomatik doldurma, çeviri ve site izinleri.</p>
+            <p class="repo-lang"><!--@icon swift-->Swift</p>
+            <p class="repo-links">
+              <svg class="icon repo-go" aria-hidden="true"><use href="#i-ext" /></svg>
+            </p>
+          </li>
+          <li class="repo">
+            <svg class="ptr" aria-hidden="true"><use href="#i-ptr" /></svg>
+            <div class="repo-main">
+              <h4 class="repo-name">
+                <a href="https://github.com/sinanmertsenerr/SE380PTAssistant" target="_blank" rel="noopener"
+                  >PT Assistant<span class="sr-only"> (GitHub, yeni sekmede açılır)</span></a
+                >
+              </h4>
+              <p class="repo-kind">Mobil uygulama · ders projesi</p>
+            </div>
+            <p class="repo-desc">Yapay zekâ koçu sohbetle kalmaz: 14 araçla antrenman programını kurar, notu ve hatırlatmayı kendi yazar.</p>
+            <p class="repo-lang"><!--@icon flutter-->Flutter</p>
+            <p class="repo-links">
+              <svg class="icon repo-go" aria-hidden="true"><use href="#i-ext" /></svg>
+            </p>
+          </li>
+          <li class="repo">
+            <svg class="ptr" aria-hidden="true"><use href="#i-ptr" /></svg>
+            <div class="repo-main">
+              <h4 class="repo-name">
+                <a href="https://github.com/sinanmertsenerr/duesday-data" target="_blank" rel="noopener"
+                  >Duesday veri hattı<span class="sr-only"> (GitHub, yeni sekmede açılır)</span></a
+                >
+              </h4>
+              <p class="repo-kind">Abonelik takip uygulamamın açık kaynak kısmı</p>
+            </div>
+            <p class="repo-desc">Zamanlanmış GitHub Actions ile abonelik fiyatlarını bölge bölge izler; şüpheli değişikliği incelemeye ayırır.</p>
+            <p class="repo-lang"><!--@icon javascript-->JavaScript</p>
+            <p class="repo-links">
+              <svg class="icon repo-go" aria-hidden="true"><use href="#i-ext" /></svg>
+            </p>
+          </li>
+          <li class="repo">
+            <svg class="ptr" aria-hidden="true"><use href="#i-ptr" /></svg>
+            <div class="repo-main">
+              <h4 class="repo-name">
+                <a href="https://github.com/sinanmertsenerr/YKSHazirlikTakvimi" target="_blank" rel="noopener"
+                  >YKS Hazırlık<span class="sr-only"> (GitHub, yeni sekmede açılır)</span></a
+                >
+              </h4>
+              <p class="repo-kind">Mobil uygulama</p>
+            </div>
+            <p class="repo-desc">TYT ve AYT için hesap istemeyen, internetsiz çalışan konu ve deneme takibi.</p>
+            <p class="repo-lang"><!--@icon typescript-->TypeScript</p>
+            <p class="repo-links">
+              <svg class="icon repo-go" aria-hidden="true"><use href="#i-ext" /></svg>
+            </p>
+          </li>
+          <li class="repo">
+            <svg class="ptr" aria-hidden="true"><use href="#i-ptr" /></svg>
+            <div class="repo-main">
+              <h4 class="repo-name">
+                <a href="https://github.com/sinanmertsenerr/TurkceGelisim" target="_blank" rel="noopener"
+                  >Türkçe Gelişim<span class="sr-only"> (GitHub, yeni sekmede açılır)</span></a
+                >
+              </h4>
+              <p class="repo-kind">Web uygulaması</p>
+            </div>
+            <p class="repo-desc">Yazım kurallarını TDK kaynaklarıyla çalıştıran 679 soruluk alıştırma; dört düzey.</p>
+            <p class="repo-lang"><!--@icon javascript-->JavaScript</p>
+            <p class="repo-links">
+              <a class="ext repo-live" href="https://sinanmertsenerr.github.io/TurkceGelisim/" target="_blank" rel="noopener"
+                >Canlı<svg class="icon" aria-hidden="true"><use href="#i-ext" /></svg
+              ></a>
+              <svg class="icon repo-go" aria-hidden="true"><use href="#i-ext" /></svg>
+            </p>
+          </li>
+        </ul>
+        <p class="repos-all">
+          <a class="go" href="https://github.com/sinanmertsenerr" target="_blank" rel="noopener"
+            ><!--@icon github-->Tüm repolar: github.com/sinanmertsenerr<svg
+              class="icon icon-arrow"
+              aria-hidden="true"
+            >
+              <use href="#i-arrow" /></svg
+          ></a>
+        </p>
+      </section>
+
+      <p class="bridge">
+        <span class="bridge-text" data-bridge>Peki bunları neyle yazıyorum?</span>
+      </p>
+
+      <!-- Stack -->
+      <section id="stack" aria-labelledby="stack-baslik" data-section>
+        <div class="split-head">
+          <h2 id="stack-baslik">Stack</h2>
+          <p class="stack-key">
+            <span class="uses">3</span>Mavi sayı, o aracı sahadaki kaç üründe kullandığımı gösterir.
+          </p>
+        </div>
+        <ul class="ruled stack">
+          <li class="stack-row">
+            <h3>Programlama dilleri</h3>
+            <ul class="logos">
+              <li><!--@icon typescript-->TypeScript</li>
+              <li><!--@icon javascript-->JavaScript</li>
+              <li><!--@icon csharp-->C#</li>
+              <li><!--@icon python-->Python</li>
+              <li><!--@icon swift-->Swift</li>
+              <li><!--@icon dart-->Dart</li>
+              <li><!--@icon sql-->SQL</li>
+            </ul>
+          </li>
+          <li class="stack-row">
+            <h3>Frontend</h3>
+            <ul class="logos">
+              <li><!--@icon react-->React<span class="uses">2<span class="sr-only"> üründe sahada</span></span></li>
+              <li><!--@icon nextdotjs-->Next.js<span class="uses">1<span class="sr-only"> üründe sahada</span></span></li>
+              <li><!--@icon tailwindcss-->Tailwind CSS</li>
+              <li><!--@icon shadcnui-->shadcn/ui</li>
+            </ul>
+          </li>
+          <li class="stack-row">
+            <h3>Backend</h3>
+            <ul class="logos">
+              <li><!--@icon nestjs-->NestJS<span class="uses">2<span class="sr-only"> üründe sahada</span></span></li>
+              <li><!--@icon nodedotjs-->Node.js</li>
+              <li><!--@icon dotnet-->.NET<span class="uses">1<span class="sr-only"> üründe sahada</span></span></li>
+              <li><!--@icon fastapi-->FastAPI</li>
+              <li><!--@icon prisma-->Prisma</li>
+            </ul>
+          </li>
+          <li class="stack-row">
+            <h3>Mobil</h3>
+            <ul class="logos">
+              <li><!--@icon react-->React Native<span class="uses">1<span class="sr-only"> üründe sahada</span></span></li>
+              <li><!--@icon flutter-->Flutter</li>
+            </ul>
+          </li>
+          <li class="stack-row">
+            <h3>Veri ve altyapı</h3>
+            <ul class="logos">
+              <li><!--@icon postgresql-->PostgreSQL<span class="uses">3<span class="sr-only"> üründe sahada</span></span></li>
+              <li><!--@icon redis-->Redis</li>
+              <li><!--@icon docker-->Docker</li>
+              <li><!--@icon firebase-->Firebase</li>
+              <li><!--@icon cloudflare-->Cloudflare</li>
+            </ul>
+          </li>
+          <li class="stack-row">
+            <h3>Araçlar ve yapay zekâ</h3>
+            <ul class="logos">
+              <li><!--@icon git-->Git</li>
+              <li><!--@icon githubactions-->GitHub Actions</li>
+              <li><!--@icon claude-->Claude Code</li>
+              <li><!--@icon openai-->Codex</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Iletisim -->
+      <section id="iletisim" class="contact" aria-labelledby="iletisim-baslik" data-section>
+        <h2 id="iletisim-baslik">Görüşme için bir e-posta yeterli.</h2>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:sinanmertsenerr@gmail.com" data-route-end
+            ><svg class="icon" aria-hidden="true"><use href="#i-mail" /></svg>E-posta gönder</a
+          >
+          <a
+            class="btn btn-secondary"
+            href="https://www.linkedin.com/in/sinanmertsener/"
+            target="_blank"
+            rel="noopener"
+            ><!--@icon linkedin-->LinkedIn</a
+          >
+          <a class="btn btn-secondary" href="https://github.com/sinanmertsenerr" target="_blank" rel="noopener"
+            ><!--@icon github-->GitHub</a
+          >
+          <a
+            class="btn btn-secondary"
+            href="https://sinansener.com/sinan-mert-sener-cv.pdf"
+            target="_blank"
+            rel="noopener"
+            ><svg class="icon" aria-hidden="true"><use href="#i-dl" /></svg>CV (PDF)</a
+          >
+        </div>
+        <p class="contact-mail">
+          <a href="mailto:sinanmertsenerr@gmail.com">sinanmertsenerr@gmail.com</a>
+          <button class="btn btn-quiet" type="button" data-copy="sinanmertsenerr@gmail.com">
+            <svg class="icon" aria-hidden="true"><use href="#i-copy" /></svg>Adresi kopyala
+          </button>
+          <span class="copy-status" role="status" data-copy-status></span>
+        </p>
+        <p class="contact-note">Genellikle 24 saat içinde dönüyorum.</p>
+      </section>
+      </main>
+
+      <footer class="foot">
+        <p>Sinan Mert Şener · İzmir</p>
+        <p>Son güncelleme: Ekim 2026</p>
+        <a class="go" href="#top"
+          >Başa dön<svg class="icon icon-up" aria-hidden="true"><use href="#i-up" /></svg
+        ></a>
+      </footer>
+    </div>
+
+    <!--@js-->
+  </body>
+</html>
