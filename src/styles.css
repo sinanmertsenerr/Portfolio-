@@ -469,16 +469,33 @@ html[lang="en"] [lang="tr"] {
   font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
   line-height: 1.5;
 }
+/* Durum ve konusulan diller yan yana; sigmayan oge alt satira iner */
 .hero-meta {
   margin-top: 28px;
-  display: grid;
-  gap: 8px;
-}
-/* Konusulan diller: dilin adi murekkep, duzeyi soluk */
-.spoken {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 22px;
+  align-items: center;
+  gap: 6px 18px;
+  /* Satir portreye degmeden once kirilsin */
+  max-width: calc(100% - 24px);
+}
+/* Durumu dillerden ayiran kisa cizgi (dil secimindekiyle ayni) */
+.hero-meta > p {
+  display: inline-flex;
+  align-items: center;
+}
+.hero-meta > p::after {
+  content: "";
+  width: 1px;
+  height: 14px;
+  margin-left: 18px;
+  background: var(--line);
+}
+/* Dilin adi murekkep, duzeyi soluk */
+.spoken {
+  display: contents;
+}
+.spoken li {
   color: var(--muted);
 }
 .spoken-name {
